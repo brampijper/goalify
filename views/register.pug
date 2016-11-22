@@ -1,26 +1,41 @@
 html
 	head
 	body
-		h2 Register!! Yay
+		h2 Register! :)
+		br
+		br
+		form(action='/register' method='post' autocomplete='off')
+			label Username 
+			br
+			input(name='username' placeholder='Brammieboy' max-length= '15' autofocus required)
 			br
 			br
-			form(action='/register' method='post' autocomplete='off')
-				label Username 
-				br
-				input(name='username' placeholder='Brammieboy' required)
-				br
-				br
-				label Emailadres
-				br
-				input(name='email' placeholder='your@emailadres.com' required)
-				br
-				br
-				label Password
-				br
-				input(name='password' placeholder='Ultra secure password' type='password' required)
-				br
-				br
-				input(type='submit' value='register' id='submit')
-				br
-				br
-				a(href='login') Log-in 
+			label Emailadres
+			br
+			input(name='email' type='email' placeholder='your@emailadres.com' required)
+			br
+			br
+			label Password
+			br
+			input(name='password' type='password' placeholder='Ultra secure password' min-length = '3' required)
+			br
+			br
+			label Birthday:
+			br
+			input(type="date" name="bday")
+			br
+			br
+			label Are you a cat or dog person?
+			br 
+			br
+			input(type='radio' name='gender' value='Cat')
+			| Cat
+			input(type='radio' name='gender') 
+			| Dog 
+			br
+			br
+			br
+			input(type='submit' value='register' id='submit')
+			br
+			br
+			a(href='login') Log-in 
