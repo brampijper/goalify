@@ -3,6 +3,7 @@
 //Import modules
 const sequelize = require('sequelize')
 const express = require ('express')
+const bcrypt = require ('bcrypt-nodejs')
 
 //define module
 
@@ -21,7 +22,7 @@ db.User = db.conn.define( 'user', {
 	email: { type: sequelize.STRING, unique: true },
 	password: sequelize.STRING,
 	score: sequelize.INTEGER,
-	age: sequelize.INTEGER,
+	dob: sequelize.DATEONLY,
 	kindOfPerson: sequelize.STRING
 } )
 db.Goal = db.conn.define ('goal', {
@@ -47,6 +48,33 @@ db.conn.sync( {force: false}).then( () => {
 })
 
 
+//Create sample user
+bcrypt.hash('panda123', null, null, function(err, hash) {
+	if (err) throw (err); 
+
+	User.create( {
+		username: 'selma2202',
+		email: 'selmadorrestein@gmail.com',
+		password: hash,
+		score: 20,
+		dob: '1991-02-22',
+		kindOfPerson: 'catperson'
+	})
+	// .then ( user => {
+	// 	user.createComplete ( {		
+	// 	})
+	// })
+})
+
+//Create sample goal
+Goal.create( {
+	title: 'Run the stairs of Nemo',
+	description: 'Start at the bottom, then run as fast as you can up the stairs of Nemo. Take a picture when you are at the top.',
+	duration: 5,
+	difficulty: 'easy',
+	points: 10,
+	geolocation: [52.374336, 4.912338]
+})
 
 
 //export defined module
