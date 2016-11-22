@@ -45,12 +45,12 @@ db.Goal.hasMany( db.Complete)
 db.Complete.belongsTo (db.Goal)
 
 db.conn.sync( {force: true}).then( () => {
-		
+
 	//Create sample user
 	bcrypt.hash('panda123', null, null, function(err, hash) {
 		if (err) throw (err); 
 
-		db.User.create( {
+		var p1 = db.User.create( {
 			username: 'selma2202',
 			email: 'selmadorrestein@gmail.com',
 			password: hash,
@@ -60,26 +60,36 @@ db.conn.sync( {force: true}).then( () => {
 		})
 		.then ( user => {
 			user.createComplete ( {
+				geolocation: '[52.374336, 4.912338]'
 			})
 		})
-	})
 
-	//Create sample goal
-	db.Goal.create( {
-		title: 'Run the stairs of Nemo',
-		description: 'Start at the bottom, then run as fast as you can up the stairs of Nemo. Take a picture when you are at the top.',
-		duration: 5,
-		difficulty: 'easy',
-		points: 10,
-		geolocation: '[52.374336, 4.912338]'
-	})
-	.then ( goal => {
-		goal.createComplete ({
+		//Create sample goal
+		var p2 = db.Goal.create( {
+			title: 'Run the stairs of Nemo',
+			description: 'Start at the bottom, then run as fast as you can up the stairs of Nemo. Take a picture when you are at the top.',
+			duration: 5,
+			difficulty: 'easy',
+			points: 10,
 			geolocation: '[52.374336, 4.912338]'
-		}).then( complete => {
+		})
+		.then ( goal => {
+			goal.createComplete ({
+				geolocation: '[52.374336, 4.912338]'
+			}).then( complete => {
 
-		} )
+			} )
+		})
+
+		// Promise.all([p1.id, p2.id]).then (values => {
+		// 	console.log(values)
+		// 	values.createComplete ({
+		// 		geolocation: '[52.374336, 4.912338]'
+		// 	})
+		// })
 	})
+
+
 
 	console.log ('Synced, yay')
 })
