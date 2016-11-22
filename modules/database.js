@@ -25,18 +25,17 @@ db.User = db.conn.define( 'user', {
 	dob: sequelize.DATEONLY,
 	kindOfPerson: sequelize.STRING
 } )
-// var point = { type: 'Point', coordinates: [52.374336, 4.912338]};
 db.Goal = db.conn.define ('goal', {
 	title: sequelize.STRING,
 	description: sequelize.STRING,
 	duration: sequelize.INTEGER,
 	difficulty: sequelize.STRING,
 	points: sequelize.INTEGER,
-	// geolocation: sequelize.GEOMETRY('POINT')
+	geolocation: sequelize.STRING
 })
 // var point = { type: 'Point', coordinates: [52.374336, 4.912338]};
 db.Complete = db.conn.define ('complete', {
-	// geolocation: sequelize.GEOMETRY('POINT')
+	geolocation: sequelize.STRING
 })
 
 //// Define relations
@@ -46,40 +45,53 @@ db.Goal.hasMany( db.Complete)
 db.Complete.belongsTo (db.Goal)
 
 db.conn.sync( {force: true}).then( () => {
-	
-//Create sample user
-bcrypt.hash('panda123', null, null, function(err, hash) {
-	if (err) throw (err); 
 
-	db.User.create( {
-		username: 'selma2202',
-		email: 'selmadorrestein@gmail.com',
-		password: hash,
-		score: 20,
-		dob: '1991-02-22',
-		kindOfPerson: 'catperson'
-	})
-	.then ( user => {
-		user.createComplete ( {		
+	//Create sample user
+	bcrypt.hash('panda123', null, null, function(err, hash) {
+		if (err) throw (err); 
+
+		var p1 = db.User.create( {
+			username: 'selma2202',
+			email: 'selmadorrestein@gmail.com',
+			password: hash,
+			score: 20,
+			dob: '1991-02-22',
+			kindOfPerson: 'catperson'
 		})
-	})
-})
+		.then ( user => {
+			user.createComplete ( {
+				geolocation: '[52.374336, 4.912338]'
+			})
+		})
 
-//Create sample goal
-db.Goal.create( {
-	title: 'Run the stairs of Nemo',
-	description: 'Start at the bottom, then run as fast as you can up the stairs of Nemo. Take a picture when you are at the top.',
-	duration: 5,
-	difficulty: 'easy',
-	points: 10,
-	geolocation: [52.374336, 4.912338]
-})
-.then ( goal => {
-	goal.createComplete ({
-	})
-})
+		//Create sample goal
+		var p2 = db.Goal.create( {
+			title: 'Run the stairs of Nemo',
+			description: 'Start at the bottom, then run as fast as you can up the stairs of Nemo. Take a picture when you are at the top.',
+			duration: 5,
+			difficulty: 'easy',
+			points: 10,
+			geolocation: '[52.374336, 4.912338]'
+		})
+		.then ( goal => {
+			goal.createComplete ({
+				geolocation: '[52.374336, 4.912338]'
+			}).then( complete => {
 
-console.log ('Synced, yay')
+			} )
+		})
+
+		// Promise.all([p1.id, p2.id]).then (values => {
+		// 	console.log(values)
+		// 	values.createComplete ({
+		// 		geolocation: '[52.374336, 4.912338]'
+		// 	})
+		// })
+	})
+
+
+
+	console.log ('Synced, yay')
 })
 
 
