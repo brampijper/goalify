@@ -26,13 +26,15 @@ app.set ('views', __dirname + '/views')
 
 //// routes and modules
 // require modules
-let database = require ( __dirname + '/modules/database')
+// let database = require ( __dirname + '/modules/database')
 
 // require routes
-let routestructure = require ( __dirname + '/routes/routestructure')
+let loginRouter			= require (__dirname + '/routes/login')
+let registerRouter			= require (__dirname + '/routes/register')
 
 // use
-app.use ( '/', routestructure)
+app.use ( '/', loginRouter)
+app.use ('/', registerRouter)
 
 
 //// For debugging purposes
