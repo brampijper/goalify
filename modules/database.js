@@ -46,7 +46,7 @@ db.Complete.belongsTo (db.Goal)
 
 db.conn.sync( {force: true}).then( () => {
 
-	//Create sample user
+	//Create sample user 1
 	bcrypt.hash('panda123', null, null, function(err, hash) {
 		if (err) throw (err); 
 
@@ -56,12 +56,7 @@ db.conn.sync( {force: true}).then( () => {
 			password: hash,
 			score: 20,
 			dob: '1991-02-22',
-			kindOfPerson: 'catperson'
-		})
-		.then ( user => {
-			user.createComplete ( {
-				geolocation: '[52.374336, 4.912338]'
-			})
+			kindOfPerson: 'Cat Person'
 		})
 
 		//Create sample goal
@@ -73,22 +68,85 @@ db.conn.sync( {force: true}).then( () => {
 			points: 10,
 			geolocation: '[52.374336, 4.912338]'
 		})
-		.then ( goal => {
-			goal.createComplete ({
-				geolocation: '[52.374336, 4.912338]'
-			}).then( complete => {
 
-			} )
+		Promise.all([p1, p2]).then (values => {
+			console.log(values[0].id)
+			console.log(values[1].id)
+			db.Complete.create ({
+				geolocation: '[52.374336, 4.912338]',
+				userId: values[0].id,
+				goalId: values[1].id
+			})
 		})
-
-		// Promise.all([p1.id, p2.id]).then (values => {
-		// 	console.log(values)
-		// 	values.createComplete ({
-		// 		geolocation: '[52.374336, 4.912338]'
-		// 	})
-		// })
 	})
 
+	//Create sample user 2
+	bcrypt.hash('brammie', null, null, function(err, hash) {
+		if (err) throw (err); 
+
+		var p3 = db.User.create( {
+			username: 'brammieboy',
+			email: 'brampijper@gmail.com',
+			password: hash,
+			score: 30,
+			dob: '1992-05-23',
+			kindOfPerson: 'Cat Person'
+		})
+
+		//Create sample goal
+		var p4 = db.Goal.create( {
+			title: 'Play cards with strangers',
+			description: 'Ask a group of strangers to join you for a game of cards.',
+			duration: 15,
+			difficulty: 'medium',
+			points: 30,
+			geolocation: '[52.358172, 4.868300]'
+		})
+
+		Promise.all([p3, p4]).then (values => {
+			console.log(values[0].id)
+			console.log(values[1].id)
+			db.Complete.create ({
+				geolocation: '[52.358283, 4.864287]',
+				userId: values[0].id,
+				goalId: values[1].id
+			})
+		})
+	})
+
+	//Create sample user 3
+	bcrypt.hash('dogs4life', null, null, function(err, hash) {
+		if (err) throw (err); 
+
+		var p5 = db.User.create( {
+			username: 'jimbo',
+			email: 'jimmy@msn.com',
+			password: hash,
+			score: 30,
+			dob: '1993-11-23',
+			kindOfPerson: 'Dog Person'
+		})
+
+		//Create sample goal
+		var p6 = db.Goal.create( {
+			title: 'Take the Ferry',
+			description: 'Take the ferry to the opposite of the IJ. Enjoy the wind in your hair and the view over Amsterdam!',
+			duration: 30,
+			difficulty: 'easy',
+			points: 10,
+			geolocation: '[52.381627, 4.901176]'
+		})
+
+		Promise.all([p5, p6]).then (values => {
+			console.log(values[0].id)
+			console.log(values[1].id)
+			db.Complete.create ({
+				geolocation: '[52.380586, 4.899492]',
+				userId: values[0].id,
+				goalId: values[1].id
+			})
+		})
+	})
 
 
 	console.log ('Synced, yay')
