@@ -25,16 +25,18 @@ db.User = db.conn.define( 'user', {
 	dob: sequelize.DATEONLY,
 	kindOfPerson: sequelize.STRING
 } )
+// var point = { type: 'Point', coordinates: [52.374336, 4.912338]};
 db.Goal = db.conn.define ('goal', {
 	title: sequelize.STRING,
 	description: sequelize.STRING,
 	duration: sequelize.INTEGER,
 	difficulty: sequelize.STRING,
 	points: sequelize.INTEGER,
-	geolocation: sequelize.GEOMETRY(point)
+	// geolocation: sequelize.GEOMETRY('POINT')
 })
+// var point = { type: 'Point', coordinates: [52.374336, 4.912338]};
 db.Complete = db.conn.define ('complete', {
-	geolocation: sequelize.GEOMETRY(point)
+	// geolocation: sequelize.GEOMETRY('POINT')
 })
 
 //// Define relations
@@ -43,16 +45,13 @@ db.Complete.belongsTo ( db.User )
 db.Goal.hasMany( db.Complete)
 db.Complete.belongsTo (db.Goal)
 
-db.conn.sync( {force: false}).then( () => {
-	console.log ('Synced, yay')
-})
-
-
+db.conn.sync( {force: true}).then( () => {
+	
 //Create sample user
 bcrypt.hash('panda123', null, null, function(err, hash) {
 	if (err) throw (err); 
 
-	User.create( {
+	db.User.create( {
 		username: 'selma2202',
 		email: 'selmadorrestein@gmail.com',
 		password: hash,
@@ -60,14 +59,14 @@ bcrypt.hash('panda123', null, null, function(err, hash) {
 		dob: '1991-02-22',
 		kindOfPerson: 'catperson'
 	})
-	// .then ( user => {
-	// 	user.createComplete ( {		
-	// 	})
-	// })
+	.then ( user => {
+		user.createComplete ( {		
+		})
+	})
 })
 
 //Create sample goal
-Goal.create( {
+db.Goal.create( {
 	title: 'Run the stairs of Nemo',
 	description: 'Start at the bottom, then run as fast as you can up the stairs of Nemo. Take a picture when you are at the top.',
 	duration: 5,
@@ -75,6 +74,16 @@ Goal.create( {
 	points: 10,
 	geolocation: [52.374336, 4.912338]
 })
+.then ( goal => {
+	goal.createComplete ({
+	})
+})
+
+console.log ('Synced, yay')
+})
+
+
+
 
 
 //export defined module
