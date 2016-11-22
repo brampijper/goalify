@@ -1,0 +1,25 @@
+{
+  "name": "goalify",
+  "version": "1.0.0",
+  "description": "An app for completing goals while exploring AMS",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Selma2202/goalify.git"
+  },
+  "keywords": [
+    "Goal",
+    "App",
+    "Exploring",
+    "Amsterdam"
+  ],
+  "author": "Selma Dorrestein Bram Pijper",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Selma2202/goalify/issues"
+  },
+  "homepage": "https://github.com/Selma2202/goalify#readme"
+}
