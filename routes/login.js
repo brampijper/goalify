@@ -6,7 +6,7 @@ const bcrypt 		= require ('bcrypt-nodejs')
 const session 		= require('express-session')
 const router  		= express.Router ( )
 
-// let db = require(__dirname + '/database')
+let db = require(__dirname + '/../modules/database')
 
 router.get('/index', (req, res) => {
 	if(req.session.email) {
@@ -24,14 +24,24 @@ router.get('/login', (req, res) => {
 		res.redirect('/profile')
 	}
 	else {
-		res.render('login', {
-			message: req.query.message
-		})
+		message: req.query.message
+		res.render('login')
 	}
 })
 
 router.post('/login', (req, res) => {
-	db.user.findOne({
+	if(req.body.email === 0) {
+		res.redirect('/login?message=' + encodeURIComponent('Please fill in your email.'))
+		return
+	}
+
+	else if(req.body.password === 0) {
+		res.redirect('/login?message=' + encodeURIComponent('Please fill in your email.'))
+		return
+	}
+	
+	else {
+	db.User.findOne({
 		where: {
 			email: req.body.email
 		}
@@ -41,12 +51,14 @@ router.post('/login', (req, res) => {
 				req.session.email 		= req.body.email
 				req.session.username 	= user.username
 				console.log('succesfully logged in')
-				res.redirect('/profile')
+				res.redirect('/profile?message=' + encodeURIComponent('Tadaaa logged-in.'))
 			} else {
 				res.redirect('/login?message=' + encodeURIComponent('Invalid email or password.'))
+				return
 			}
 		})
 	})
+	}
 })
 
 module.exports = router

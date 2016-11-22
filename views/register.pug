@@ -22,15 +22,15 @@ html
 			br
 			label Birthday:
 			br
-			input(type="date" name="bday")
+			input(type="date" name="bday" required)
 			br
 			br
 			label Are you a cat or dog person?
 			br 
 			br
-			input(type='radio' name='gender' value='Cat')
+			input(type='radio' name='catdog' value='Cat Person' required)
 			| Cat
-			input(type='radio' name='gender') 
+			input(type='radio' name='catdog' value='Dog Person' required) 
 			| Dog 
 			br
 			br

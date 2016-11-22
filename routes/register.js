@@ -6,7 +6,7 @@ const bcrypt 		= require ('bcrypt-nodejs')
 const session 		= require('express-session')
 const router  		= express.Router ( )
 
-// let db = require(__dirname + '/database')
+let db = require(__dirname + '/../modules/database')
 
 router.get('/register', (req, res) => {
 	if(req.session.email) {
@@ -19,18 +19,35 @@ router.get('/register', (req, res) => {
 
 router.post('/register', (req, res) => {
 	if (req.body.username && req.body.email && req.body.password !== 0) {
-			bcrypt.hash(req.body.password, null, null, function(err, hash) {
-				db.user.create({
-					username: req.body.username,
-					email: req.body.email,
-					password: hash
-				}).then(function () {
-					db.conn.sync().then(function() {
-					console.log('User Added')
-					res.redirect('/login?message' + encodeURIComponent("Please log-in"))
+		db.User.findOne({
+			where: {
+				username: req.body.username
+			}
+		}).then( (user) => {
+			if(user) {
+				res.redirect('/register?message' + encodeURIComponent('Sorry, this username is taken'))
+			} 
+			else {
+				bcrypt.hash(req.body.password, null, null, function(err, hash) {
+					db.User.create({
+						username: req.body.username,
+						email: req.body.email,
+						password: hash,
+						score: '0',
+						dob: req.body.bday,
+						kindOfPerson: req.body.catdog
+					}).then(function () {
+						db.conn.sync().then( () => {
+						console.log('User Added')
+						res.redirect('/login?message' + encodeURIComponent("Please log-in"))
+						})
 					})
-				})
-			})
+				})				
+			}
+		})
+	}
+	else {
+		res.redirect('/register?message' + encodeURIComponent("Please fill in the form"))
 	} 
 })
 
