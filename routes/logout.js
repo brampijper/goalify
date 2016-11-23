@@ -1,3 +1,4 @@
+'use strict'
 //require the libraries.
 const express 		= require ('express')
 const sequelize 	= require ('sequelize')
