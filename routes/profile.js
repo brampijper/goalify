@@ -1,3 +1,4 @@
+'use strict'
 // Import standardized modules
 const sequelize		= require('sequelize')
 const express 		= require ('express')

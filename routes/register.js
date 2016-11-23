@@ -1,3 +1,4 @@
+'use strict'
 // Import standardized modules
 const sequelize		= require('sequelize')
 const express 		= require ('express')
@@ -17,6 +18,8 @@ router.get('/register', (req, res) => {
 	}	
 })
 
+//This route checks if all the input fields are filled.
+//Makes sure that the user will type in an unique username and emailadress.
 router.post('/register', (req, res) => {
 	if (req.body.username && req.body.email && req.body.password !== 0) {
 		db.User.findOne({
@@ -26,28 +29,42 @@ router.post('/register', (req, res) => {
 		}).then( (user) => {
 			if(user) {
 				res.redirect('/register?message' + encodeURIComponent('Sorry, this username is taken'))
-			} 
-			else {
-				bcrypt.hash(req.body.password, null, null, function(err, hash) {
-					db.User.create({
-						username: req.body.username,
-						email: req.body.email,
-						password: hash,
-						score: '0',
-						dob: req.body.bday,
-						kindOfPerson: req.body.catdog
-					}).then(function () {
-						db.conn.sync().then( () => {
-						console.log('User Added')
-						res.redirect('/login?message' + encodeURIComponent("Please log-in"))
-						})
-					})
-				})				
+				return
+			}
+			if (!user ) {
+				db.User.findOne({
+					where: {
+						email: req.body.email
+					}
+				}).then( (user) => {
+					if(user) {
+						res.redirect('/register?message' + encodeURIComponent('Sorry, this emailadress is taken'))
+						return
+					}
+					else {
+						bcrypt.hash(req.body.password, null, null, function(err, hash) {
+							db.User.create({
+								username: req.body.username,
+								email: req.body.email,
+								password: hash,
+								score: 0,
+								dob: req.body.bday,
+								kindOfPerson: req.body.catdog
+							}).then(function () {
+								db.conn.sync().then( () => {
+									console.log('User Added')
+									res.redirect('/login?message' + encodeURIComponent("Please log-in"))
+								})
+							})
+						})				
+					}					
+				})
 			}
 		})
 	}
 	else {
 		res.redirect('/register?message' + encodeURIComponent("Please fill in the form"))
+		return
 	} 
 })
 

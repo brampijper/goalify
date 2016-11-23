@@ -1,3 +1,4 @@
+'use strict'
 // Import standardized modules
 const sequelize		= require('sequelize')
 const express 		= require ('express')
@@ -36,7 +37,7 @@ router.post('/login', (req, res) => {
 	}
 
 	else if(req.body.password === 0) {
-		res.redirect('/login?message=' + encodeURIComponent('Please fill in your email.'))
+		res.redirect('/login?message=' + encodeURIComponent('Please fill in your password.'))
 		return
 	}
 	
