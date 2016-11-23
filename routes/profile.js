@@ -13,7 +13,7 @@ router.get('/profile', (req, res) => {
 	var user = req.session.user;
 	//in case no session is active/no user logged in
 	if (user === undefined) {
-		res.redirect('login/?message=' + encodeURIComponent("Please log in."));
+		res.redirect('login?message=' + encodeURIComponent("Please log in."));
 	} else {
 		console.log('\nThe browser will now display the profile.')
 		res.render('profile', {
