@@ -31,9 +31,11 @@ router.post('/profile', (req, res) => {
 		}
 	}).then( (user) => {
 		user.updateAttributes({
-			email: req.body.newemail
+			email: req.body.newemail,
+			bio: req.body.newbio,
+			dob: req.body.newdob
 		})
-		res.redirect('/profile?message=' + encodeURIComponent('Your email address has been changed.'))
+		res.redirect('/profile?message=' + encodeURIComponent('Your personail details has been changed.'))
 		return
 	})
 })

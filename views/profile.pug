@@ -38,12 +38,17 @@ html
 
 
 		p Your bio: #{currentUser.bio}
-		p (change bio)
+		form(action='/profile' method='post' autocomplete='off')
+			input(name='newbio' type='text' placeholder='change your bio' required)
+			input(type='submit' value='change bio' id='submitnewbio')
 		br
 
 
 		p Your date of birth: #{currentUser.dob}
 		p (change date of birth)
+		form(action='/profile' method='post' autocomplete='off')
+			input(name='newdob' type='date' required)
+			input(type='submit' value='change date of birth' id='submitnewdob')
 		br
 
 

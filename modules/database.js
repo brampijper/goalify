@@ -83,12 +83,12 @@ db.conn.sync( {force: true}).then( () => {
 	})
 
 	//Create sample user 2
-	bcrypt.hash('brammie', null, null, function(err, hash) {
+	bcrypt.hash('a', null, null, function(err, hash) {
 		if (err) throw (err); 
 
 		var p3 = db.User.create( {
 			username: 'brammieboy',
-			email: 'brampijper@gmail.com',
+			email: 'a',
 			password: hash,
 			score: 30,
 			dob: '1992-05-23',

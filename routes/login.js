@@ -10,7 +10,7 @@ const router  		= express.Router ( )
 let db = require(__dirname + '/../modules/database')
 
 router.get('/index', (req, res) => {
-	if(req.session.email) {
+	if(req.session.user) {
 		res.redirect('/profile')
 	}
 	else {
@@ -21,7 +21,7 @@ router.get('/index', (req, res) => {
 })
 
 router.get('/login', (req, res) => {
-	if(req.session.email) {
+	if(req.session.user) {
 		res.redirect('/profile')
 	}
 	else {

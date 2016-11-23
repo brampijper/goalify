@@ -11,10 +11,10 @@ let db = require(__dirname + '/../modules/database')
 
 //The users logs out
 router.get('/logout', (req, res) => {
-	if(!req.session.email) {
+	if(!req.session.user) {
 		res.redirect('/login?message=' + encodeURIComponent('Please log-in first;)'))		
 	}
-	else if(req.session.email) {
+	else if(req.session.user) {
 		req.session.destroy( (err) => {
 			if(err) console.log(err)
 			else { 
