@@ -1,9 +1,72 @@
 html
 	head
 	body
-		h2 Oh Yeahhhhh Babbyyyy
+		h2 Profile page
+		H3 Welcome, #{currentUser.username}
+		p
+			| Here you can view and edit your information. To see how other members view your profile, click here 
+			strong (en dat moet dan dus nog een link worden naar de public profile page)
 		br
+		
+
+		h4 Profile details that can not be changed
+		
+
+		p Your username: #{currentUser.username}
+		p Your team: you are a #{currentUser.kindOfPerson}
+		p Your current score: #{currentUser.score}
+		p
+			| (Get a higher score by 
+			a(href='goaloverview') completing more goals
+			| )
+		
+
+		p Your finished goals:
+		em EN DAN HIER EEN LIJST MET VOLTOOIDE OPDRACHTEN MET EEN LINK ERNAAR?
 		br
-		h3 Profile page, whatever :p 
+
+
+		h4 Profile details that can be changed
+
+
+		p Your current profile picture:
+		p 
+			em SOMEHOW PICTURE HERE, standaard van een kat of hond ( "if currentuser.kindofperson == cat, then"etc)
+		p (Change)
 		br
+
+
+		p Your bio: #{currentUser.bio}
+		p (change bio)
+		br
+
+
+		p Your date of birth: #{currentUser.dob}
+		p (change date of birth)
+		br
+
+
+		p Your email address: #{currentUser.email}
+		p (change email addres)
+		br
+
+
+		p To change your password, first please add your old password.
+		p invulveld oud wachtwoord
+		p invulveld nieuw wachtwoord
+		p invulveld nieuw wachtwoord (ter controle)
+		br
+
+
+		h4 I want to delete my profile
+		p Are you sure? We'd hate to see you go!
+		p This action is irreversible.
+		p We require your password before confirmation
+		p invulveld wachtwoord
+		p knop DELETE
+
+
+		h4 LOGOUT knop nog naar navbar verplaatsen, zodat een gebruiker niet per ongeluk op verwijder drukt ipv logout
 		a(href='logout') Log-out
+
+

@@ -23,7 +23,8 @@ db.User = db.conn.define( 'user', {
 	password: sequelize.STRING,
 	score: sequelize.INTEGER,
 	dob: sequelize.DATEONLY,
-	kindOfPerson: sequelize.STRING
+	kindOfPerson: sequelize.STRING,
+	bio: sequelize.STRING
 } )
 db.Goal = db.conn.define ('goal', {
 	title: sequelize.STRING,
@@ -56,7 +57,8 @@ db.conn.sync( {force: true}).then( () => {
 			password: hash,
 			score: 20,
 			dob: '1991-02-22',
-			kindOfPerson: 'Cat Person'
+			kindOfPerson: 'Cat Person',
+			bio: 'I am generally nice'
 		})
 
 		//Create sample goal
@@ -90,7 +92,8 @@ db.conn.sync( {force: true}).then( () => {
 			password: hash,
 			score: 30,
 			dob: '1992-05-23',
-			kindOfPerson: 'Cat Person'
+			kindOfPerson: 'Cat Person',
+			bio: 'Selma is my BFF in Amsterdam'
 		})
 
 		//Create sample goal
@@ -124,7 +127,8 @@ db.conn.sync( {force: true}).then( () => {
 			password: hash,
 			score: 30,
 			dob: '1993-11-23',
-			kindOfPerson: 'Dog Person'
+			kindOfPerson: 'Dog Person',
+			bio: 'I like marketing and f16'
 		})
 
 		//Create sample goal
