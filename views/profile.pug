@@ -2,9 +2,9 @@ html
 	head
 		include includes/header.pug
 	body
-		h2 Profile page
+		h2= message
 		H3 Welcome, #{currentUser.username}
-		p
+		p 
 			| Here you can view and edit your information. To see how other members view your profile, click here 
 			strong (en dat moet dan dus nog een link worden naar de public profile page)
 		br
@@ -48,7 +48,10 @@ html
 
 
 		p Your email address: #{currentUser.email}
-		p (change email addres)
+		p Change e-mail:
+		form(action='/profile' method='post' autocomplete='off')
+			input(name='newemail' type='email' placeholder='yournew@emailadres.com' required)
+			input(type='submit' value='change e-mail' id='submitnewemail')
 		br
 
 
