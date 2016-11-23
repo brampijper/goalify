@@ -28,7 +28,7 @@ router.post('/register', (req, res) => {
 			}
 		}).then( (user) => {
 			if(user) {
-				res.redirect('/register?message' + encodeURIComponent('Sorry, this username is taken'))
+				res.redirect('/register?message=' + encodeURIComponent('Sorry, this username is taken'))
 				return
 			}
 			if (!user ) {
@@ -38,7 +38,7 @@ router.post('/register', (req, res) => {
 					}
 				}).then( (user) => {
 					if(user) {
-						res.redirect('/register?message' + encodeURIComponent('Sorry, this emailadress is taken'))
+						res.redirect('/register?message=' + encodeURIComponent('Sorry, this emailadress is taken'))
 						return
 					}
 					else {
@@ -54,7 +54,7 @@ router.post('/register', (req, res) => {
 							}).then(function () {
 								db.conn.sync().then( () => {
 									console.log('User Added')
-									res.redirect('/login?message' + encodeURIComponent("Please log-in"))
+									res.redirect('/login?message=' + encodeURIComponent("Please log-in"))
 								})
 							})
 						})				
@@ -64,7 +64,7 @@ router.post('/register', (req, res) => {
 		})
 	}
 	else {
-		res.redirect('/register?message' + encodeURIComponent("Please fill in the form"))
+		res.redirect('/register?message=' + encodeURIComponent("Please fill in the form"))
 		return
 	} 
 })
