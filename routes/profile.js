@@ -33,12 +33,21 @@ router.post('/profile', (req, res) => {
 		user.updateAttributes({
 			email: req.body.newemail,
 			bio: req.body.newbio,
-			dob: req.body.newdob
+			dob: req.body.newdob,
+			password: req.body.newpassword
 		})
 		res.redirect('/profile?message=' + encodeURIComponent('Your personail details has been changed.'))
 		return
 	})
 })
 
+
+// Validate email
+// Validate password
+// check whether new passwords match
+// hash new password
+
+// to destroy account: http://stackoverflow.com/questions/8402597/sequelize-js-delete-query
+// where id = req.session.user.id
 
 module.exports = router
