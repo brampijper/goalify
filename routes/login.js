@@ -49,8 +49,8 @@ router.post('/login', (req, res) => {
 	}).then( (user) => {
 		bcrypt.compare(req.body.password, user.password, (err, result) => {
 			if(result) {
-				req.session.email 		= req.body.email
-				req.session.username 	= user.username
+				req.session.user 		= user
+				// req.session.username 	= user.username
 				console.log('succesfully logged in')
 				res.redirect('/profile?message=' + encodeURIComponent('Tadaaa logged-in.'))
 			} else {
