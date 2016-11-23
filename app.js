@@ -34,12 +34,14 @@ let loginRouter			= require (__dirname + '/routes/login')
 let logoutRouter		= require (__dirname + '/routes/logout')
 let registerRouter		= require (__dirname + '/routes/register')
 let profileRouter		= require (__dirname + '/routes/profile')
+let goalOverviewRouter	= require (__dirname + '/routes/goaloverview')
 
 // use
 app.use ( '/', loginRouter)
 app.use ('/', logoutRouter)
 app.use ('/', registerRouter)
 app.use ('/', profileRouter)
+app.use ('/', goalOverviewRouter)
 
 
 //// For debugging purposes
