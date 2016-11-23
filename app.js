@@ -9,6 +9,8 @@ const bodyParser = require('body-parser')
 const bcrypt = require ('bcrypt-nodejs')
 const session = require('express-session');
 const pg = require ('pg')
+const webpack = require("webpack");
+
 
 //initialize app
 const app = express ( )
