@@ -154,7 +154,6 @@ router.post('/deleteaccount', (req, res) => {
 			}
 		})
 	})
-
 })
 
 
