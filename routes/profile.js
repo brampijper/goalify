@@ -70,17 +70,30 @@ router.post('/newdob', (req, res) => {
 })
 
 router.post('/newemail', (req, res) => {
-	db.User.findOne({
-		where: {
-			username: req.session.user.username
-		}
-	}).then( (user) => {
-		user.updateAttributes({
-			email: req.body.newemail,
+	if (req.body.newemail !== 0) {
+		db.User.findOne({
+			where: {
+				email: req.body.newemail
+			}
+		}).then( (user) => {
+			if(user) {
+				res.redirect('/profile?message=' + encodeURIComponent('Sorry, this emailadress already exists. Please choose another or login.'))
+				return
+			} else {
+				db.User.findOne({
+					where: {
+						username: req.session.user.username
+					}
+				}).then( (user) => {
+					user.updateAttributes({
+						email: req.body.newemail,
+					})
+					res.redirect('/profile?message=' + encodeURIComponent('Your email has been changed.'))
+					return
+				})
+			}
 		})
-		res.redirect('/profile?message=' + encodeURIComponent('Your email has been changed.'))
-		return
-	})
+	}
 })
 
 router.post('/newpassword', (req, res) => {
@@ -115,6 +128,35 @@ router.post('/newpassword', (req, res) => {
 	}
 })
 
+router.post('/deleteaccount', (req, res) => {
+	db.User.findOne({
+		where: {
+			username: req.session.user.username
+		}
+	}).then( (user) => {
+		bcrypt.compare(req.body.oldpassword, user.password, (err, result) => {
+			if(result) {
+				db.User.destroy({
+					where: {
+						username: req.session.user.username
+					}
+				}).then( (user) => {
+					req.session.destroy( (err) => {
+						if(err) console.log(err)
+							else { 
+								res.redirect('/login?message=' + encodeURIComponent('Your account has been deleted.'))
+							}
+						})
+				})
+			} else {
+				res.redirect('/profile?message=' + encodeURIComponent('Your old password is incorrect. We can not delete your account.'))
+				return
+			}
+		})
+	})
+
+})
+
 
 
 
@@ -123,7 +165,7 @@ router.post('/newpassword', (req, res) => {
 // check whether new passwords match
 // hash new password
 
-// to destroy account: http://stackoverflow.com/questions/8402597/sequelize-js-delete-query
+// to destroy account: 	
 // where id = req.session.user.id
 
 module.exports = router
