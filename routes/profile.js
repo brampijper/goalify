@@ -71,6 +71,14 @@ router.post('/newpic', (req, res) => {
 })
 //at this point, i used https://howtonode.org/really-simple-file-uploads as inspiration
 //bram: look into amazon s3
+// base64 image node?
+// https://www.npmjs.com/package/base64-img
+
+// als je het pad krijgt, kan hij het plaatje eruit halen
+// dan plaatje opslaan op bepaalde locatie, met bepaald pad
+// dan is het plaatje ookw eer te accessen
+// het pad kun je dan in de database zetten
+//
 
 
 //Update bio
