@@ -1,0 +1,45 @@
+html
+	head
+		include includes/header.pug
+	body
+		if (currentUser === undefined)
+			p blablabla NIET ingelogd
+			p Laat alleen top 3 zien
+			p Vraag verder om in te loggen of te registreren
+				each thing in userRankLoggedout
+					ul
+						li - #{thing.username}: #{thing.score} points.
+				p ...
+			p
+			| please 
+			a(href='login') login
+			|  or 
+			a(href='register') register
+			|  to see all scores and compete!
+
+
+
+		else
+			h2= message
+			H3 Welcome, #{currentUser.username}
+			p Here you can view the leader board.
+			p heujjjj ingelogd
+			p laat complete ranglijst zien
+			p vraag om meer opdrachten te voltooien.
+				each thing in userRank
+					ul
+						li - #{thing.username}: #{thing.score} points.
+
+
+
+
+
+
+		
+
+
+
+
+
+
+		

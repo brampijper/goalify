@@ -169,6 +169,41 @@ db.conn.sync( {force: true}).then( () => {
 		})
 	})
 
+	//Create sample user 4
+	bcrypt.hash('12345678', null, null, function(err, hash) {
+		if (err) throw (err); 
+
+		var p7 = db.User.create( {
+			username: 'xx_elisa_girly_xx',
+			email: 'elisabeth@gmail.com',
+			password: hash,
+			score: 40,
+			dob: '1990-08-08',
+			kindOfPerson: 'Cat Person',
+			bio: 'Life is a party... but you have to hang the balloons yourself'
+		})
+
+		//Create sample goal
+		var p8 = db.Goal.create( {
+			title: 'Go for a swim',
+			description: 'A perfect goal for those hot summer days: why don\'t you just jump in the cannel and leave everybody on the quay astonished! Just don\'t forget your towel...',
+			duration: 5,
+			difficulty: 'easy',
+			points: 40,
+			geolocation: '[52.374404, 4.885953]'
+		})
+
+		Promise.all([p7, p8]).then (values => {
+			console.log(values[0].id)
+			console.log(values[1].id)
+			db.Complete.create ({
+				geolocation: '[52.359596, 4.904182]',
+				userId: values[0].id,
+				goalId: values[1].id
+			})
+		})
+	})
+
 
 	console.log ('Synced, yay')
 })
