@@ -96,14 +96,21 @@ router.post('/newpassword', (req, res) => {
 				username: req.session.user.username
 			}
 		}).then( (user) => {
-			bcrypt.hash(req.body.newpassword, null, null, function(err, hash) {
-				if (err) throw (err)
-					user.updateAttributes({
-						password: hash,
+			bcrypt.compare(req.body.oldpassword, user.password, (err, result) => {
+				if(result) {
+					bcrypt.hash(req.body.newpassword, null, null, function(err, hash) {
+						if (err) throw (err)
+							user.updateAttributes({
+								password: hash,
+							})
 					})
+					res.redirect('/profile?message=' + encodeURIComponent('Your password has been changed.'))
+					return
+				} else {
+					res.redirect('/profile?message=' + encodeURIComponent('Your old password is incorrect. Please try again.'))
+					return
+				}
 			})
-			res.redirect('/profile?message=' + encodeURIComponent('Your password has been changed.'))
-			return
 		})
 	}
 })

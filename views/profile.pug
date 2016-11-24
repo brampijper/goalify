@@ -63,8 +63,8 @@ html
 		p To change your password, first please add your old password.
 		form(action='/newpassword' method='post' autocomplete='off')
 			input(name='oldpassword' type='password' placeholder='Your old password' required)
-			input(name='newpassword' type='password' placeholder='Your new password' min-length = '3' required)
-			input(name='newpassword2' type='password' placeholder='Confirm your new password' min-length = '3' required)
+			input(name='newpassword' type='password' placeholder='Your new password' min-length = '8' required)
+			input(name='newpassword2' type='password' placeholder='Confirm your new password' min-length = '8' required)
 			input(type='submit' value='change password' id='submitnewpassword')
 		br
 
