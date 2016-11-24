@@ -5,6 +5,7 @@ const express 		= require ('express')
 const bodyParser 	= require('body-parser')
 const bcrypt 		= require ('bcrypt-nodejs')
 const session 		= require('express-session')
+const fs 			= require('fs')
 const router  		= express.Router ( )
 
 let db = require(__dirname + '/../modules/database')
@@ -27,6 +28,35 @@ router.get('/profile', (req, res) => {
 })
 
 //Make seperate forms on the profile page work
+
+//Update profile picture
+router.post('/newpic', (req, res) => {
+	
+
+	fs.readFile(req.files.img.path, function (err, data) {
+		var newPath = __dirname + "/uploads/uploadedFileName";
+		fs.writeFile(newPath, data, function (err) {
+			console.log(newPath)
+			console.log(data)
+			db.User.findOne({
+				where: {
+					username: req.session.user.username
+				}
+			}).then( (user) => {
+				user.updateAttributes({
+					bio: req.body.newpic,
+				})
+
+				res.redirect('/profile?message=' + encodeURIComponent('Your picture has been changed.'))
+				return
+			});
+		});
+
+
+
+	})
+})
+
 
 //Update bio
 router.post('/newbio', (req, res) => {
