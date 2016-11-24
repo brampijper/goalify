@@ -9,12 +9,14 @@ const router  		= express.Router ( )
 
 let db = require(__dirname + '/../modules/database')
 
+//Make the profile page exist
 router.get('/profile', (req, res) => {
 	var user = req.session.user;
 	var message = req.query.message
 	//in case no session is active/no user logged in
 	if (user === undefined) {
 		res.redirect('login?message=' + encodeURIComponent("Please log in."));
+		//Otherwise, render the profile page, include data of the current user and include the possibility to show a message
 	} else {
 		console.log('\nThe browser will now display the profile.')
 		res.render('profile', {
@@ -24,28 +26,16 @@ router.get('/profile', (req, res) => {
 	}
 })
 
-// router.post('/profile', (req, res) => {
-// 	db.User.findOne({
-// 		where: {
-// 			username: req.session.user.username
-// 		}
-// 	}).then( (user) => {
-// 		user.updateAttributes({
-// 			email: req.body.newemail,
-// 			bio: req.body.newbio,
-// 			dob: req.body.newdob,
-// 			password: req.body.newpassword
-// 		})
-// 		res.redirect('/profile?message=' + encodeURIComponent('Your personal details has been changed.'))
-// 		return
-// 	})
-// })
+//Make seperate forms on the profile page work
 
+//Update bio
 router.post('/newbio', (req, res) => {
+	//Since the username never changes, request users from the database that have the same username as the current user.
 	db.User.findOne({
 		where: {
 			username: req.session.user.username
 		}
+		//Since a bio is allowed to be empty, no validation is required.
 	}).then( (user) => {
 		user.updateAttributes({
 			bio: req.body.newbio,
@@ -55,11 +45,15 @@ router.post('/newbio', (req, res) => {
 	})
 })
 
+
+//Update date of birth
 router.post('/newdob', (req, res) => {
+	//Since the username never changes, request users from the database that have the same username as the current user.
 	db.User.findOne({
 		where: {
 			username: req.session.user.username
 		}
+		//Since a dob has front-end and sequelize validation to be a date format, no further validation is required.
 	}).then( (user) => {
 		user.updateAttributes({
 			dob: req.body.newdob,
@@ -69,17 +63,23 @@ router.post('/newdob', (req, res) => {
 	})
 })
 
+//Update email
 router.post('/newemail', (req, res) => {
+	//In case frontend validation breaks, backend validation to make sure form is not empty
 	if (req.body.newemail !== 0) {
+		//Check to find out if the new email adress already exists in the database, assigned to a different user
 		db.User.findOne({
 			where: {
 				email: req.body.newemail
 			}
 		}).then( (user) => {
+			//If it already exists, it can not be changed
 			if(user) {
 				res.redirect('/profile?message=' + encodeURIComponent('Sorry, this emailadress already exists. Please choose another or login.'))
 				return
+				//Otherwise: change it!
 			} else {
+				//Since the username never changes, request users from the database that have the same username as the current user.
 				db.User.findOne({
 					where: {
 						username: req.session.user.username
@@ -96,21 +96,27 @@ router.post('/newemail', (req, res) => {
 	}
 })
 
+//Update password
 router.post('/newpassword', (req, res) => {
+	//In case front end validation breaks, make sure new password is at least 8 characters
 	if(req.body.newpassword.length <= 7) {
 		res.redirect('profile?message=' + encodeURIComponent("Your password should be at least 8 characters long. Please try again."));
 		return;
+		//Then check whether user didn't make a typo in choosing a new password
 	} else if(req.body.newpassword !== req.body.newpassword2) {
 		res.redirect('profile?message=' + encodeURIComponent("Your passwords did not match. Please try again."));
 		return;
 	} else {
+		//Since the username never changes, request users from the database that have the same username as the current user.
 		db.User.findOne({
 			where: {
 				username: req.session.user.username
 			}
+			//Since changing a password is a heavy change, first the old password is required. The old password needs to match the one in the database.
 		}).then( (user) => {
 			bcrypt.compare(req.body.oldpassword, user.password, (err, result) => {
 				if(result) {
+					//If the user succesfully passed all this validation, a new hashed password will be made.
 					bcrypt.hash(req.body.newpassword, null, null, function(err, hash) {
 						if (err) throw (err)
 							user.updateAttributes({
@@ -128,18 +134,23 @@ router.post('/newpassword', (req, res) => {
 	}
 })
 
+//Delete account
 router.post('/deleteaccount', (req, res) => {
+	//Since the username never changes, request users from the database that have the same username as the current user.
 	db.User.findOne({
 		where: {
 			username: req.session.user.username
 		}
 	}).then( (user) => {
+		//Since deleting an account is a heavy change, first the user must confirm s/he's sure by filling out their password, which will be checked by the database.
 		bcrypt.compare(req.body.oldpassword, user.password, (err, result) => {
 			if(result) {
+				//Since the username never changes and is unique, destroy the user from the database that has the same username as the current user.
 				db.User.destroy({
 					where: {
 						username: req.session.user.username
 					}
+					//Also destroy the current session, otherwise the user will still be send to a profile page, even though it no longer exists.
 				}).then( (user) => {
 					req.session.destroy( (err) => {
 						if(err) console.log(err)
@@ -156,15 +167,5 @@ router.post('/deleteaccount', (req, res) => {
 	})
 })
 
-
-
-
-// Validate email
-// Validate password
-// check whether new passwords match
-// hash new password
-
-// to destroy account: 	
-// where id = req.session.user.id
 
 module.exports = router
