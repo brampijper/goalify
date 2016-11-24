@@ -1,0 +1,47 @@
+html
+	head
+		include includes/header.pug
+	body
+		if (currentUser === undefined)
+			h2= message
+			H3 Leaderboard
+			p Our best three players currently are: 
+				each thing in userRankLoggedout
+					ul
+						li - #{thing.username}: #{thing.score} points.
+				p ...
+			p
+			| Think you can beat 'em? Please 
+			a(href='login') login
+			|  or 
+			a(href='register') register
+			|  to see all scores and compete!
+
+
+
+		else
+			h2= message
+			H3 Leaderboard
+			p Hi #{currentUser.username}, see how you compare.
+				each thing in userRank
+					ul
+						li - #{thing.username}: #{thing.score} points.
+						//- Elke username moet een link worden naar het profiel van die gebruiker
+						//- Mogelijk nog in tabel plaatsen.
+			p 
+			| Think you can beat 'em? Climb up the leaderboard by 
+			a(href='goaloverview') completing some more goals around you.
+
+
+
+
+
+
+		
+
+
+
+
+
+
+		

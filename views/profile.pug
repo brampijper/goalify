@@ -16,18 +16,19 @@ html
 		p Your username: #{currentUser.username}
 		p Your team: you are a #{currentUser.kindOfPerson}
 		p Your current score: #{currentUser.score}
-		p
-			| (Get a higher score by 
-			a(href='goaloverview') completing more goals
-			| )
+		ol
+			li Get a higher score by 
+				a(href='goaloverview') completing more goals
+			li View how you rank on the 
+				a(href='leaderboard') leaderboard
+				//- Nog een unordered list van maken, maar die is momenteel niet zichtbaar in materialize
 		
 
 		p Your finished goals:
 		each thing in completedGoals
-			ul
+			ol
 				li - #{thing.goal.title}: #{thing.goal.points} points.
-		em EN DAN HIER EEN LIJST MET VOLTOOIDE OPDRACHTEN MET EEN LINK ERNAAR?
-		br
+		//- Nog een unordered list van maken, maar die is momenteel niet zichtbaar in materialize
 
 
 		h4 Profile details that can be changed
