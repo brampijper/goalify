@@ -2,13 +2,13 @@
 function initMap() {
 
 	//set position to center google maps
-	var uluru = {lat: 52.3702, lng: 4.8952}
+	var mainPosition = {lat: 52.3702, lng: 4.8952}
 
 	//create new google maps with options
 	var map = new google.maps.Map(document.getElementById('map'), {
 		disableDefaultUI: true,
 		zoom: 12,
-		center: uluru
+		center: mainPosition
     })
 
     //add marker on position
