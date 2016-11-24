@@ -11,26 +11,37 @@ let db = require(__dirname + '/../modules/database')
 
 router.get('/goaloverview', (req, res) => {
 	if(req.session.user) {
-		db.Complete.all({
-			where: {
-				userId: req.session.user.id
-			}
-		}).then( (completedGoals) => {
-			// let test = completedGoals
-			// console.log(completedGoals[0].goalId)
+		db.Goal.all({
+			include: [{
+				model: db.Complete, 
+			 	where: {userId: req.session.user.id} //userId == req.sessions.user.id
+			 										 //db.Complete.goalId == db.Goal.goalId
+			}]
+		}).then( (allGoals) => {
 			db.Goal.all({
+				where: {
+				}
+			})
+			console.log(completedGoals)
+			// db.Goal.all({
+
+
+			// }).then( (result) => {
+			// 	console.log(result)
+			// })
+
+			
+
+			// console.log(completedGoals[0].goalId)
 				// where: {
-				// 	id: completedGoals[0,1].goalId
+				// 	$ne: completedGoals[0].goalId,
+				// 	$ne: completedGoals[1].goalId
 				// }
-					//goalId !not copmletedGoals.goalId
+				// 	//goalId !not copmletedGoals.goalId
 					//in completedgoals zitten all goals die de user al heeft gedaan
 					//Deze moeten geexclude worden van de goals.
-					//Hoe dan? 
-			}).then( (uncompletedGoals) => {
-				console.log(uncompletedGoals)
-				console.log(completedGoals)
 			})
-		})
+				// console.log(completedGoals)
 		res.render('goaloverview')
 	}
 	else {
@@ -39,3 +50,10 @@ router.get('/goaloverview', (req, res) => {
 })
 
 module.exports = router
+
+//include the completed goals model
+//or the other way around. 
+
+// where: {
+// 	userId: req.session.user.id
+// }
