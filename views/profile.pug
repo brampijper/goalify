@@ -23,6 +23,9 @@ html
 		
 
 		p Your finished goals:
+		each thing in completedGoals
+			ul
+				li - #{thing.goal.title}: #{thing.goal.points} points.
 		em EN DAN HIER EEN LIJST MET VOLTOOIDE OPDRACHTEN MET EEN LINK ERNAAR?
 		br
 
@@ -35,7 +38,7 @@ html
 			em SOMEHOW PICTURE HERE, standaard van een kat of hond ( "if currentuser.kindofperson == cat, then"etc)
 		form(action='/newpic' method='post')
 			| Select a file: 
-			input(type='file', name='img')
+			input(type='file', name='newpic')
 			input(type='submit')
 
 		//- form(action='/newpic' method='post' enctype='multipart/form-data')
