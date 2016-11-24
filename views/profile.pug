@@ -38,7 +38,7 @@ html
 
 
 		p Your bio: #{currentUser.bio}
-		form(action='/profile' method='post' autocomplete='off')
+		form(action='/newbio' method='post' autocomplete='off')
 			input(name='newbio' type='text' placeholder='change your bio' required)
 			input(type='submit' value='change bio' id='submitnewbio')
 		br
@@ -46,7 +46,7 @@ html
 
 		p Your date of birth: #{currentUser.dob}
 		p (change date of birth)
-		form(action='/profile' method='post' autocomplete='off')
+		form(action='/newdob' method='post' autocomplete='off')
 			input(name='newdob' type='date' required)
 			input(type='submit' value='change date of birth' id='submitnewdob')
 		br
@@ -54,14 +54,14 @@ html
 
 		p Your email address: #{currentUser.email}
 		p Change e-mail:
-		form(action='/profile' method='post' autocomplete='off')
+		form(action='/newemail' method='post' autocomplete='off')
 			input(name='newemail' type='email' placeholder='yournew@emailadres.com' required)
 			input(type='submit' value='change e-mail' id='submitnewemail')
 		br
 
 
 		p To change your password, first please add your old password.
-		form(action='/profile' method='post' autocomplete='off')
+		form(action='/newpassword' method='post' autocomplete='off')
 			input(name='oldpassword' type='password' placeholder='Your old password' required)
 			input(name='newpassword' type='password' placeholder='Your new password' min-length = '3' required)
 			input(name='newpassword2' type='password' placeholder='Confirm your new password' min-length = '3' required)

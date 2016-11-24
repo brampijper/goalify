@@ -24,7 +24,52 @@ router.get('/profile', (req, res) => {
 	}
 })
 
-router.post('/profile', (req, res) => {
+// router.post('/profile', (req, res) => {
+// 	db.User.findOne({
+// 		where: {
+// 			username: req.session.user.username
+// 		}
+// 	}).then( (user) => {
+// 		user.updateAttributes({
+// 			email: req.body.newemail,
+// 			bio: req.body.newbio,
+// 			dob: req.body.newdob,
+// 			password: req.body.newpassword
+// 		})
+// 		res.redirect('/profile?message=' + encodeURIComponent('Your personal details has been changed.'))
+// 		return
+// 	})
+// })
+
+router.post('/newbio', (req, res) => {
+	db.User.findOne({
+		where: {
+			username: req.session.user.username
+		}
+	}).then( (user) => {
+		user.updateAttributes({
+			bio: req.body.newbio,
+		})
+		res.redirect('/profile?message=' + encodeURIComponent('Your bio has been changed.'))
+		return
+	})
+})
+
+router.post('/newdob', (req, res) => {
+	db.User.findOne({
+		where: {
+			username: req.session.user.username
+		}
+	}).then( (user) => {
+		user.updateAttributes({
+			dob: req.body.newdob,
+		})
+		res.redirect('/profile?message=' + encodeURIComponent('Your date of birth has been changed.'))
+		return
+	})
+})
+
+router.post('/newemail', (req, res) => {
 	db.User.findOne({
 		where: {
 			username: req.session.user.username
@@ -32,14 +77,38 @@ router.post('/profile', (req, res) => {
 	}).then( (user) => {
 		user.updateAttributes({
 			email: req.body.newemail,
-			bio: req.body.newbio,
-			dob: req.body.newdob,
-			password: req.body.newpassword
 		})
-		res.redirect('/profile?message=' + encodeURIComponent('Your personail details has been changed.'))
+		res.redirect('/profile?message=' + encodeURIComponent('Your email has been changed.'))
 		return
 	})
 })
+
+router.post('/newpassword', (req, res) => {
+	if(req.body.newpassword.length <= 7) {
+		res.redirect('profile?message=' + encodeURIComponent("Your password should be at least 8 characters long. Please try again."));
+		return;
+	} else if(req.body.newpassword !== req.body.newpassword2) {
+		res.redirect('profile?message=' + encodeURIComponent("Your passwords did not match. Please try again."));
+		return;
+	} else {
+		db.User.findOne({
+			where: {
+				username: req.session.user.username
+			}
+		}).then( (user) => {
+			bcrypt.hash(req.body.newpassword, null, null, function(err, hash) {
+				if (err) throw (err)
+					user.updateAttributes({
+						password: hash,
+					})
+			})
+			res.redirect('/profile?message=' + encodeURIComponent('Your password has been changed.'))
+			return
+		})
+	}
+})
+
+
 
 
 // Validate email
