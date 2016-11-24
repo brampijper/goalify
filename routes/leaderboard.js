@@ -14,7 +14,7 @@ let db = require(__dirname + '/../modules/database')
 router.get('/leaderboard', (req, res) => {
 	var user = req.session.user;
 	var message = req.query.message
-	//in case no session is active/no user logged in
+	//in case no session is active/no user logged in, it also needs to render the same page, but it should send different data (only 3 users in stead of all)
 	if (user === undefined) {
 		db.User.findAll({
 			limit: 3,

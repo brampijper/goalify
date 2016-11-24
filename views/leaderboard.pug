@@ -3,15 +3,15 @@ html
 		include includes/header.pug
 	body
 		if (currentUser === undefined)
-			p blablabla NIET ingelogd
-			p Laat alleen top 3 zien
-			p Vraag verder om in te loggen of te registreren
+			h2= message
+			H3 Leaderboard
+			p Our best three players currently are: 
 				each thing in userRankLoggedout
 					ul
 						li - #{thing.username}: #{thing.score} points.
 				p ...
 			p
-			| please 
+			| Think you can beat 'em? Please 
 			a(href='login') login
 			|  or 
 			a(href='register') register
@@ -21,14 +21,16 @@ html
 
 		else
 			h2= message
-			H3 Welcome, #{currentUser.username}
-			p Here you can view the leader board.
-			p heujjjj ingelogd
-			p laat complete ranglijst zien
-			p vraag om meer opdrachten te voltooien.
+			H3 Leaderboard
+			p Hi #{currentUser.username}, see how you compare.
 				each thing in userRank
 					ul
 						li - #{thing.username}: #{thing.score} points.
+						//- Elke username moet een link worden naar het profiel van die gebruiker
+						//- Mogelijk nog in tabel plaatsen.
+			p 
+			| Think you can beat 'em? Climb up the leaderboard by 
+			a(href='goaloverview') completing some more goals around you.
 
 
 
