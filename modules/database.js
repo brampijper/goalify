@@ -106,6 +106,15 @@ db.conn.sync( {force: true}).then( () => {
 			geolocation: '[52.358172, 4.868300]'
 		})
 
+		var p5 = db.Goal.create( {
+			title: 'Smoke some weed',
+			description: 'Go to a coffeeshop and buy some weed',
+			duration: 100,
+			difficulty: 'hard',
+			points: 50,
+			geolocation: '[52.372826, 4.895622]'
+		})		
+
 		Promise.all([p3, p4]).then (values => {
 			console.log(values[0].id)
 			console.log(values[1].id)
@@ -113,6 +122,14 @@ db.conn.sync( {force: true}).then( () => {
 				geolocation: '[52.358283, 4.864287]',
 				userId: values[0].id,
 				goalId: values[1].id
+			}).then( () => {
+				Promise.all([p3, p5]).then(values => {
+					db.Complete.create ({
+						geolocation: '[52.358283, 4.864287]',
+						userId: values[0].id,
+						goalId: values[1].id
+					})
+				})
 			})
 		})
 	})
