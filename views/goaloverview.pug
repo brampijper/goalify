@@ -5,6 +5,11 @@ html
 		h2 Goals Overview map
 		br
 		br
+		each goal in unfinishedgoal
+			ul
+				li.geolocation Unfinished Goal: #{goal.title}
+		br
+		br
 		div#map
 		script(src='jquery-3.1.1.min.js' type='text/javascript')
 		script(src='main.js' type='text/javascript')

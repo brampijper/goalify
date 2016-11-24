@@ -9,40 +9,31 @@ const router  		= express.Router ( )
 
 let db = require(__dirname + '/../modules/database')
 
+let goalArray = []
+
 router.get('/goaloverview', (req, res) => {
+	db.Goal.findAll().then( goals => console.log('Number of goals ' + goals.length) )
 	if(req.session.user) {
-		db.Goal.all({
+		db.Goal.findAll({
 			include: [{
 				model: db.Complete, 
-			 	where: {userId: req.session.user.id} //userId == req.sessions.user.id
-			 										 //db.Complete.goalId == db.Goal.goalId
+			 	where: {userId: req.session.user.id},
+			 	required: false
 			}]
-		}).then( (allGoals) => {
-			db.Goal.all({
-				where: {
-				}
+		}).then( (goals) => {
+			// res.send(goals)
+			for (var i = 0; i < goals.length; i++) {
+				console.log(goals[i].title + ' has ' + goals[i].completes.length + ' completes')
+
+				if(goals[i].completes.length === 0) {
+					goalArray.push(goals[i])
+				}				
+			}
+		}).then( () => {
+			res.render('goaloverview', {
+				unfinishedgoal: goalArray
 			})
-			console.log(completedGoals)
-			// db.Goal.all({
-
-
-			// }).then( (result) => {
-			// 	console.log(result)
-			// })
-
-			
-
-			// console.log(completedGoals[0].goalId)
-				// where: {
-				// 	$ne: completedGoals[0].goalId,
-				// 	$ne: completedGoals[1].goalId
-				// }
-				// 	//goalId !not copmletedGoals.goalId
-					//in completedgoals zitten all goals die de user al heeft gedaan
-					//Deze moeten geexclude worden van de goals.
-			})
-				// console.log(completedGoals)
-		res.render('goaloverview')
+		})
 	}
 	else {
 		res.redirect('/index')
