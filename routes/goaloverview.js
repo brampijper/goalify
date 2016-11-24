@@ -16,17 +16,19 @@ router.get('/goaloverview', (req, res) => {
 				userId: req.session.user.id
 			}
 		}).then( (completedGoals) => {
+			// let test = completedGoals
 			// console.log(completedGoals[0].goalId)
 			db.Goal.all({
-				where: {
-					id: completedGoals[0,1].goalId
-				}
+				// where: {
+				// 	id: completedGoals[0,1].goalId
+				// }
 					//goalId !not copmletedGoals.goalId
 					//in completedgoals zitten all goals die de user al heeft gedaan
 					//Deze moeten geexclude worden van de goals.
 					//Hoe dan? 
 			}).then( (uncompletedGoals) => {
 				console.log(uncompletedGoals)
+				console.log(completedGoals)
 			})
 		})
 		res.render('goaloverview')
