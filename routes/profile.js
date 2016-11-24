@@ -5,6 +5,7 @@ const express 		= require ('express')
 const bodyParser 	= require('body-parser')
 const bcrypt 		= require ('bcrypt-nodejs')
 const session 		= require('express-session')
+const fs 			= require('fs')
 const router  		= express.Router ( )
 
 let db = require(__dirname + '/../modules/database')
@@ -19,14 +20,66 @@ router.get('/profile', (req, res) => {
 		//Otherwise, render the profile page, include data of the current user and include the possibility to show a message
 	} else {
 		console.log('\nThe browser will now display the profile.')
-		res.render('profile', {
-			currentUser: user, 
-			message: message
+
+		db.Complete.findAll({
+			where: {userId: req.session.user.id},
+			order: [['updatedAt', 'DESC']],
+			include: [db.Goal]
+		}).then( (goals) => { 
+			res.render('profile', {
+				completedGoals: goals, 
+				currentUser: user, 
+				message: message
+			})
+
 		})
+
+		
 	}
 })
 
 //Make seperate forms on the profile page work
+
+//Update profile picture
+router.post('/newpic', (req, res) => {
+	console.log(req)
+	console.log('----------------------------------')
+	console.log(req.body.newpic)
+
+	// fs.readFile(req.body.newpic, function (err, data) {
+	// 	var newPath = __dirname + "/../static";
+	// 	fs.writeFile(newPath, data, function (err) {
+	// 		console.log(newPath)
+	// 		console.log(data)
+	// 		db.User.findOne({
+	// 			where: {
+	// 				username: req.session.user.username
+	// 			}
+	// 		}).then( (user) => {
+	// 			user.updateAttributes({
+	// 				bio: req.body.newpic,
+	// 			})
+
+	// 			res.redirect('/profile?message=' + encodeURIComponent('Your picture has been changed.'))
+	// 			return
+	// 		});
+	// 	});
+
+
+
+	// })
+})
+//at this point, i used https://howtonode.org/really-simple-file-uploads as inspiration
+//bram: look into amazon s3
+// base64 image node?
+// https://www.npmjs.com/package/base64-img
+
+// als je het pad krijgt, kan hij het plaatje eruit halen
+// dan plaatje opslaan op bepaalde locatie, met bepaald pad
+// dan is het plaatje ookw eer te accessen
+// het pad kun je dan in de database zetten
+//
+
 
 //Update bio
 router.post('/newbio', (req, res) => {
