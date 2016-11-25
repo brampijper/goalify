@@ -1,7 +1,7 @@
 //initializing google maps with a custom design
 function initMap() {
 
-	//set position to center google maps
+    //set position to center google maps
 	var mainPosition = {lat: 52.3702, lng: 4.8952}
 
 	//create new google maps with options
@@ -11,26 +11,33 @@ function initMap() {
 		center: mainPosition
     })
 
-    //add marker on position
-    var marker = new google.maps.Marker({
-        position: {lat:52.374336, lng: 4.912338},
-        map: map,
-        title: 'Test'
-    })
-
-    var infowindow = new google.maps.InfoWindow({
-        content: 'This is the first assignment'
-    })
-
-    //show information when user clicks on the marker
-    marker.addListener('click', function() {
-        infowindow.open(map, marker);
-    })    
-
-	//ask browser location from user
     var infoWindow = new google.maps.InfoWindow({map: map});
 
-    // if user accepts show location
+    $.getJSON('/json/goals.json', function(goal) {
+        $.each(goal, function(key, data) {
+            var latLng = new google.maps.LatLng(data.lat, data.lng)
+                //Creating a marker and putting it on the map. 
+            var marker = new google.maps.Marker({
+                position: latLng,
+                map: map,
+                title: data.title
+            })
+
+            var contentString = 'Goal: ' + data.title + '<br>' + '<br>' + 'Description: ' + data.description + '<br><br>' + 'Duration: ' + data.duration + ' minutes' + '<br><br>' + 'Points: ' + data.points + '<br><br>' + 'Difficulty: ' + data.difficulty
+
+            var infowindow = new google.maps.InfoWindow() 
+
+            google.maps.event.addListener(marker, 'click', function() {
+                infowindow.setContent(contentString)
+                infowindow.open(map, marker);
+            })
+            google.maps.event.addListener(map, 'click', function () {
+                infowindow.close();
+            })  
+        })
+    })
+
+    // When user accepts show location
     if (navigator.geolocation) {
     	navigator.geolocation.getCurrentPosition(function(position) {
     		var pos = {
@@ -61,12 +68,3 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 		'Error: The Geolocation service failed.' :
 		'Error: Your browser doesn\'t support geolocation.');
 }
-
-//TODO
-    //Look for Lat Long in the database.
-    //store them in an object / array.
-    //For every item create a new marker with a seperate inforwindow and addListener. 
-
-//Extra
-    //Only show assignments that are close to the user's current position. 
-    //Show distance between the assignments and the user. 
