@@ -24,7 +24,8 @@ db.User = db.conn.define( 'user', {
 	score: sequelize.INTEGER,
 	dob: sequelize.DATEONLY,
 	kindOfPerson: sequelize.STRING,
-	bio: sequelize.STRING
+	bio: sequelize.STRING,
+	profifo: sequelize.STRING
 } )
 db.Goal = db.conn.define ('goal', {
 	title: sequelize.STRING,
@@ -32,11 +33,13 @@ db.Goal = db.conn.define ('goal', {
 	duration: sequelize.INTEGER,
 	difficulty: sequelize.STRING,
 	points: sequelize.INTEGER,
-	geolocation: sequelize.STRING
+	lat: sequelize.STRING,
+	lng: sequelize.STRING
 })
 // var point = { type: 'Point', coordinates: [52.374336, 4.912338]};
 db.Complete = db.conn.define ('complete', {
-	geolocation: sequelize.STRING
+	lat: sequelize.STRING,
+	lng: sequelize.STRING
 })
 
 //// Define relations
@@ -58,7 +61,8 @@ db.conn.sync( {force: true}).then( () => {
 			score: 20,
 			dob: '1991-02-22',
 			kindOfPerson: 'Cat Person',
-			bio: 'I am generally nice'
+			bio: 'I am generally nice',
+			profifo: ' '
 		})
 
 		//Create sample goal
@@ -68,14 +72,16 @@ db.conn.sync( {force: true}).then( () => {
 			duration: 5,
 			difficulty: 'easy',
 			points: 10,
-			geolocation: '[52.374336, 4.912338]'
+			lat: '52.374336',
+			lng: '4.912338'
 		})
 
 		Promise.all([p1, p2]).then (values => {
 			console.log(values[0].id)
 			console.log(values[1].id)
 			db.Complete.create ({
-				geolocation: '[52.374336, 4.912338]',
+				lat: '52.374336',
+				lng: '4.912338',
 				userId: values[0].id,
 				goalId: values[1].id
 			})
@@ -93,7 +99,8 @@ db.conn.sync( {force: true}).then( () => {
 			score: 30,
 			dob: '1992-05-23',
 			kindOfPerson: 'Cat Person',
-			bio: 'Selma is my BFF in Amsterdam'
+			bio: 'Selma is my BFF in Amsterdam',
+			profifo: ' '
 		})
 
 		//Create sample goal
@@ -103,7 +110,8 @@ db.conn.sync( {force: true}).then( () => {
 			duration: 15,
 			difficulty: 'medium',
 			points: 30,
-			geolocation: '[52.358172, 4.868300]'
+			lat: '52.358172',
+			lng: '4.868300'
 		})
 
 		var p5 = db.Goal.create( {
@@ -112,20 +120,23 @@ db.conn.sync( {force: true}).then( () => {
 			duration: 100,
 			difficulty: 'hard',
 			points: 50,
-			geolocation: '[52.372826, 4.895622]'
+			lat: '52.372826',
+			lng: '4.895622'
 		})		
 
 		Promise.all([p3, p4]).then (values => {
 			console.log(values[0].id)
 			console.log(values[1].id)
 			db.Complete.create ({
-				geolocation: '[52.358283, 4.864287]',
+				lat: '52.358283',
+				lng: '4.864287',
 				userId: values[0].id,
 				goalId: values[1].id
 			}).then( () => {
 				Promise.all([p3, p5]).then(values => {
 					db.Complete.create ({
-						geolocation: '[52.358283, 4.864287]',
+						lat: '52.358283',
+						lng: '4.864287',
 						userId: values[0].id,
 						goalId: values[1].id
 					})
@@ -145,7 +156,8 @@ db.conn.sync( {force: true}).then( () => {
 			score: 30,
 			dob: '1993-11-23',
 			kindOfPerson: 'Dog Person',
-			bio: 'I like marketing and f16'
+			bio: 'I like marketing and f16',
+			profifo: ' '
 		})
 
 		//Create sample goal
@@ -155,14 +167,16 @@ db.conn.sync( {force: true}).then( () => {
 			duration: 30,
 			difficulty: 'easy',
 			points: 10,
-			geolocation: '[52.381627, 4.901176]'
+			lat: '52.381627',
+			lng: '4.901176'
 		})
 
 		Promise.all([p5, p6]).then (values => {
 			console.log(values[0].id)
 			console.log(values[1].id)
 			db.Complete.create ({
-				geolocation: '[52.380586, 4.899492]',
+				lat: '52.380586',
+				lng: '4.899492',
 				userId: values[0].id,
 				goalId: values[1].id
 			})
@@ -180,7 +194,8 @@ db.conn.sync( {force: true}).then( () => {
 			score: 40,
 			dob: '1990-08-08',
 			kindOfPerson: 'Cat Person',
-			bio: 'Life is a party... but you have to hang the balloons yourself'
+			bio: 'Life is a party... but you have to hang the balloons yourself',
+			profifo: ' '
 		})
 
 		//Create sample goal
@@ -190,14 +205,16 @@ db.conn.sync( {force: true}).then( () => {
 			duration: 5,
 			difficulty: 'easy',
 			points: 40,
-			geolocation: '[52.374404, 4.885953]'
+			lat: '52.374404',
+			lng: '4.885953'
 		})
 
 		Promise.all([p7, p8]).then (values => {
 			console.log(values[0].id)
 			console.log(values[1].id)
 			db.Complete.create ({
-				geolocation: '[52.359596, 4.904182]',
+				lat: '52.359596',
+				lng: '4.904182',
 				userId: values[0].id,
 				goalId: values[1].id
 			})
