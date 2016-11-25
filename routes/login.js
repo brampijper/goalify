@@ -44,7 +44,7 @@ router.post('/login', (req, res) => {
 	else {
 	db.User.findOne({
 		where: {
-			email: req.body.email
+			email: req.body.email.toLowerCase()
 		}
 	}).then( (user) => {
 		bcrypt.compare(req.body.password, user.password, (err, result) => {

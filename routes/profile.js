@@ -175,7 +175,7 @@ router.post('/newemail', (req, res) => {
 		//Check to find out if the new email adress already exists in the database, assigned to a different user
 		db.User.findOne({
 			where: {
-				email: req.body.newemail
+				email: req.body.newemail.toLowerCase()
 			}
 		}).then( (user) => {
 			//If it already exists, it can not be changed
@@ -191,7 +191,7 @@ router.post('/newemail', (req, res) => {
 					}
 				}).then( (user) => {
 					user.updateAttributes({
-						email: req.body.newemail,
+						email: req.body.newemail.toLowerCase(),
 					})
 					res.redirect('/profile?message=' + encodeURIComponent('Your email has been changed.'))
 					return
