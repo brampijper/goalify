@@ -5,6 +5,7 @@ const express 		= require ('express')
 const bodyParser 	= require('body-parser')
 const bcrypt 		= require ('bcrypt-nodejs')
 const session 		= require('express-session')
+const fs 			= require('fs')
 const router  		= express.Router ( )
 
 let db = require(__dirname + '/../modules/database')
@@ -27,24 +28,22 @@ router.get('/goaloverview', (req, res) => {
 
 				if(goals[i].completes.length === 0) {
 					goalArray.push(goals[i])
-				}				
+				}
+				fs.writeFile (__dirname + '/goal.json', JSON.stringify(goalArray), 'utf-8', function(error) {
+					if(error) throw error
+				})			
 			}
 		}).then( () => {
-			res.render('goaloverview', {
-				unfinishedgoal: goalArray
-			})
+			res.render('goaloverview')
+				//unfinishedgoal: goalArray
 		})
 	}
 	else {
-		res.redirect('/index')
-	}
+		res.redirect('/index'
+)	}
 })
 
 module.exports = router
 
-//include the completed goals model
-//or the other way around. 
-
-// where: {
-// 	userId: req.session.user.id
-// }
+//What data do I need for google maps? 
+	//Goal title
