@@ -6,6 +6,19 @@ const bodyParser 	= require('body-parser')
 const bcrypt 		= require ('bcrypt-nodejs')
 const session 		= require('express-session')
 const fs 			= require('fs')
+const base64Img 	= require('base64-img');
+const multer		= require('multer')
+const storage		= multer.diskStorage ({
+	destination: function (req, file, callback) {
+		callback(null, './static/images');
+	},
+	filename: function (req, file, callback) {
+		let newPicture = file.fieldname + '-' + Date.now()
+		callback(null, newPicture);
+	}
+})
+let upload = multer({ storage : storage}).single('newpic');
+
 const router  		= express.Router ( )
 
 let db = require(__dirname + '/../modules/database')
@@ -44,7 +57,41 @@ router.get('/profile', (req, res) => {
 router.post('/newpic', (req, res) => {
 	console.log(req)
 	console.log('----------------------------------')
-	console.log(req.body.newpic)
+	console.log(__dirname + req.body.newpic)
+
+
+upload(req, res, function(err) {
+		if(err) {
+			console.log(err)
+			return res.redirect('/profile?message=' + encodeURIComponent('Your file could not be uploaded.'));
+		} else {
+//Since the username never changes, request users from the database that have the same username as the current user.
+	db.User.findOne({
+		where: {
+			username: req.session.user.username
+		}
+	})
+	.then( (user) => {
+		console.log(upload)
+		user.updateAttributes({
+			profifo: upload,
+		})
+	}) 
+
+
+
+	
+		res.redirect('/profile?message=' + encodeURIComponent('Your picture has been changed.'));
+		}
+	});
+});
+
+
+
+	// base64Img.base64(__dirname + req.body.newpic, function(err, data) {
+	// 	console.log (data)
+
+	// })
 
 	// fs.readFile(req.body.newpic, function (err, data) {
 	// 	var newPath = __dirname + "/../static";
@@ -68,7 +115,7 @@ router.post('/newpic', (req, res) => {
 
 
 	// })
-})
+// })
 //at this point, i used https://howtonode.org/really-simple-file-uploads as inspiration
 //bram: look into amazon s3
 // base64 image node?
