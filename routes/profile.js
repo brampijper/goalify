@@ -7,16 +7,21 @@ const bcrypt 		= require ('bcrypt-nodejs')
 const session 		= require('express-session')
 const fs 			= require('fs')
 const base64Img 	= require('base64-img');
+//// For router.post /newpic
+// use multer as middleware
 const multer		= require('multer')
 const storage		= multer.diskStorage ({
+	//declare where to save the inputted file
 	destination: function (req, file, callback) {
 		callback(null, './static/images');
 	},
+	//declare how to name the inputted file (add date.now for uniqueness)
 	filename: function (req, file, callback) {
 		let newPicture = file.fieldname + '-' + Date.now()
 		callback(null, newPicture);
 	}
 })
+//
 let upload = multer({ storage : storage}).single('newpic');
 
 const router  		= express.Router ( )
@@ -54,40 +59,40 @@ router.get('/profile', (req, res) => {
 //Make seperate forms on the profile page work
 
 //Update profile picture
+//used https://codeforgeek.com/2014/11/file-uploads-using-node-js/ as inspiration
 router.post('/newpic', (req, res) => {
+	//testing what information is in the req
 	console.log(req)
 	console.log('----------------------------------')
-	console.log(__dirname + req.body.newpic)
 
-
-upload(req, res, function(err) {
+	// this would put the upload in motion
+	upload(req, res, function(err) {
 		if(err) {
 			console.log(err)
+			//if an error occurs, get redirected with a message
 			return res.redirect('/profile?message=' + encodeURIComponent('Your file could not be uploaded.'));
 		} else {
-//Since the username never changes, request users from the database that have the same username as the current user.
-	db.User.findOne({
-		where: {
-			username: req.session.user.username
-		}
-	})
-	.then( (user) => {
-		console.log(upload)
-		user.updateAttributes({
-			profifo: upload,
-		})
-	}) 
+			//Since the username never changes, request users from the database that have the same username as the current user.
+			db.User.findOne({
+				where: {
+					username: req.session.user.username
+				}
+			})
+			.then( (user) => {
+				user.updateAttributes({
+					profifo: './images' + req.body.newpic //HOWWWWWWW --> this now translates to "./imagesundefined" in the database
+					//since static is the standard go-to for static files (as declared in app.js, by simply saving the path in the database, this should also be able to called upon in the pugfile to show this image)
+					//However this doesn't work yet.............
+				})
+				res.redirect('/profile?message=' + encodeURIComponent('Your picture has been changed.'));
+			}) 
 
-
-
-	
-		res.redirect('/profile?message=' + encodeURIComponent('Your picture has been changed.'));
 		}
 	});
 });
 
 
-
+//Old attempt at changing profile picture with base64Img
 	// base64Img.base64(__dirname + req.body.newpic, function(err, data) {
 	// 	console.log (data)
 
