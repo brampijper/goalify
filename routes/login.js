@@ -10,23 +10,22 @@ const router  		= express.Router ( )
 let db = require(__dirname + '/../modules/database')
 
 router.get('/index', (req, res) => {
+	var message = req.query.message
 	if(req.session.user) {
 		res.redirect('/profile')
 	}
 	else {
-		res.render('index', {
-			message: req.query.message
-		})
+		res.render('index', {message: message})
 	}
 })
 
 router.get('/login', (req, res) => {
+	var message = req.query.message
 	if(req.session.user) {
 		res.redirect('/profile')
 	}
 	else {
-		message: req.query.message
-		res.render('login')
+		res.render('login', {message: message})
 	}
 })
 
@@ -42,23 +41,28 @@ router.post('/login', (req, res) => {
 	}
 	
 	else {
-	db.User.findOne({
-		where: {
-			email: req.body.email
-		}
-	}).then( (user) => {
-		bcrypt.compare(req.body.password, user.password, (err, result) => {
-			if(result) {
-				req.session.user 		= user
-				// req.session.username 	= user.username
-				console.log('succesfully logged in')
-				res.redirect('/profile?message=' + encodeURIComponent('Tadaaa logged-in.'))
+		db.User.findOne({
+			where: {
+				email: req.body.email.toLowerCase()
+			}
+		}).then( (user) => {
+			if (user) {
+				bcrypt.compare(req.body.password, user.password, (err, result) => {
+					if(result) {
+						req.session.user 		= user
+						// req.session.username 	= user.username
+						console.log('succesfully logged in')
+						res.redirect('/profile?message=' + encodeURIComponent('Tadaaa logged-in.'))
+					} else {
+						res.redirect('/login?message=' + encodeURIComponent('Invalid email or password.'))
+						return
+					}
+				})
 			} else {
 				res.redirect('/login?message=' + encodeURIComponent('Invalid email or password.'))
 				return
 			}
 		})
-	})
 	}
 })
 

@@ -24,7 +24,7 @@ router.post('/register', (req, res) => {
 	if (req.body.username && req.body.email && req.body.password !== 0) {
 		db.User.findOne({
 			where: {
-				username: req.body.username
+				username: req.body.username.toLowerCase()
 			}
 		}).then( (user) => {
 			if(user) {
@@ -34,7 +34,7 @@ router.post('/register', (req, res) => {
 			if (!user ) {
 				db.User.findOne({
 					where: {
-						email: req.body.email
+						email: req.body.email.toLowerCase()
 					}
 				}).then( (user) => {
 					if(user) {
@@ -44,8 +44,8 @@ router.post('/register', (req, res) => {
 					else {
 						bcrypt.hash(req.body.password, null, null, function(err, hash) {
 							db.User.create({
-								username: req.body.username,
-								email: req.body.email,
+								username: req.body.username.toLowerCase(),
+								email: req.body.email.toLowerCase(),
 								password: hash,
 								score: 0,
 								dob: req.body.bday,
