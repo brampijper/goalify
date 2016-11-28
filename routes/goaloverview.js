@@ -39,7 +39,7 @@ router.get('/goaloverview', (req, res) => {
 			return goalArray
 		}).then( (unfinishedGoals) => {
 			for (var i = 0; i < unfinishedGoals.length; i++) {
-				console.log(unfinishedGoals[i])
+				// console.log(unfinishedGoals[i])
 			}
 			fs.writeFile (__dirname + '/../static/json/goals.json', JSON.stringify(unfinishedGoals), 'utf-8', function(error) {
 				if(error) throw error
@@ -57,13 +57,11 @@ router.get('/goal-overview', (req, res) => {
 				id: req.query.id
 			}
 		}).then((goal) => {
-			Promise.all([goal]).then(values => {
-				db.Complete.create({
-					lat: values[0].lat,
-					lng: values[0].lng,
-					userId: req.session.user.id,
-					goalId: values[0].id
-				})
+			db.Complete.create({
+				lat: goal.lat,
+				lng: goal.lng,
+				userId: req.session.user.id,
+				goalId: goal.id,	
 			})
 		}).then( () => {
 			res.redirect('goaloverview?message=' + encodeURIComponent("Goal Marked as complete!"))
