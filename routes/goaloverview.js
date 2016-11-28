@@ -14,7 +14,15 @@ let goalArray = []
 
 router.get('/goaloverview', (req, res) => {
 	// db.Goal.findAll().then( goals => console.log('Number of goals ' + goals.length) )
-	if(req.session.user) {
+	let user = req.session.user
+	let message = req.query.message
+	if (user === undefined) {
+
+		res.redirect('login?message=' + encodeURIComponent("Please log in."))
+		console.log(user)
+	}
+
+	else {
 		db.Goal.findAll({
 			include: [{
 				model: db.Complete, 
@@ -22,7 +30,6 @@ router.get('/goaloverview', (req, res) => {
 			 	required: false
 			}]
 		}).then( (goals) => {
-			// res.send(goals)
 			for (var i = 0; i < goals.length; i++) {
 				// console.log(goals[i].title + ' has ' + goals[i].completes.length + ' completes')
 
@@ -37,6 +44,35 @@ router.get('/goaloverview', (req, res) => {
 			})	
 		}).then( () => {
 			res.render('goaloverview')
+		})
+	}
+})
+
+router.get('/goal-overview', (req, res) => {
+	if(req.session.user) {
+		db.Goal.findOne({
+			where: {
+				id: req.query.id
+			}
+		}).then((goal) => {
+			Promise.all([goal]).then(values => {
+				db.Complete.create({
+					lat: values[0].lat,
+					lng: values[0].lng,
+					userId: req.session.user.id,
+					goalId: values[0].id
+				})
+			})
+		}).then( () => {
+			db.User.findAll({
+				where: {
+					id: req.session.user.id
+				}
+			})
+		}).then( (user) => {
+			console.log(user)
+			req.session.user = user
+			res.redirect('goaloverview?message=' + encodeURIComponent("Goal Marked as complete!"))
 		})
 	}
 	else {
