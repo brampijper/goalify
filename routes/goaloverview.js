@@ -10,16 +10,14 @@ const router  		= express.Router ( )
 
 let db = require(__dirname + '/../modules/database')
 
-let goalArray = []
-
 router.get('/goaloverview', (req, res) => {
 	// db.Goal.findAll().then( goals => console.log('Number of goals ' + goals.length) )
 	let user = req.session.user
 	let message = req.query.message
+
 	if (user === undefined) {
 
 		res.redirect('login?message=' + encodeURIComponent("Please log in."))
-		console.log(user)
 	}
 
 	else {
@@ -30,8 +28,9 @@ router.get('/goaloverview', (req, res) => {
 			 	required: false
 			}]
 		}).then( (goals) => {
+			var goalArray = []
 			for (var i = 0; i < goals.length; i++) {
-				// console.log(goals[i].title + ' has ' + goals[i].completes.length + ' completes')
+				//console.log(goals[i].title + ' has ' + goals[i].completes.length + ' completes')
 
 				if(goals[i].completes.length === 0) {
 					goalArray.push(goals[i])
@@ -39,6 +38,9 @@ router.get('/goaloverview', (req, res) => {
 			}
 			return goalArray
 		}).then( (unfinishedGoals) => {
+			for (var i = 0; i < unfinishedGoals.length; i++) {
+				console.log(unfinishedGoals[i])
+			}
 			fs.writeFile (__dirname + '/../static/json/goals.json', JSON.stringify(unfinishedGoals), 'utf-8', function(error) {
 				if(error) throw error
 			})	
@@ -64,14 +66,6 @@ router.get('/goal-overview', (req, res) => {
 				})
 			})
 		}).then( () => {
-			db.User.findAll({
-				where: {
-					id: req.session.user.id
-				}
-			})
-		}).then( (user) => {
-			console.log(user)
-			req.session.user = user
 			res.redirect('goaloverview?message=' + encodeURIComponent("Goal Marked as complete!"))
 		})
 	}
