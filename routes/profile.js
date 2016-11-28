@@ -7,6 +7,7 @@ const bcrypt 		= require ('bcrypt-nodejs')
 const session 		= require('express-session')
 const fs 			= require('fs')
 const base64Img 	= require('base64-img');
+
 //// For router.post /newpic
 // use multer as middleware
 const multer		= require('multer')
@@ -17,7 +18,7 @@ const storage		= multer.diskStorage ({
 	},
 	//declare how to name the inputted file (add date.now for uniqueness)
 	filename: function (req, file, callback) {
-		let newPicture = file.fieldname + '-' + Date.now()
+		let newPicture = file.fieldname + '-' + req.session.user.id
 		callback(null, newPicture);
 	}
 })
@@ -38,6 +39,8 @@ router.get('/profile', (req, res) => {
 		//Otherwise, render the profile page, include data of the current user and include the possibility to show a message
 	} else {
 		console.log('\nThe browser will now display the profile.')
+		console.log(req.session.user.id)
+		console.log(req.session.user.profifo)
 
 		db.Complete.findAll({
 			where: {userId: req.session.user.id},
@@ -47,6 +50,7 @@ router.get('/profile', (req, res) => {
 			res.render('profile', {
 				completedGoals: goals, 
 				currentUser: user, 
+				profilePic: user.profifo,
 				message: message
 			})
 
@@ -80,10 +84,11 @@ router.post('/newpic', (req, res) => {
 			})
 			.then( (user) => {
 				user.updateAttributes({
-					profifo: './images' + req.body.newpic //HOWWWWWWW --> this now translates to "./imagesundefined" in the database
+					profifo: '/images/newpic-' + req.session.user.id  //HOWWWWWWW --> this now translates to "./imagesundefined" in the database
 					//since static is the standard go-to for static files (as declared in app.js, by simply saving the path in the database, this should also be able to called upon in the pugfile to show this image)
 					//However this doesn't work yet.............
 				})
+				req.session.user 		= user
 				res.redirect('/profile?message=' + encodeURIComponent('Your picture has been changed.'));
 			}) 
 
@@ -145,6 +150,8 @@ router.post('/newbio', (req, res) => {
 		user.updateAttributes({
 			bio: req.body.newbio,
 		})
+		//renew session of the same user, but with new bio
+		req.session.user 	= user
 		res.redirect('/profile?message=' + encodeURIComponent('Your bio has been changed.'))
 		return
 	})
@@ -163,6 +170,7 @@ router.post('/newdob', (req, res) => {
 		user.updateAttributes({
 			dob: req.body.newdob,
 		})
+		req.session.user 		= user
 		res.redirect('/profile?message=' + encodeURIComponent('Your date of birth has been changed.'))
 		return
 	})
@@ -193,6 +201,7 @@ router.post('/newemail', (req, res) => {
 					user.updateAttributes({
 						email: req.body.newemail.toLowerCase(),
 					})
+					req.session.user 		= user
 					res.redirect('/profile?message=' + encodeURIComponent('Your email has been changed.'))
 					return
 				})
@@ -228,6 +237,7 @@ router.post('/newpassword', (req, res) => {
 								password: hash,
 							})
 					})
+					req.session.user 		= user
 					res.redirect('/profile?message=' + encodeURIComponent('Your password has been changed.'))
 					return
 				} else {

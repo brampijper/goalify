@@ -35,8 +35,11 @@ html
 
 
 		p Your current profile picture:
+		img(src=currentUser.profifo style="width:300px")
+		//- img(src=profilePic) 
+		//- p= profilepic
 		p 
-			em SOMEHOW PICTURE HERE, standaard van een kat of hond ( "if currentuser.kindofperson == cat, then"etc)
+			em SOMEHOW PICTURE HERE, standaard van een kat of hond ( "if currentuser.kindofperson == cat && currentUser.profifo = empty, then"etc)
 		form(action='/newpic' method='post' id='uploadForm' enctype="multipart/form-data")
 			| Select a file: 
 			input(type='file', name='newpic')
