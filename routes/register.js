@@ -50,7 +50,8 @@ router.post('/register', (req, res) => {
 								score: 0,
 								dob: req.body.bday,
 								kindOfPerson: req.body.catdog,
-								bio: 'This person does not have a bio just yet.'
+								bio: 'This person does not have a bio just yet.',
+								profifo: 'empty'
 							}).then(function () {
 								db.conn.sync().then( () => {
 									console.log('User Added')
