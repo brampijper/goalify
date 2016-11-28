@@ -7,6 +7,7 @@ const bcrypt 		= require ('bcrypt-nodejs')
 const session 		= require('express-session')
 const fs 			= require('fs')
 const base64Img 	= require('base64-img');
+
 //// For router.post /newpic
 // use multer as middleware
 const multer		= require('multer')
@@ -17,7 +18,7 @@ const storage		= multer.diskStorage ({
 	},
 	//declare how to name the inputted file (add date.now for uniqueness)
 	filename: function (req, file, callback) {
-		let newPicture = file.fieldname + '-' + Date.now()
+		let newPicture = file.fieldname + '-' + req.session.user.id
 		callback(null, newPicture);
 	}
 })
@@ -80,7 +81,7 @@ router.post('/newpic', (req, res) => {
 			})
 			.then( (user) => {
 				user.updateAttributes({
-					profifo: './images' + req.body.newpic //HOWWWWWWW --> this now translates to "./imagesundefined" in the database
+					profifo: '/images/newpic-' + req.session.user.id  //HOWWWWWWW --> this now translates to "./imagesundefined" in the database
 					//since static is the standard go-to for static files (as declared in app.js, by simply saving the path in the database, this should also be able to called upon in the pugfile to show this image)
 					//However this doesn't work yet.............
 				})
