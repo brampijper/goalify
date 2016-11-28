@@ -36,15 +36,20 @@ html
 
 		p Your current profile picture:
 
-		//- if currentuser.kindOfPerson
+		if (currentUser.kindOfPerson == 'cat' && currentUser.profifo.length === 0)
+			img(src='images/catperson.jpg' style="width:300px")
+			em You do not have a profile picture just yet.
 
+		else if (currentUser.kindOfPerson == 'dog' && currentUser.profifo.length === 0)
+			img(src='images/dogperson.jpg' style="width:300px")
+			em You do not have a profile picture just yet.
 
-
-		img(src=currentUser.profifo style="width:300px")
+		else 
+			img(src=currentUser.profifo style="width:300px")
 		//- img(src=profilePic) 
 		//- p= profilepic
-		p 
-			em SOMEHOW PICTURE HERE, standaard van een kat of hond ( "if currentuser.kindofperson == cat && currentUser.profifo = empty, then"etc)
+
+		em Change profile picture
 		form(action='/newpic' method='post' id='uploadForm' enctype="multipart/form-data")
 			| Select a file: 
 			input(type='file', name='newpic')
@@ -96,9 +101,6 @@ html
 			input(type='submit' value='DELETE' id='submitnewpassword')
 		br
 
-
-		h4 LOGOUT knop nog naar navbar verplaatsen, zodat een gebruiker niet per ongeluk op verwijder drukt ipv logout
-		a(href='logout') Log-out
 		main
 		include includes/footer.pug
 

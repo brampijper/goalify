@@ -60,9 +60,9 @@ db.conn.sync( {force: true}).then( () => {
 			password: hash,
 			score: 20,
 			dob: '1991-02-22',
-			kindOfPerson: 'Cat Person',
+			kindOfPerson: 'cat',
 			bio: 'I am generally nice',
-			profifo: ' '
+			profifo: ''
 		})
 
 		//Create sample goal
@@ -98,9 +98,9 @@ db.conn.sync( {force: true}).then( () => {
 			password: hash,
 			score: 30,
 			dob: '1992-05-23',
-			kindOfPerson: 'Cat Person',
+			kindOfPerson: 'cat',
 			bio: 'Selma is my BFF in Amsterdam',
-			profifo: ' '
+			profifo: ''
 		})
 
 		//Create sample goal
@@ -155,9 +155,9 @@ db.conn.sync( {force: true}).then( () => {
 			password: hash,
 			score: 30,
 			dob: '1993-11-23',
-			kindOfPerson: 'Dog Person',
+			kindOfPerson: 'dog',
 			bio: 'I like marketing and f16',
-			profifo: ' '
+			profifo: ''
 		})
 
 		//Create sample goal
@@ -193,9 +193,9 @@ db.conn.sync( {force: true}).then( () => {
 			password: hash,
 			score: 40,
 			dob: '1990-08-08',
-			kindOfPerson: 'Cat Person',
+			kindOfPerson: 'cat',
 			bio: 'Life is a party... but you have to hang the balloons yourself',
-			profifo: ' '
+			profifo: ''
 		})
 
 		//Create sample goal
