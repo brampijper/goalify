@@ -175,6 +175,7 @@ router.post('/newdob', (req, res) => {
 		return
 	})
 })
+//look into date issue: https://github.com/sequelize/sequelize/issues/4858
 
 //Update email
 router.post('/newemail', (req, res) => {

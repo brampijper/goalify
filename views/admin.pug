@@ -1,0 +1,83 @@
+html
+	head
+		include includes/header.pug
+	body
+		if (currentUser.username === 'brammieboy' || 'selma2202')
+			h2 Welcome, admin!
+			h3= message
+			p How lovely that you have found inspiration, add new goals for your users here.
+			h3 New goal
+			form(action='/admin' method='post' autocomplete='off')
+				label Title 
+				br
+				input(name='title' type='text' placeholder='Title of task' max-length= '50' autofocus required)
+				br
+				br
+				label Description 
+				br
+				input(name='description' type='text' placeholder='Description of task' required)
+				br
+				br
+				label Duration 
+				br
+				input(name='duration' type='number' min="0" step="5" required)
+				br
+				br
+				label Difficulty
+				br
+				input(type='radio' name='difficulty' id='easy' value='easy' required)
+				label(for='easy') Easy
+				br
+				input(type='radio' name='difficulty' id='medium' value='medium' required) 
+				label(for='medium') Medium
+				br
+				input(type='radio' name='difficulty' id='hard' value='hard' required) 
+				label(for='hard') Hard
+				br
+				br
+				label Points 
+				br
+				input(name='points' type='number' min="0" step="5" required)
+				br
+				br
+				//- zou nog cool zijn als de admin de coordinaten op een kaartje kan aangeven
+				label Latitude
+				br
+				input(name='lat' type='text' placeholder='Latitude' max-length= '50'  required)
+				br
+				label Longitude 
+				br
+				input(name='lng' type='text' placeholder='Longitude' max-length= '50'  required)
+
+
+
+
+				br
+				input(type='submit' value='Create goal' id='submit')
+				br
+				br
+
+			//- h2= message
+			//- H3 Leaderboard
+			//- p Our best three players currently are: 
+			//- 	each thing in userRankLoggedout
+			//- 		ul
+			//- 			li - #{thing.username}: #{thing.score} points.
+			//- 	p ...
+			//- p
+			//- | Think you can beat 'em? Please 
+			//- a(href='login') login
+			//- |  or 
+			//- a(href='register') register
+			//- |  to see all scores and compete!
+
+
+
+		else
+			h2 You have no authority to view this page. You will be redirected to the home page in 10 seconds. If you're not redirected, click here.
+			//-nog laten redirecten, met vertraging, naar home
+		main
+		include includes/footer.pug
+
+
+
