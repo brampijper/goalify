@@ -23,7 +23,8 @@ function initMap() {
                 title: data.title
             })
 
-            var contentString = 'Goal: ' + data.title + '<br>' + '<br>' + 'Description: ' + data.description + '<br><br>' + 'Duration: ' + data.duration + ' minutes' + '<br><br>' + 'Points: ' + data.points + '<br><br>' + 'Difficulty: ' + data.difficulty
+            var contentString = 'Goal: ' + data.title + '<br>' + '<br>' + 'Description: ' + data.description + '<br><br>' + 'Duration: ' + data.duration + ' minutes' + '<br><br>' + 'Points: ' + data.points + '<br><br>' + 'Difficulty: ' + data.difficulty + '<br><br>' + '<a href="goal-overview?id='+ data.id + '"  /> Complete Goal' 
+
 
             var infowindow = new google.maps.InfoWindow() 
 
