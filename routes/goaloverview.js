@@ -24,8 +24,8 @@ router.get('/goaloverview', (req, res) => {
 		db.Goal.findAll({
 			include: [{
 				model: db.Complete, 
-			 	where: {userId: req.session.user.id},
-			 	required: false
+				where: {userId: req.session.user.id},
+				required: false
 			}]
 		}).then( (goals) => {
 			var goalArray = []
@@ -57,14 +57,28 @@ router.get('/goal-overview', (req, res) => {
 				id: req.query.id
 			}
 		}).then((goal) => {
+			var goalPoints = goal.points
+			console.log(goalPoints)
+			console.log('------------------------------------------------')
 			db.Complete.create({
 				lat: goal.lat,
 				lng: goal.lng,
 				userId: req.session.user.id,
 				goalId: goal.id,	
+			}).then( () => {
+				db.User.findOne({
+					where: {
+						id: req.session.user.id
+					}
+				}).then ( (user) => {
+					var oldScore = user.score
+					console.log(user)
+					user.updateAttributes({
+						score: oldScore + goalPoints
+					})
+				})
+				res.redirect('goaloverview?message=' + encodeURIComponent("Goal Marked as complete!"))
 			})
-		}).then( () => {
-			res.redirect('goaloverview?message=' + encodeURIComponent("Goal Marked as complete!"))
 		})
 	}
 	else {
