@@ -22,6 +22,12 @@ html
 		p Current score: #{userinfo.score}
 		p Accomplished goals (plus datum?? of Last completed goal (dus maar 1, plus datum)
 
+		if userinfo.id === currentUser.id
+			h5
+				| Is this information incorrect? 
+				a(href='profile') Click here 
+				| to change your personal details.
+
 
 		
 		//- h2= message
