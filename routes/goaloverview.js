@@ -34,9 +34,9 @@ router.get('/goaloverview', (req, res) => {
 
 				if(goals[i].completes.length === 0) {
 					goalArray.push(goals[i])
-				}	
+				}
 			}
-			return goalArray
+			return goalArray 
 		}).then( (unfinishedGoals) => {
 			for (var i = 0; i < unfinishedGoals.length; i++) {
 				// console.log(unfinishedGoals[i])
@@ -64,6 +64,7 @@ router.get('/goal-overview', (req, res) => {
 				lat: goal.lat,
 				lng: goal.lng,
 				userId: req.session.user.id,
+<<<<<<< HEAD
 				goalId: goal.id,	
 			}).then( () => {
 				db.User.findOne({
@@ -78,6 +79,9 @@ router.get('/goal-overview', (req, res) => {
 					})
 				})
 				res.redirect('goaloverview?message=' + encodeURIComponent("Goal Marked as complete!"))
+=======
+					
+>>>>>>> 7dfee80ebd1362d3cbc1204a2af75dad88cc0697
 			})
 		})
 	}
