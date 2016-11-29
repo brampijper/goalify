@@ -28,21 +28,16 @@ router.get('/goaloverview', (req, res) => {
 				required: false
 			}]
 		}).then( (goals) => {
-			var unfGoalArray = []
-			// var finGoalArray = [] 
+			var goalArray = []
 			for (var i = 0; i < goals.length; i++) {
 				//console.log(goals[i].title + ' has ' + goals[i].completes.length + ' completes')
 
 				if(goals[i].completes.length === 0) {
-					unfGoalArray.push(goals[i])
+					goalArray.push(goals[i])
 				}
-				// if (goals[i].completes.length !== 0) {
-				// 	finGoalArray.push(goals[i])
-				// }
 			}
-			return unfGoalArray 
+			return goalArray 
 		}).then( (unfinishedGoals) => {
-			// console.log(unfinishedGoals[0].title)
 			for (var i = 0; i < unfinishedGoals.length; i++) {
 				// console.log(unfinishedGoals[i])
 			}
