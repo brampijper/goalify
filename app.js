@@ -37,15 +37,17 @@ let profileRouter		= require (__dirname + '/routes/profile')
 let goalOverviewRouter	= require (__dirname + '/routes/goaloverview')
 let leaderboard			= require (__dirname + '/routes/leaderboard')
 let admin				= require (__dirname + '/routes/admin')
+let publicprofile		= require (__dirname + '/routes/publicprofile')
 
 // use
-app.use ( '/', loginRouter)
+app.use ('/', loginRouter)
 app.use ('/', logoutRouter)
 app.use ('/', registerRouter)
 app.use ('/', profileRouter)
 app.use ('/', goalOverviewRouter)
 app.use ('/', leaderboard)
 app.use ('/', admin)
+app.use ('/', publicprofile)
 
 //// For debugging purposes
 app.get ('/ping', (req, res) => {

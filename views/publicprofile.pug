@@ -1,0 +1,127 @@
+html
+	head
+		include includes/header.pug
+	body
+		h2 #{userinfo.username}'s profile
+		h4= message
+		//- h4 #{currentUser.username}
+		if (userinfo.kindOfPerson == 'cat' && userinfo.profifo.length === 0)
+			img(src='images/catperson.jpg' style="width:300px" class='circle')
+
+		else if (userinfo.kindOfPerson == 'dog' && userinfo.profifo.length === 0)
+			img(src='images/dogperson.jpg' style="width:300px" class='circle')
+
+		else 
+			img(src=userinfo.profifo style="width:300px" class='circle')
+		h4 #{userinfo.username}
+		h5 "#{userinfo.bio}"
+		p Age: (hier nog datumnotatie omzetten) #{userinfo.dob}
+
+		h4 Game achievements:
+		p Playing for team: #{userinfo.kindOfPerson}
+		p Current score: #{userinfo.score}
+		p Accomplished goals (plus datum?? of Last completed goal (dus maar 1, plus datum)
+
+
+		
+		//- h2= message
+		//- H3 Welcome, #{currentUser.username}
+		//- p 
+		//- 	| Here you can view and edit your information. To see how other members view your profile, click here 
+		//- 	strong (en dat moet dan dus nog een link worden naar de public profile page)
+		//- br
+		
+
+		//- h4 Profile details that can not be changed
+		
+
+		//- p Your username: #{currentUser.username}
+		//- p Your team: you are a #{currentUser.kindOfPerson}
+		//- p Your current score: #{currentUser.score}
+		//- ol
+		//- 	li Get a higher score by 
+		//- 		a(href='goaloverview') completing more goals
+		//- 	li View how you rank on the 
+		//- 		a(href='leaderboard') leaderboard
+		//- 		//- Nog een unordered list van maken, maar die is momenteel niet zichtbaar in materialize
+		
+
+		//- p Your finished goals:
+		//- each thing in completedGoals
+		//- 	ol
+		//- 		li - #{thing.goal.title}: #{thing.goal.points} points.
+		//- //- Nog een unordered list van maken, maar die is momenteel niet zichtbaar in materialize
+
+
+		//- h4 Profile details that can be changed
+
+
+		//- p Your current profile picture:
+
+		//- if (currentUser.kindOfPerson == 'cat' && currentUser.profifo.length === 0)
+		//- 	img(src='http://loremflickr.com/300/300/cat' style="width:300px")
+		//- 	em You do not have a profile picture just yet.
+
+		//- else if (currentUser.kindOfPerson == 'dog' && currentUser.profifo.length === 0)
+		//- 	img(src='http://loremflickr.com/300/300/dog' style="width:300px")
+		//- 	em You do not have a profile picture just yet.
+
+		//- else 
+		//- 	img(src=currentUser.profifo style="width:300px")
+
+		//- em Change profile picture
+		//- form(action='/newpic' method='post' id='uploadForm' enctype="multipart/form-data")
+		//- 	| Select a file: 
+		//- 	input(type='file', name='newpic')
+		//- 	input(type='submit')
+
+		//- //- form(action='/newpic' method='post' enctype='multipart/form-data')
+		//- //- 	input(name='displayImage' type='file')	
+
+
+
+		//- p Your bio: #{currentUser.bio}
+		//- form(action='/newbio' method='post' autocomplete='off')
+		//- 	input(name='newbio' type='text' placeholder='change your bio' required)
+		//- 	input(type='submit' value='change bio' id='submitnewbio')
+		//- br
+
+
+		//- p Your date of birth: #{currentUser.dob}
+		//- p (change date of birth)
+		//- form(action='/newdob' method='post' autocomplete='off')
+		//- 	input(name='newdob' type='date' required)
+		//- 	input(type='submit' value='change date of birth' id='submitnewdob')
+		//- br
+
+
+		//- p Your email address: #{currentUser.email}
+		//- p Change e-mail:
+		//- form(action='/newemail' method='post' autocomplete='off')
+		//- 	input(name='newemail' type='email' placeholder='yournew@emailadres.com' min-length = '3' required)
+		//- 	input(type='submit' value='change e-mail' id='submitnewemail')
+		//- br
+
+
+		//- p To change your password, first please add your old password.
+		//- form(action='/newpassword' method='post' autocomplete='off')
+		//- 	input(name='oldpassword' type='password' placeholder='Your old password' required)
+		//- 	input(name='newpassword' type='password' placeholder='Your new password' min-length = '8' required)
+		//- 	input(name='newpassword2' type='password' placeholder='Confirm your new password' min-length = '8' required)
+		//- 	input(type='submit' value='change password' id='submitnewpassword')
+		//- br
+
+
+		//- h4 I want to delete my profile
+		//- p Are you sure? We'd hate to see you go!
+		//- p This action is irreversible.
+		//- p We require your password before confirmation
+		//- form(action='/deleteaccount' method='post' autocomplete='off')
+		//- 	input(name='oldpassword' type='password' placeholder='Your old password' required)
+		//- 	input(type='submit' value='DELETE' id='submitnewpassword')
+		//- br
+
+		main
+		include includes/footer.pug
+
+
