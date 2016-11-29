@@ -8,7 +8,9 @@ html
 			p Our best three players currently are: 
 				each thing in userRankLoggedout
 					ul
-						li - #{thing.username}: #{thing.score} points.
+						li - 
+							a(href='publicprofile?id=' + thing.id) #{thing.username} 
+							| : #{thing.score} points.
 				p ...
 			p
 			| Think you can beat 'em? Please 
@@ -25,7 +27,9 @@ html
 			p Hi #{currentUser.username}, see how you compare.
 				each thing in userRank
 					ul
-						li - #{thing.username}: #{thing.score} points.
+						li - 
+							a(href='publicprofile?id=' + thing.id) #{thing.username}
+							|: #{thing.score} points.
 						//- Elke username moet een link worden naar het profiel van die gebruiker
 						//- Mogelijk nog in tabel plaatsen.
 			p 

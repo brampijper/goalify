@@ -5,8 +5,10 @@ html
 		h2= message
 		H3 Welcome, #{currentUser.username}
 		p 
-			| Here you can view and edit your information. To see how other members view your profile, click here 
-			strong (en dat moet dan dus nog een link worden naar de public profile page)
+			| Here you can view and edit your information. To see how other members view your profile, 
+			a(href='publicprofile?id=' + currentUser.id) click here
+			| .
+
 		br
 		
 
