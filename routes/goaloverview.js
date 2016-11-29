@@ -9,6 +9,7 @@ const fs 			= require('fs')
 const router  		= express.Router ( )
 
 let db = require(__dirname + '/../modules/database')
+var completedGoalArray = []
 
 router.get('/goaloverview', (req, res) => {
 	// db.Goal.findAll().then( goals => console.log('Number of goals ' + goals.length) )
@@ -31,19 +32,21 @@ router.get('/goaloverview', (req, res) => {
 			var goalArray = []
 			for (var i = 0; i < goals.length; i++) {
 				//console.log(goals[i].title + ' has ' + goals[i].completes.length + ' completes')
-
 				if(goals[i].completes.length === 0) {
 					goalArray.push(goals[i])
 				}
+				else {
+					completedGoalArray.push(goals[i])
+				}
 			}
-			return goalArray 
+			return goalArray	 
 		}).then( (unfinishedGoals) => {
-			for (var i = 0; i < unfinishedGoals.length; i++) {
-				// console.log(unfinishedGoals[i])
-			}
 			fs.writeFile (__dirname + '/../static/json/goals.json', JSON.stringify(unfinishedGoals), 'utf-8', function(error) {
 				if(error) throw error
-			})	
+			})
+			fs.writeFile (__dirname + '/../static/json/finishedGoals.json', JSON.stringify(completedGoalArray), 'utf-8', function(error) {
+				if(error) throw error
+			})
 		}).then( () => {
 			res.render('goaloverview')
 		})
@@ -58,7 +61,6 @@ router.get('/goal-overview', (req, res) => {
 			}
 		}).then((goal) => {
 			var goalPoints = goal.points
-			console.log(goalPoints)
 			db.Complete.create({
 				lat: goal.lat,
 				lng: goal.lng,
@@ -71,7 +73,6 @@ router.get('/goal-overview', (req, res) => {
 					}
 				}).then ( (user) => {
 					var oldScore = user.score
-					console.log(user)
 					user.updateAttributes({
 						score: oldScore + goalPoints
 					})
