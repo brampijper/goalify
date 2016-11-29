@@ -37,15 +37,15 @@ html
 		p Your current profile picture:
 
 		if (currentUser.kindOfPerson == 'cat' && currentUser.profifo.length === 0)
-			img(src='http://loremflickr.com/300/300/cat' style="width:300px")
+			img(src='http://loremflickr.com/300/300/cat' style="width:300px" class='circle')
 			em You do not have a profile picture just yet.
 
 		else if (currentUser.kindOfPerson == 'dog' && currentUser.profifo.length === 0)
-			img(src='http://loremflickr.com/300/300/dog' style="width:300px")
+			img(src='http://loremflickr.com/300/300/dog' style="width:300px" class='circle')
 			em You do not have a profile picture just yet.
 
 		else 
-			img(src=currentUser.profifo style="width:300px")
+			img(src=currentUser.profifo style="width:300px" class='circle')
 
 		em Change profile picture
 		form(action='/newpic' method='post' id='uploadForm' enctype="multipart/form-data")
