@@ -59,13 +59,11 @@ router.get('/goal-overview', (req, res) => {
 		}).then((goal) => {
 			var goalPoints = goal.points
 			console.log(goalPoints)
-			console.log('------------------------------------------------')
 			db.Complete.create({
 				lat: goal.lat,
 				lng: goal.lng,
 				userId: req.session.user.id,
-<<<<<<< HEAD
-				goalId: goal.id,	
+				goalId: goal.id	
 			}).then( () => {
 				db.User.findOne({
 					where: {
@@ -79,9 +77,6 @@ router.get('/goal-overview', (req, res) => {
 					})
 				})
 				res.redirect('goaloverview?message=' + encodeURIComponent("Goal Marked as complete!"))
-=======
-					
->>>>>>> 7dfee80ebd1362d3cbc1204a2af75dad88cc0697
 			})
 		})
 	}
