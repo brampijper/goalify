@@ -9,6 +9,7 @@ function initMap() {
 		disableDefaultUI: true,
 		zoom: 12,
 		center: mainPosition
+
     })
 
     var directionsService = new google.maps.DirectionsService();
@@ -57,7 +58,10 @@ function initMap() {
 
                     directionsService.route(request, function(response, status) {
                         if (status == google.maps.DirectionsStatus.OK) {
-                            directionsDisplay.setOptions( { suppressMarkers: true } );
+                            directionsDisplay.setOptions({ 
+                                suppressMarkers: true,
+                                suppressBicyclingLayer: true 
+                            });
                             directionsDisplay.setDirections(response);
                         }
                     })
