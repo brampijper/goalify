@@ -2,7 +2,7 @@ html
 	head
 		include includes/header.pug
 	body
-		if (currentUser.username === 'brammieboy' || 'selma2202' || 'admin')
+		if (currentUser.username === 'brammieboy' || currentUser.username === 'selma2202' || currentUser.username ==='admin')
 			h2 Welcome, admin!
 			h3= message
 			p How lovely that you have found inspiration, add new goals for your users here.
@@ -106,7 +106,23 @@ html
 
 
 		else
-			h2 You have no authority to view this page. You will be redirected to the home page in 10 seconds. If you're not redirected, click here.
+			h2 Oops!
+			p 
+				| It seems you are not an admin. Do you perhaps wish to 
+				a(href='leaderboard') view the leaderboard
+				| , 
+				a(href='profile') edit your own profile 
+				| or 
+				a(href='goaloverview') view all goals
+				| ?
+
+			h3 We're really sorry about this.
+			if (currentUser.kindOfPerson == 'cat')
+				p Since you like cats so much, here is a picture of a sad cat:
+				img(src='images/sadcat.png' style="width:400px" class='circle')
+			else
+				p Since you like dogs so much, here is a picture of a sad dog:
+				img(src='images/saddog.jpg' style="width:400px" class='circle')
 			//-nog laten redirecten, met vertraging, naar home
 		main
 		include includes/footer.pug
