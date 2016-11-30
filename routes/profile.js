@@ -6,7 +6,6 @@ const bodyParser 	= require('body-parser')
 const bcrypt 		= require ('bcrypt-nodejs')
 const session 		= require('express-session')
 const fs 			= require('fs')
-const base64Img 	= require('base64-img');
 
 //// For router.post /newpic
 // use multer as middleware

@@ -1,9 +1,11 @@
 html
 	head
-		include includes/header.pug
+		if (currentUser === undefined)
+			include includes/header-loggedout.pug
+		else
+			include includes/header.pug
 	body
 		if (currentUser === undefined)
-			h2= message
 			H3 Leaderboard
 			p Our best three players currently are: 
 				each thing in userRankLoggedout
