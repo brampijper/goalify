@@ -55,6 +55,8 @@ router.get('/goaloverview', (req, res) => {
 
 router.get('/goal-overview', (req, res) => {
 	if(req.session.user) {
+		console.log(req.query)
+		console.log('--------------------------------------------------------------------')
 		db.Goal.findOne({
 			where: {
 				id: req.query.id
