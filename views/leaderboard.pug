@@ -7,15 +7,15 @@ html
 	body
 		if (currentUser === undefined)
 			H3 Leaderboard
-			h5 Team ranking
-			p Team cat: nog hier weergeven
-			p Team dog: nog hier weergeven
-			p 
-				| To contribute to your team, please 
-				a(href='login') login
-				|  or 
-				a(href='register') register
-				|.
+			//- h5 Team ranking
+			//- p Team cat: 
+			//- p Team dog:
+			//- p 
+			//- 	| To contribute to your team, please 
+			//- 	a(href='login') login
+			//- 	|  or 
+			//- 	a(href='register') register
+			//- 	|.
 			h5 Individual ranking
 			p Our best three players currently are: 
 				each thing in userRankLoggedout
@@ -36,8 +36,8 @@ html
 		else
 			H3 Leaderboard
 			h5 Team ranking
-			p Team cat: nog hier weergeven
-			p Team dog: nog hier weergeven
+			p Team cat: #{catscore}
+			p Team dog: #{dogscore}
 			p You contributed #{currentUser.score} points to Team #{currentUser.kindOfPerson}.
 
 			h5 Individual ranking

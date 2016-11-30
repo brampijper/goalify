@@ -28,16 +28,45 @@ router.get('/leaderboard', (req, res) => {
 		})
 		//Otherwise, render the profile page, include data of the current user and include the possibility to show a message
 	} else {
-		console.log('\nThe browser will now display the profile.')
+		console.log('\nThe browser will now display the leaderboard.')
+
+let catscore = 0
+let dogscore = 0
 
 		db.User.findAll({
-			order: [['score', 'DESC']],
-		}).then( (userScores) => { 
-			res.render('leaderboard', {
-				userRank: userScores, 
-				currentUser: user, 
-				message: message
-			})
+			where: {kindOfPerson: 'cat'}
+		}).then( (catusers) => {
+			// let catscore = 0
+			for (var i = 0; i < catusers.length; i++) {
+				catscore = catscore + catusers[i].score
+			}
+			console.log(catscore)
+			console.log('..........................')
+		}).then ( () => { 
+			db.User.findAll({
+				where: {kindOfPerson: 'dog'}
+			}).then( (dogusers) => {
+				// let dogscore = 0
+				for (var i = 0; i < dogusers.length; i++) {
+					dogscore = dogscore + dogusers[i].score
+				}
+				console.log(dogscore)
+			console.log('--------------------------------')
+			}).then ( () => {
+				console.log(catscore)
+				console.log(dogscore)
+				db.User.findAll({
+					order: [['score', 'DESC']],
+				}).then( (userScores) => { 
+					res.render('leaderboard', {
+						userRank: userScores, 
+						currentUser: user, 
+						message: message,
+						dogscore: dogscore,
+						catscore: catscore
+					})
+				})
+		})
 		})
 	}
 })
