@@ -2,31 +2,54 @@ html
 	head
 		include includes/header.pug
 	body
-		h2 #{userinfo.username}'s profile
-		h4= message
-		//- h4 #{currentUser.username}
-		if (userinfo.kindOfPerson == 'cat' && userinfo.profifo.length === 0)
-			img(src='images/catperson.jpg' style="width:300px" class='circle')
+		if (userinfo === null)
+			h2 Oops!
+			p 
+				| It seems page you are looking for can not be found. Do you perhaps wish to 
+				a(href='leaderboard') view the leaderboard
+				| , 
+				a(href='profile') edit your own profile 
+				| or 
+				a(href='goaloverview') view all goals
+				| ?
 
-		else if (userinfo.kindOfPerson == 'dog' && userinfo.profifo.length === 0)
-			img(src='images/dogperson.jpg' style="width:300px" class='circle')
+			h3 We're really sorry about this.
+			if (currentUser.kindOfPerson == 'cat')
+				p Since you like cats so much, here is a picture of a sad cat:
+				img(src='images/sadcat.png' style="width:400px" class='circle')
+			else
+				p Since you like dogs so much, here is a picture of a sad dog:
+				img(src='images/saddog.jpg' style="width:400px" class='circle')
 
-		else 
-			img(src=userinfo.profifo style="width:300px" class='circle')
-		h4 #{userinfo.username}
-		h5 "#{userinfo.bio}"
-		p Age: (hier nog datumnotatie omzetten) #{userinfo.dob}
 
-		h4 Game achievements:
-		p Playing for team: #{userinfo.kindOfPerson}
-		p Current score: #{userinfo.score}
-		p Accomplished goals (plus datum?? of Last completed goal (dus maar 1, plus datum)
+				//- This part is only ever visible when the user is logged in, therefore the option login or register is unnecessary
 
-		if userinfo.id === currentUser.id
-			h5
-				| Is this information incorrect? 
-				a(href='profile') Click here 
-				| to change your personal details.
+		else
+			h2 #{userinfo.username}'s profile
+			h4= message
+			//- h4 #{currentUser.username}
+			if (userinfo.kindOfPerson == 'cat' && userinfo.profifo.length === 0)
+				img(src='images/catperson.jpg' style="width:300px" class='circle')
+
+			else if (userinfo.kindOfPerson == 'dog' && userinfo.profifo.length === 0)
+				img(src='images/dogperson.jpg' style="width:300px" class='circle')
+
+			else 
+				img(src=userinfo.profifo style="width:300px" class='circle')
+			h4 #{userinfo.username}
+			h5 "#{userinfo.bio}"
+			p Age: (hier nog datumnotatie omzetten) #{userinfo.dob}
+
+			h4 Game achievements:
+			p Playing for team: #{userinfo.kindOfPerson}
+			p Current score: #{userinfo.score}
+			p Accomplished goals (plus datum?? of Last completed goal (dus maar 1, plus datum)
+
+			if userinfo.id === currentUser.id
+				h5
+					| Is this information incorrect? 
+					a(href='profile') Click here 
+					| to change your personal details.
 
 
 		

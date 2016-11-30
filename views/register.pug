@@ -1,9 +1,9 @@
 html
 	head
-		include includes/header.pug
+		include includes/header-loggedout.pug
 	body
-		h2 Register! :)
-		br
+		h2 Register
+		h5= message
 		br
 		form(action='/register' method='post' autocomplete='off')
 			label Username 
