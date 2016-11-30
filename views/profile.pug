@@ -67,7 +67,7 @@ html
 		br
 
 
-		p Your date of birth: #{currentUser.dob}
+		p Your date of birth: #{birthday}
 		p (change date of birth)
 		form(action='/newdob' method='post' autocomplete='off')
 			input(name='newdob' type='date' required)

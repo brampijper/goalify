@@ -46,9 +46,12 @@ router.get('/profile', (req, res) => {
 			order: [['updatedAt', 'DESC']],
 			include: [db.Goal]
 		}).then( (goals) => { 
+			let test = user.dob
+			test.format('YYY-MM-DD')
 			res.render('profile', {
 				completedGoals: goals, 
 				currentUser: user, 
+				birthday: test,
 				profilePic: user.profifo,
 				message: message
 			})
@@ -147,7 +150,7 @@ router.post('/newbio', (req, res) => {
 		//Since a bio is allowed to be empty, no validation is required.
 	}).then( (user) => {
 		user.updateAttributes({
-			bio: req.body.newbio,
+			bio: req.body.newbio
 		})
 		//renew session of the same user, but with new bio
 		req.session.user 	= user
@@ -167,7 +170,7 @@ router.post('/newdob', (req, res) => {
 		//Since a dob has front-end and sequelize validation to be a date format, no further validation is required.
 	}).then( (user) => {
 		user.updateAttributes({
-			dob: req.body.newdob,
+			dob: req.body.newdob
 		})
 		req.session.user 		= user
 		res.redirect('/profile?message=' + encodeURIComponent('Your date of birth has been changed.'))
