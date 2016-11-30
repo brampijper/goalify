@@ -4,13 +4,11 @@ var map, userLocation, mainPosition = {lat: 52.3702, lng: 4.8952}, map;
 function initMap() { 
 
 	//create new google maps with options
-	var map = new google.maps.Map(document.getElementById('map'), {
+	map = new google.maps.Map(document.getElementById('map'), {
 		disableDefaultUI: true,
 		zoom: 12,
 		center: mainPosition
     })
-
-    var infoWindow = new google.maps.InfoWindow({map: map});
 
     $.getJSON('/json/goals.json', function(goal) {
         $.each(goal, function(key, data) {
@@ -62,51 +60,29 @@ function initMap() {
             })  
         })
     })
-
-
-
- //    // When user accepts show location
- //    if (navigator.geolocation) {
- //    	navigator.geolocation.watchPosition(function(position) {
- //    		var pos = {
- //    			lat: position.coords.latitude,
- //    			lng: position.coords.longitude
- //            }
-
- //            infoWindow.setPosition(pos)
-
- //            //creates a marker with the current location
- //            infoWindow.setContent('You are here:)')
- //            map.setCenter(pos)
-
- //        }, () => {
- //        	handleLocationError(true, infoWindow, map.getCenter());
- //          })
- //    } 
-	// else {
- //          // Browser doesn't support Geolocation
- //          handleLocationError(false, infoWindow, map.getCenter());
- //    }
 }
 
-// //if the browser doesn't suppoert geolocation than the user can't use this functionality.
-// function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-// 	infoWindow.setPosition(pos);
-// 	infoWindow.setContent(browserHasGeolocation ?
-// 		'Error: The Geolocation service failed.' :
-// 		'Error: Your browser doesn\'t support geolocation.');
-// }
 
 function setCurrenPosition(pos) {
     // marker for userLocation
     userLocation = new google.maps.Marker({
-           map : map,
-           position : new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
-           title : "You are here",
-           icon : "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-       })
+       map : map,
+       position : new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+       title : "You are here",
+       icon : "images/location-marker.png"
+    })
+    var circle = new google.maps.Circle({
+        map: map,
+        radius: 200,
+        strokeOpacity: 0.7,
+        strokeWeight: 1,
+        fillOpacity: 0.15,
+        fillColor: '##A0C6D9'
+    })
+    circle.bindTo('center', userLocation, 'position')
+    
     // scroll to userLocation
-    // map.panTo(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude))
+    map.panTo(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude))
 }
 
     function displayAndWatch(position) {
@@ -128,8 +104,7 @@ function setCurrenPosition(pos) {
 
     function setMarkerPosition(marker, position) {
         console.log('yaaay i run tooo')
-        marker.setPosition( new google.maps.LatLng(position.coords.latitude,position.coords.longitude)
-            )
+        marker.setPosition( new google.maps.LatLng(position.coords.latitude,position.coords.longitude))
     }
 
     function locError(error) {
