@@ -1,8 +1,8 @@
 var map, userLocation, mainPosition = {lat: 52.3702, lng: 4.8952}, map;
-var distance; 
+var distance;
 
 //initializing google maps with a custom design
-function initMap() { 
+function initMap() {
 
 	//create new google maps with options
 	map = new google.maps.Map(document.getElementById('map'), {
@@ -10,6 +10,9 @@ function initMap() {
 		zoom: 12,
 		center: mainPosition
     })
+
+    var directionsService = new google.maps.DirectionsService();
+    var directionsDisplay = new google.maps.DirectionsRenderer({ 'map': map });
 
     $.getJSON('/json/goals.json', function(goal) {
         $.each(goal, function(key, data) {
@@ -35,10 +38,21 @@ function initMap() {
 
             google.maps.event.addListener(marker, 'click', function() {
                 distance = google.maps.geometry.spherical.computeDistanceBetween(userLocation.position, marker.position)
-                console.log("this is the distance: " + distance)
                 var contentString = 'Goal: ' + data.title + '<br>' + '<br>' + 'Description: ' + data.description + '<br><br>' + 'Duration: ' + data.duration + ' minutes' + '<br><br>' + 'Points: ' + data.points + '<br><br>' + 'Difficulty: ' + data.difficulty + '<br><br>' + '<a id="MyLink" href="goal-overview?id='+ data.id + "&distance=" + distance + '"/> Complete Goal' 
                 infowindow.setContent(contentString)
                 infowindow.open(map, marker);
+
+                var request = {
+                    origin: latLng,
+                    destination: userLocation.position,
+                    travelMode: google.maps.TravelMode.BICYCLING
+                }
+
+                directionsService.route(request, function(response, status) {
+                    if (status == google.maps.DirectionsStatus.OK) {
+                        directionsDisplay.setDirections(response);
+                    }
+                })
             })
             google.maps.event.addListener(map, 'click', function () {
                 infowindow.close();
