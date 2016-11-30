@@ -38,7 +38,13 @@ function initMap() {
 
             google.maps.event.addListener(marker, 'click', function() {
                 distance = google.maps.geometry.spherical.computeDistanceBetween(userLocation.position, marker.position)
-                var contentString = 'Goal: ' + data.title + '<br>' + '<br>' + 'Description: ' + data.description + '<br><br>' + 'Duration: ' + data.duration + ' minutes' + '<br><br>' + 'Points: ' + data.points + '<br><br>' + 'Difficulty: ' + data.difficulty + '<br><br>' + '<a id="MyLink" href="goal-overview?id='+ data.id + "&distance=" + distance + '"/> Complete Goal' 
+                var contentString = 
+                    'Goal: ' + data.title + '<br><br>' + 
+                    'Description: ' + data.description + '<br><br>' + 
+                    'Duration: ' + data.duration + ' minutes' + '<br><br>' + 
+                    'Points: ' + data.points + '<br><br>' + 
+                    'Difficulty: ' + data.difficulty + '<br><br>' + 
+                    "<a id='MyLink' href='goal-overview?id="+ data.id + "&distance=" + distance + "'>Complete Goal</a>"
                 infowindow.setContent(contentString)
                 infowindow.open(map, marker);
 
@@ -48,11 +54,13 @@ function initMap() {
                     travelMode: google.maps.TravelMode.BICYCLING
                 }
 
-                directionsService.route(request, function(response, status) {
-                    if (status == google.maps.DirectionsStatus.OK) {
-                        directionsDisplay.setDirections(response);
-                    }
-                })
+                function showRoute() { 
+                    directionsService.route(request, function(response, status) {
+                        if (status == google.maps.DirectionsStatus.OK) {
+                            directionsDisplay.setDirections(response);
+                        }
+                    })
+                }
             })
             google.maps.event.addListener(map, 'click', function () {
                 infowindow.close();
