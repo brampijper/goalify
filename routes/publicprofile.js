@@ -17,6 +17,7 @@ router.get('/publicprofile', (req, res) => {
 	var message = req.query.message;
 	var user = req.session.user;
 	var profileId = req.query.id;
+
 if (user === undefined) {
 		res.redirect('login?message=' + encodeURIComponent("Please log in to view this user."));
 	} else {
@@ -24,6 +25,7 @@ if (user === undefined) {
 		db.User.findOne({
 			where: {id: profileId},
 		}).then(function(userinfo) {
+			console.log(userinfo)
 			res.render('publicprofile', {
 				userinfo: userinfo, currentUser: user, message: message})
 		});
