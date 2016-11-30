@@ -10,11 +10,12 @@ const router  		= express.Router ( )
 let db = require(__dirname + '/../modules/database')
 
 router.get('/register', (req, res) => {
+	var message = req.query.message
 	if(req.session.email) {
 		res.redirect('/profile')
 	}
 	else {
-		res.render('register')
+		res.render('register', {message: message})
 	}	
 })
 
