@@ -2,7 +2,7 @@ html
 	head
 		include includes/header.pug
 	body
-		if (currentUser.username === 'brammieboy' || 'selma2202')
+		if (currentUser.username === 'brammieboy' || 'selma2202' || 'admin')
 			h2 Welcome, admin!
 			h3= message
 			p How lovely that you have found inspiration, add new goals for your users here.
@@ -48,14 +48,46 @@ html
 				label Longitude 
 				br
 				input(name='lng' type='text' placeholder='Longitude' max-length= '50'  required)
-
-
-
-
 				br
 				input(type='submit' value='Create goal' id='submit')
 				br
 				br
+			h3 Goals
+			table.striped.highlight.responsive-table
+					thead
+						tr
+							th(data-field='id') ID
+							th(data-field='title') Title
+							th(data-field='description') Description
+							th(data-field='duration') Duration
+							th(data-field='difficulty') Difficulty
+							th(data-field='points') Points
+							th(data-field='lat') Latitude
+							th(data-field='lng') Longitude
+							th(data-field='createdat') CreatedAt
+							th(data-field='updatedat') UpdatedAt
+							th(data-field='edit') Edit 
+							th(data-field='delete') Delete
+					tbody
+						each goal in goals
+							tr
+								td #{goal.id}
+								td #{goal.title}
+								td #{goal.description}
+								td #{goal.duration}
+								td #{goal.difficulty}
+								td #{goal.points}
+								td #{goal.lat}
+								td #{goal.lng}
+								td #{goal.createdAt}
+								td #{goal.updatedAt}
+								td EDIT
+								td 
+									form(action=('/deletegoal?id=' + goal.id) method='post' autocomplete='off')
+										input(type='submit' value='Delete' id='deletegoal')
+				
+
+
 
 			//- h2= message
 			//- H3 Leaderboard
