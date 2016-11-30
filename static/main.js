@@ -13,6 +13,7 @@ function initMap() {
 
     var directionsService = new google.maps.DirectionsService();
     var directionsDisplay = new google.maps.DirectionsRenderer({ 'map': map });
+    var infowindow = new google.maps.InfoWindow() 
 
     $.getJSON('/json/goals.json', function(goal) {
         $.each(goal, function(key, data) {
@@ -34,8 +35,6 @@ function initMap() {
             })
             circle.bindTo('center', marker, 'position')
 
-            var infowindow = new google.maps.InfoWindow() 
-
             google.maps.event.addListener(marker, 'click', function() {
                 distance = google.maps.geometry.spherical.computeDistanceBetween(userLocation.position, marker.position)
                 var contentString = 
@@ -49,7 +48,7 @@ function initMap() {
                     "<div id='travel_time'></div>"
 
                 infowindow.setContent(contentString)
-                infowindow.open(map, marker);
+                infowindow.open(map, this);
 
                 $('#showRoute').click(function(){ 
                     var request = {
@@ -72,7 +71,7 @@ function initMap() {
             })
             google.maps.event.addListener(map, 'click', function () {
                 infowindow.close();
-            })  
+            })
         })
 
     })
@@ -89,9 +88,6 @@ function initMap() {
             })
 
             var contentString = 'Finished Goalsss You received points for this yooo' 
-
-
-            var infowindow = new google.maps.InfoWindow() 
 
             google.maps.event.addListener(marker, 'click', function() {
                 var contentString = 'Completed Goal: ' + data.title + '<br><br>' + 'Description: ' + data.description + '<br><br>' + 'You received: ' + data.points + ' points for this goal'
