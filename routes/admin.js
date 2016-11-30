@@ -48,5 +48,17 @@ router.post('/admin', (req, res) => {
 	}) 
 })
 
+router.post('/deletegoal', (req, res) => {
+	// let deleteId = req.query.id
+	db.Goal.destroy({
+		where: {
+			id: req.query.id
+		}
+	}).then(function () {
+		console.log('Goal deleted')
+		res.redirect('/admin?message=' + encodeURIComponent("The goal has been deleted."))
+	})	 
+})
+
 
 module.exports = router

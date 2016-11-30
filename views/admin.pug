@@ -66,6 +66,8 @@ html
 							th(data-field='lng') Longitude
 							th(data-field='createdat') CreatedAt
 							th(data-field='updatedat') UpdatedAt
+							th(data-field='edit') Edit 
+							th(data-field='delete') Delete
 					tbody
 						each goal in goals
 							tr
@@ -79,6 +81,10 @@ html
 								td #{goal.lng}
 								td #{goal.createdAt}
 								td #{goal.updatedAt}
+								td EDIT
+								td 
+									form(action=('/deletegoal?id=' + goal.id) method='post' autocomplete='off')
+										input(type='submit' value='Delete' id='deletegoal')
 				
 
 
