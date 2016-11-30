@@ -45,6 +45,7 @@ function initMap() {
                     'Points: ' + data.points + '<br><br>' + 
                     'Difficulty: ' + data.difficulty + '<br><br>' + 
                     "<a id='MyLink' href='goal-overview?id="+ data.id + "&distance=" + distance + "'>Complete Goal</a>"
+                    // "<button onclick='" + showRoute() + "'>Click me</button>"
                 infowindow.setContent(contentString)
                 infowindow.open(map, marker);
 
@@ -54,13 +55,12 @@ function initMap() {
                     travelMode: google.maps.TravelMode.BICYCLING
                 }
 
-                function showRoute() { 
                     directionsService.route(request, function(response, status) {
                         if (status == google.maps.DirectionsStatus.OK) {
+                            directionsDisplay.setOptions( { suppressMarkers: true } );
                             directionsDisplay.setDirections(response);
                         }
                     })
-                }
             })
             google.maps.event.addListener(map, 'click', function () {
                 infowindow.close();
