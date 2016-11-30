@@ -9,7 +9,7 @@ const fs 			= require('fs')
 const router  		= express.Router ( )
 
 let db = require(__dirname + '/../modules/database')
-var completedGoalArray = []
+let completedGoalArray = []
 
 router.get('/goaloverview', (req, res) => {
 	// db.Goal.findAll().then( goals => console.log('Number of goals ' + goals.length) )
@@ -29,17 +29,17 @@ router.get('/goaloverview', (req, res) => {
 				required: false
 			}]
 		}).then( (goals) => {
-			var goalArray = []
+			let unfinishedGoalArray = []
 			for (var i = 0; i < goals.length; i++) {
 				//console.log(goals[i].title + ' has ' + goals[i].completes.length + ' completes')
 				if(goals[i].completes.length === 0) {
-					goalArray.push(goals[i])
+					unfinishedGoalArray.push(goals[i])
 				}
 				else {
 					completedGoalArray.push(goals[i])
 				}
 			}
-			return goalArray	 
+			return unfinishedGoalArray	 
 		}).then( (unfinishedGoals) => {
 			fs.writeFile (__dirname + '/../static/json/goals.json', JSON.stringify(unfinishedGoals), 'utf-8', function(error) {
 				if(error) throw error
@@ -48,40 +48,46 @@ router.get('/goaloverview', (req, res) => {
 				if(error) throw error
 			})
 		}).then( () => {
-			res.render('goaloverview')
+			res.render('goaloverview', {
+				message: message
+			})
 		})
 	}
 })
 
 router.get('/goal-overview', (req, res) => {
+	let message = req.query.message
 	if(req.session.user) {
-		console.log(req.query)
-		console.log('--------------------------------------------------------------------')
-		db.Goal.findOne({
-			where: {
-				id: req.query.id
-			}
-		}).then((goal) => {
-			var goalPoints = goal.points
-			db.Complete.create({
-				lat: goal.lat,
-				lng: goal.lng,
-				userId: req.session.user.id,
-				goalId: goal.id	
-			}).then( () => {
-				db.User.findOne({
-					where: {
-						id: req.session.user.id
-					}
-				}).then ( (user) => {
-					var oldScore = user.score
-					user.updateAttributes({
-						score: oldScore + goalPoints
+		if(req.query.distance >= 500) {
+			res.redirect('goaloverview?message=' + encodeURIComponent('Please move closer to the goal location'))
+		}
+		else {
+			db.Goal.findOne({
+				where: {
+					id: req.query.id
+				}
+			}).then((goal) => {
+				var goalPoints = goal.points
+				db.Complete.create({
+					lat: goal.lat,
+					lng: goal.lng,
+					userId: req.session.user.id,
+					goalId: goal.id	
+				}).then( () => {
+					db.User.findOne({
+						where: {
+							id: req.session.user.id
+						}
+					}).then ( (user) => {
+						var oldScore = user.score
+						user.updateAttributes({
+							score: oldScore + goalPoints
+						})
 					})
+					res.redirect('goaloverview?message=' + encodeURIComponent("Goal Marked as complete!"))
 				})
-				res.redirect('goaloverview?message=' + encodeURIComponent("Goal Marked as complete!"))
 			})
-		})
+		}
 	}
 	else {
 		res.redirect('/index')	

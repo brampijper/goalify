@@ -39,8 +39,6 @@ function initMap() {
                 var contentString = 'Goal: ' + data.title + '<br>' + '<br>' + 'Description: ' + data.description + '<br><br>' + 'Duration: ' + data.duration + ' minutes' + '<br><br>' + 'Points: ' + data.points + '<br><br>' + 'Difficulty: ' + data.difficulty + '<br><br>' + '<a id="MyLink" href="goal-overview?id='+ data.id + "&distance=" + distance + '"/> Complete Goal' 
                 infowindow.setContent(contentString)
                 infowindow.open(map, marker);
-                // console.log(userLocation.position)
-                // console.log(marker.position)
             })
             google.maps.event.addListener(map, 'click', function () {
                 infowindow.close();
@@ -66,6 +64,7 @@ function initMap() {
             var infowindow = new google.maps.InfoWindow() 
 
             google.maps.event.addListener(marker, 'click', function() {
+                var contentString = 'Completed Goal: ' + data.title + '<br><br>' + 'Description: ' + data.description + '<br><br>' + 'You received: ' + data.points + ' points for this goal'
                 infowindow.setContent(contentString)
                 infowindow.open(map, marker);
             })
