@@ -1,4 +1,5 @@
 var map, userLocation, mainPosition = {lat: 52.3702, lng: 4.8952}, map;
+var distance; 
 
 //initializing google maps with a custom design
 function initMap() { 
@@ -20,19 +21,32 @@ function initMap() {
                 title: data.title
             })
 
-            var contentString = 'Goal: ' + data.title + '<br>' + '<br>' + 'Description: ' + data.description + '<br><br>' + 'Duration: ' + data.duration + ' minutes' + '<br><br>' + 'Points: ' + data.points + '<br><br>' + 'Difficulty: ' + data.difficulty + '<br><br>' + '<a href="goal-overview?id='+ data.id + '"  /> Complete Goal' 
-
+            var circle = new google.maps.Circle({
+                map: map,
+                radius: 200,
+                strokeOpacity: 0.7,
+                strokeWeight: 1,
+                fillOpacity: 0.35,
+                fillColor: '#F44336'
+            })
+            circle.bindTo('center', marker, 'position')
 
             var infowindow = new google.maps.InfoWindow() 
 
             google.maps.event.addListener(marker, 'click', function() {
+                distance = google.maps.geometry.spherical.computeDistanceBetween(userLocation.position, marker.position)
+                console.log("this is the distance: " + distance)
+                var contentString = 'Goal: ' + data.title + '<br>' + '<br>' + 'Description: ' + data.description + '<br><br>' + 'Duration: ' + data.duration + ' minutes' + '<br><br>' + 'Points: ' + data.points + '<br><br>' + 'Difficulty: ' + data.difficulty + '<br><br>' + '<a id="MyLink" href="goal-overview?id='+ data.id + "&distance=" + distance + '"/> Complete Goal' 
                 infowindow.setContent(contentString)
                 infowindow.open(map, marker);
+                // console.log(userLocation.position)
+                // console.log(marker.position)
             })
             google.maps.event.addListener(map, 'click', function () {
                 infowindow.close();
             })  
         })
+
     })
 
      $.getJSON('/json/finishedGoals.json', function(goal) {
@@ -68,16 +82,15 @@ function setCurrenPosition(pos) {
     userLocation = new google.maps.Marker({
        map : map,
        position : new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
-       title : "You are here",
        icon : "images/location-marker.png"
     })
     var circle = new google.maps.Circle({
         map: map,
-        radius: 200,
-        strokeOpacity: 0.7,
+        radius: 350,
+        strokeOpacity: 0.5,
         strokeWeight: 1,
-        fillOpacity: 0.15,
-        fillColor: '##A0C6D9'
+        fillOpacity: 0.25,
+        fillColor: '#2196F3'
     })
     circle.bindTo('center', userLocation, 'position')
     
@@ -115,7 +128,7 @@ function setCurrenPosition(pos) {
 function initLocationProcedure() {
     initMap()
     if(navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(displayAndWatch, locError)
+        navigator.geolocation.getCurrentPosition(displayAndWatch, locError, {enableHighAccuracy: true})
     } else {
         alert('Sorry, your browser does not support the Geolocation')
     }
