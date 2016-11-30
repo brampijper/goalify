@@ -7,6 +7,16 @@ html
 	body
 		if (currentUser === undefined)
 			H3 Leaderboard
+			h5 Team ranking
+			p Team cat: nog hier weergeven
+			p Team dog: nog hier weergeven
+			p 
+				| To contribute to your team, please 
+				a(href='login') login
+				|  or 
+				a(href='register') register
+				|.
+			h5 Individual ranking
 			p Our best three players currently are: 
 				each thing in userRankLoggedout
 					ul
@@ -15,28 +25,33 @@ html
 							| : #{thing.score} points.
 				p ...
 			p
-			| Think you can beat 'em? Please 
-			a(href='login') login
-			|  or 
-			a(href='register') register
-			|  to see all scores and compete!
+				| Think you can beat 'em? Please 
+				a(href='login') login
+				|  or 
+				a(href='register') register
+				|  to see all scores and compete!
 
 
 
 		else
-			h2= message
 			H3 Leaderboard
+			h5 Team ranking
+			p Team cat: nog hier weergeven
+			p Team dog: nog hier weergeven
+			p You contributed #{currentUser.score} points to Team #{currentUser.kindOfPerson}.
+
+			h5 Individual ranking
 			p Hi #{currentUser.username}, see how you compare.
 				each thing in userRank
 					ul
 						li - 
 							a(href='publicprofile?id=' + thing.id) #{thing.username}
 							|: #{thing.score} points.
-						//- Elke username moet een link worden naar het profiel van die gebruiker
 						//- Mogelijk nog in tabel plaatsen.
 			p 
-			| Think you can beat 'em? Climb up the leaderboard by 
-			a(href='goaloverview') completing some more goals around you.
+				| Think you can beat 'em? Climb up the leaderboard by 
+				a(href='goaloverview') completing some more goals around you
+				| .
 		main
 		include includes/footer.pug
 
