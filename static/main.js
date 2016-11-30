@@ -45,26 +45,28 @@ function initMap() {
                     'Duration: ' + data.duration + ' minutes' + '<br><br>' + 
                     'Points: ' + data.points + '<br><br>' + 
                     'Difficulty: ' + data.difficulty + '<br><br>' + 
-                    "<a id='MyLink' href='goal-overview?id="+ data.id + "&distance=" + distance + "'>Complete Goal</a>"
-                    // "<button onclick='" + showRoute() + "'>Click me</button>"
+                    "<a href='goal-overview?id="+ data.id + "&distance=" + distance + "'>Complete Goal</a>" + '<br><br>' +
+                    "<a id='showRoute' href='#'> Show Route</a>"
+
                 infowindow.setContent(contentString)
                 infowindow.open(map, marker);
 
-                var request = {
-                    origin: latLng,
-                    destination: userLocation.position,
-                    travelMode: google.maps.TravelMode.BICYCLING
-                }
-
+                $('#showRoute').click(function(){ 
+                    var request = {
+                        origin: latLng,
+                        destination: userLocation.position,
+                        travelMode: google.maps.TravelMode.BICYCLING
+                    }
                     directionsService.route(request, function(response, status) {
                         if (status == google.maps.DirectionsStatus.OK) {
                             directionsDisplay.setOptions({ 
                                 suppressMarkers: true,
                                 suppressBicyclingLayer: true 
-                            });
+                            })
                             directionsDisplay.setDirections(response);
                         }
-                    })
+                    })  
+                })
             })
             google.maps.event.addListener(map, 'click', function () {
                 infowindow.close();
