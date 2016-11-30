@@ -46,12 +46,9 @@ router.get('/profile', (req, res) => {
 			order: [['updatedAt', 'DESC']],
 			include: [db.Goal]
 		}).then( (goals) => { 
-			let test = user.dob
-			test.format('YYY-MM-DD')
 			res.render('profile', {
 				completedGoals: goals, 
 				currentUser: user, 
-				birthday: test,
 				profilePic: user.profifo,
 				message: message
 			})
