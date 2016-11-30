@@ -16,11 +16,17 @@ router.get('/admin', (req, res) => {
 	if (user === undefined) {
 		res.redirect('login?message=' + encodeURIComponent("Please log in."));
 	} else {
-		console.log (req.session.user)
-		res.render('admin', {
-			currentUser: user,
-			message: message
+		db.Goal.findAll({
+			order: [['updatedAt', 'DESC']]
+		}).then( (goals) => {
+			console.log (req.session.user)
+			res.render('admin', {
+				currentUser: user,
+				message: message,
+				goals: goals
+			})
 		})
+		
 	}
 })
 
