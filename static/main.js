@@ -9,7 +9,6 @@ function initMap() {
 		disableDefaultUI: true,
 		zoom: 12,
 		center: mainPosition
-
     })
 
     var directionsService = new google.maps.DirectionsService();
@@ -46,7 +45,8 @@ function initMap() {
                     'Points: ' + data.points + '<br><br>' + 
                     'Difficulty: ' + data.difficulty + '<br><br>' + 
                     "<a href='goal-overview?id="+ data.id + "&distance=" + distance + "'>Complete Goal</a>" + '<br><br>' +
-                    "<a id='showRoute' href='#'> Show Route</a>"
+                    "<a id='showRoute' href='#'> Show Route</a>" + '<br><br>' +
+                    "<div id='travel_time'></div>"
 
                 infowindow.setContent(contentString)
                 infowindow.open(map, marker);
@@ -64,6 +64,8 @@ function initMap() {
                                 suppressBicyclingLayer: true 
                             })
                             directionsDisplay.setDirections(response);
+                            var point = response.routes[0].legs[0];
+                            $( '#travel_time').html( 'Estimated travel time: ' + point.duration.text + ' (' + point.distance.text + ') '); 
                         }
                     })  
                 })
