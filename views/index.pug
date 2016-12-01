@@ -1,11 +1,20 @@
 html
-	head
-		include includes/header-loggedout.pug
+	include includes/header-loggedout.pug
 	body
-		h2 Wohojooo Landings Page
+		div.container-mainbox
+			div.row
+				div.col.s12
+					h2.center-align Explorify Your City
+		br
 		p= message
 		br
-		a(href='login') Login!
+		div.container-secondbox
+			div.row
+				div.col.s12
+					h2.center-align Which team would you pick?
+					input(id="toggle" type="button" name="" value="toggle")
+					div.cat
+					div.dog
 		br
 		br
 		a(href='register') Register!

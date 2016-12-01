@@ -1,10 +1,11 @@
-link( href="css/styles.css" type="text/css" rel="stylesheet")
-link( href="materialize-css/dist/css/materialize.min.css" type="text/css" rel="stylesheet")
+head
+	link( href="materialize-css/dist/css/materialize.min.css" type="text/css" rel="stylesheet")
+	link( href="css/styles.css" type="text/css" rel="stylesheet")
 body
-	div.navbar-fixed
+	div.navbar-wrapper
 		nav
 			div.nav-wrapper
-				a(href="index" class="brand-logo") Explorify
+				//- a(href="index" class="brand-logo") Logo
 				ul#nav-mobile.right
 					li
 						a(href='profile') Profile
