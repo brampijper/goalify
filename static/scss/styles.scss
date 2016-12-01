@@ -23,7 +23,7 @@ $body-color: #FAFAFA;
 }
 
 footer.page-footer {
-	background-color: $secondary-color;
+	background-color: #F5F5F5;
 }
 
 nav ul li a {
@@ -31,7 +31,9 @@ nav ul li a {
 }
 
 body {
-	background-color: $body-color; 
+	display: flex;
+    min-height: 100vh;
+    flex-direction: column; 
 }
 
 main {
@@ -51,33 +53,47 @@ main {
 
 .container-secondbox {
 	background-color: #FF5722;
+	margin-top:8%;
+	height: auto;
 	h2 {
 		color: #f5f5f5; 
-		padding-top:3%;
-		padding-bottom: 3%; 
+		padding-top:2%;
+		padding-bottom: 5%; 
 	}
-}
-
-.test {
-	background-color:grey;
 }
 
 .cat {
 	display: inline-block;
-	margin-left:5%;
-	width:35%;
-	background-color:#E0E0E0;
+	float: left;
+	width:1%;
+	background-color:#424242;
 	height:150px
 }
 
 .dog {
 	display: inline-block;
-	margin-right:5%;
-	width:55%;
-	background-color:#424242;
+	float: right; 
+	width:1%;
+	background-color:#E0E0E0;
 	height:150px;
-	margin-bottom:5%;
+	margin-bottom:10%;
 }
+
+.dog p {
+  position: relative;
+  top: 40%;
+  transform: translateY(-50%);
+}
+
+.cat p {
+  position: relative;
+  top: 40%;
+  transform: translateY(-50%);	
+}
+
+div#sidenav-overlay {
+	z-index: -1; 
+} 
 
 .rowbackgr {
 	background-color: $main-color;

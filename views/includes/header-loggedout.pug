@@ -1,18 +1,28 @@
 head
-	link( href="materialize-css/dist/css/materialize.min.css" type="text/css" rel="stylesheet")
-	link( href="css/styles.css" type="text/css" rel="stylesheet")
+	link(href="materialize-css/dist/css/materialize.min.css" type="text/css" rel="stylesheet")
+	link(href="css/styles.css" type="text/css" rel="stylesheet")
 	link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
 body
 	div.navbar-fixed
 		nav
 			div.nav-wrapper
-				a(href="index" class="brand-logo") Explorify
-				ul#nav-mobile.right
-					li
-						a(href='index') Home
-					li
-						a(href='login') Login
-					li
-						a(href='register') Register
-					li
-						a(href='leaderboard') Leaderboard
+				a(href='#' data-activates='mobile-demo' class='button-collapse hide-on-med-and-up')
+					i.material-icons menu
+					ul.right.hide-on-small-only
+						li
+							a(href='index') Home
+						li
+							a(href='login') Login
+						li
+							a(href='register') Register
+						li
+							a(href='leaderboard') Leaderboard
+					ul(class="side-nav hide-on-med-and-up" id='mobile-demo')
+						li
+							a(href='index') Home
+						li
+							a(href='login') Login
+						li
+							a(href='register') Register
+						li
+							a(href='leaderboard') Leaderboard

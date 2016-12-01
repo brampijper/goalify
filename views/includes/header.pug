@@ -6,8 +6,18 @@ body
 	div.navbar-wrapper
 		nav
 			div.nav-wrapper
-				//- a(href="index" class="brand-logo") Logo
-				ul#nav-mobile.right
+				a(href='#' data-activates='mobile-demo' class='button-collapse hide-on-med-and-up')
+					i.material-icons menu
+				ul.right.hide-on-small-only
+					li
+						a(href='profile') Profile
+					li
+						a(href='goaloverview') Goals
+					li
+						a(href='leaderboard') Leaderboard
+					li
+						a(href='logout') Logout
+				ul.side-nav.hide-on-med-and-up
 					li
 						a(href='profile') Profile
 					li
