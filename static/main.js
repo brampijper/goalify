@@ -3,7 +3,7 @@ var distance;
 
 //initializing google maps with a custom design
 function initMap() {
-
+    console.log('google maps runs')
 	//create new google maps with options
 	map = new google.maps.Map(document.getElementById('map'), {
 		disableDefaultUI: true,
