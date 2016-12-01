@@ -9,11 +9,11 @@ function initMap() {
 		disableDefaultUI: true,
 		zoom: 12,
 		center: mainPosition
-
     })
 
     var directionsService = new google.maps.DirectionsService();
     var directionsDisplay = new google.maps.DirectionsRenderer({ 'map': map });
+    var infowindow = new google.maps.InfoWindow() 
 
     $.getJSON('/json/goals.json', function(goal) {
         $.each(goal, function(key, data) {
@@ -35,8 +35,6 @@ function initMap() {
             })
             circle.bindTo('center', marker, 'position')
 
-            var infowindow = new google.maps.InfoWindow() 
-
             google.maps.event.addListener(marker, 'click', function() {
                 distance = google.maps.geometry.spherical.computeDistanceBetween(userLocation.position, marker.position)
                 var contentString = 
@@ -45,30 +43,35 @@ function initMap() {
                     'Duration: ' + data.duration + ' minutes' + '<br><br>' + 
                     'Points: ' + data.points + '<br><br>' + 
                     'Difficulty: ' + data.difficulty + '<br><br>' + 
-                    "<a id='MyLink' href='goal-overview?id="+ data.id + "&distance=" + distance + "'>Complete Goal</a>"
-                    // "<button onclick='" + showRoute() + "'>Click me</button>"
+                    "<a href='goal-overview?id="+ data.id + "&distance=" + distance + "'>Complete Goal</a>" + '<br><br>' +
+                    "<a id='showRoute' href='#'> Show Route</a>" + '<br><br>' +
+                    "<div id='travel_time'></div>"
+
                 infowindow.setContent(contentString)
-                infowindow.open(map, marker);
+                infowindow.open(map, this);
 
-                var request = {
-                    origin: latLng,
-                    destination: userLocation.position,
-                    travelMode: google.maps.TravelMode.BICYCLING
-                }
-
+                $('#showRoute').click(function(){ 
+                    var request = {
+                        origin: latLng,
+                        destination: userLocation.position,
+                        travelMode: google.maps.TravelMode.BICYCLING
+                    }
                     directionsService.route(request, function(response, status) {
                         if (status == google.maps.DirectionsStatus.OK) {
                             directionsDisplay.setOptions({ 
                                 suppressMarkers: true,
                                 suppressBicyclingLayer: true 
-                            });
+                            })
                             directionsDisplay.setDirections(response);
+                            var point = response.routes[0].legs[0];
+                            $( '#travel_time').html( 'Estimated travel time: ' + point.duration.text + ' (' + point.distance.text + ') '); 
                         }
-                    })
+                    })  
+                })
             })
             google.maps.event.addListener(map, 'click', function () {
                 infowindow.close();
-            })  
+            })
         })
 
     })
@@ -85,9 +88,6 @@ function initMap() {
             })
 
             var contentString = 'Finished Goalsss You received points for this yooo' 
-
-
-            var infowindow = new google.maps.InfoWindow() 
 
             google.maps.event.addListener(marker, 'click', function() {
                 var contentString = 'Completed Goal: ' + data.title + '<br><br>' + 'Description: ' + data.description + '<br><br>' + 'You received: ' + data.points + ' points for this goal'
