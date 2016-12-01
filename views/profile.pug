@@ -6,9 +6,11 @@ html
 			div.row
 				div.col.s12
 					H2 Welcome, #{currentUser.username}
-					h3= message
-					p 
-						| Here you can view and edit your information. To see how other members view your profile, 
+					h3= message			
+			div.row.rowbackgr
+				div.col.s12
+					h5 
+						| Here you can view and edit your information. Only you can see this page. To see how other members view your profile, 
 						a(href='publicprofile?id=' + currentUser.id) click here
 						| .
 
@@ -18,64 +20,74 @@ html
 				div.col.s12
 					h4 Profile details that can not be changed
 					
-			div.row
-				div.col.s12.l6
-					p Your username: #{currentUser.username}
-					p Your team: you are a #{currentUser.kindOfPerson}
-					p Your current score: #{currentUser.score}
-					ol
-						li Get a higher score by 
+			div.row.rowbackgr
+				div.col.s12.m6.l6
+					p 
+						strong Your username: 
+						| #{currentUser.username}
+						br 
+						strong Your team: 
+						| you are a #{currentUser.kindOfPerson}
+						br
+						strong Your current score: 
+						| #{currentUser.score}
+					div.highlighted
+						p 
+							|Get a higher score by 
 							a(href='goaloverview') completing more goals
-						li View how you rank on the 
+							br
+							| View how you rank on the 
 							a(href='leaderboard') leaderboard
 							//- Nog een unordered list van maken, maar die is momenteel niet zichtbaar in materialize
 					
 		
-				div.col.s12.l6
-					p Your finished goals:
+				div.col.s12.m6.l6
+					p
+						strong Your finished goals:
 					each thing in completedGoals
-						ol
-							li - #{thing.goal.title}: #{thing.goal.points} points.
+						p 
+							i.small.material-icons done 
+							| #{thing.goal.title}: #{thing.goal.points} points.
 					//- Nog een unordered list van maken, maar die is momenteel niet zichtbaar in materialize
 
 			div.row
 				div.col.s12
 					h4 Profile details that can be changed
 
-
-					p Your current profile picture:
-
+			div.row.rowbackgr
+				div.col.s12.m6.l6
 					if (currentUser.kindOfPerson == 'cat' && currentUser.profifo.length === 0)
 						img(src='images/catperson.jpg' style="width:300px" class='circle')
-						p
-							em You do not have a profile picture just yet.
 
 					else if (currentUser.kindOfPerson == 'dog' && currentUser.profifo.length === 0)
 						img(src='images/dogperson.jpg' style="width:300px" class='circle')
-						p
-							em You do not have a profile picture just yet.
 
 					else 
 						img(src=currentUser.profifo style="width:300px" class='circle')
 
-					em Change profile picture
-					form(action='/newpic' method='post' id='uploadForm' enctype="multipart/form-data")
-						| Select a file: 
-						input(type='file', name='newpic')
-						input(type='submit')
+				div.col.s12.m6.l6
+					p
+						em Change profile picture
+						form(action='/newpic' method='post' id='uploadForm' enctype="multipart/form-data")
+							| Select a file: 
+							input(type='file', name='newpic')
+							p
+								input(type='submit')
 
 					//- form(action='/newpic' method='post' enctype='multipart/form-data')
 					//- 	input(name='displayImage' type='file')	
 
 
-
+			div.row.rowbackgr
+				div.col.s12
 					p Your bio: #{currentUser.bio}
 					form(action='/newbio' method='post' autocomplete='off')
 						input(name='newbio' type='text' placeholder='change your bio' required)
 						input(type='submit' value='change bio' id='submitnewbio')
 					br
 
-
+			div.row.rowbackgr
+				div.col.s12
 					p Your date of birth: #{currentUser.dob}
 					p (change date of birth)
 					form(action='/newdob' method='post' autocomplete='off')
@@ -83,7 +95,8 @@ html
 						input(type='submit' value='change date of birth' id='submitnewdob')
 					br
 
-
+			div.row.rowbackgr
+				div.col.s12
 					p Your email address: #{currentUser.email}
 					p Change e-mail:
 					form(action='/newemail' method='post' autocomplete='off')
@@ -91,7 +104,8 @@ html
 						input(type='submit' value='change e-mail' id='submitnewemail')
 					br
 
-
+			div.row.rowbackgr
+				div.col.s12
 					p To change your password, first please add your old password.
 					form(action='/newpassword' method='post' autocomplete='off')
 						input(name='oldpassword' type='password' placeholder='Your old password' required)
@@ -100,8 +114,12 @@ html
 						input(type='submit' value='change password' id='submitnewpassword')
 					br
 
-
+			div.row
+				div.col.s12
 					h4 I want to delete my profile
+
+			div.row.rowbackgr
+				div.col.s12
 					p Are you sure? We'd hate to see you go!
 					p This action is irreversible.
 					p We require your password before confirmation
