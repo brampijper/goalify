@@ -8,23 +8,22 @@ html
 		div.container
 			if (currentUser === undefined)
 				H2 Leaderboard
-				//- h5 Team ranking
-				//- p Team cat: 
-				//- p Team dog:
-				//- p 
-				//- 	| To contribute to your team, please 
-				//- 	a(href='login') login
-				//- 	|  or 
-				//- 	a(href='register') register
-				//- 	|.
 				h5 Individual ranking
 				p Our best three players currently are: 
-					each thing in userRankLoggedout
-						ul
-							li - 
-								a(href='publicprofile?id=' + thing.id) #{thing.username} 
-								|(team #{thing.kindOfPerson}): #{thing.score} points.
-					p ...
+
+				table.striped.highlight.responsive-table
+					thead
+						tr
+							th(data-field='user') User
+							th(data-field='team') Team
+							th(data-field='points') Points
+					tbody
+						each thing in userRankLoggedout
+							tr
+								td 
+									a(href='publicprofile?id=' + thing.id) #{thing.username}
+								td #{thing.kindOfPerson}
+								td #{thing.score}		
 				p
 					| Think you can beat 'em? Please 
 					a(href='login') login
@@ -49,12 +48,29 @@ html
 
 				h5 Individual ranking
 				p Hi #{currentUser.username}, see how you compare.
-					each thing in userRank
-						ul
-							li - 
-								a(href='publicprofile?id=' + thing.id) #{thing.username} 
-								|(team #{thing.kindOfPerson}): #{thing.score} points.
-							//- Mogelijk nog in tabel plaatsen.
+
+				table.striped.highlight.responsive-table
+					thead
+						tr
+							th(data-field='user') User
+							th(data-field='team') Team
+							th(data-field='points') Points
+					tbody
+						each thing in userRank
+							tr
+								if (thing.username == currentUser.username)
+									td
+										a(href='publicprofile?id=' + thing.id) 
+											strong YOU!
+								else
+									td
+										a(href='publicprofile?id=' + thing.id) #{thing.username}
+
+								 
+									
+								td #{thing.kindOfPerson}
+								td #{thing.score}	
+
 				p 
 					| Think you can beat 'em? Climb up the leaderboard by 
 					a(href='goaloverview') completing some more goals around you
