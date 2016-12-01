@@ -24,7 +24,7 @@ router.get('/publicprofile', (req, res) => {
 		console.log('\nThe browser will now display the profile of a user.')
 		db.Complete.findAll({
 			where: {userId: profileId},
-			order: [['completedAt', 'DESC']],
+			order: [['createdAt', 'DESC']],
 			include: 
 			[{model: db.User}, 
 			{model: db.Goal}]
