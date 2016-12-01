@@ -22,7 +22,8 @@ function initMap() {
             var marker = new google.maps.Marker({
                 position: latLng,
                 map: map,
-                title: data.title
+                title: data.title,
+                animation: google.maps.Animation.DROP
             })
 
             var circle = new google.maps.Circle({
