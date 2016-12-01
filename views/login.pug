@@ -2,24 +2,25 @@ html
 	head
 		include includes/header-loggedout.pug
 	body
-		h2 Goalify in AMS
-		br
-		br
-		form(action='/login' method='post')
-			input(name='email' placeholder='Your emailadress' type='text' required)
-				//- niet vergeten aan te passen: type naar email
-			br
-			br
-			input(name='password' placeholder='Your password' type='password' required)
-			br
-			br
-			input(type='submit' value='Login' id='submit')
-			br
-			br
-			h2= message
-			br
-			br
-		p No account yet? 
-		a(href='register') Register!
+		div.container
+			div.row
+				div.col.s12
+					h2 Login
+					h4= message
+			div.row.rowbackgr
+				div.col.s12
+					h4 Login to your Explorify account
+					form(action='/login' method='post')
+						label Your email address
+						input(name='email' placeholder='your@email.com' type='text' required)
+							//- niet vergeten aan te passen: type naar email
+						br
+						br
+						label Your password
+						input(name='password' placeholder='Your password' type='password' required)
+						br
+						br
+						input(type='submit' value='Login' id='submit')
+
 		main
 		include includes/footer.pug

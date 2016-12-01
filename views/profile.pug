@@ -6,7 +6,7 @@ html
 			div.row
 				div.col.s12
 					H2 Welcome, #{currentUser.username}!
-					h3= message			
+					h4= message			
 			div.row.rowbackgr
 				div.col.s12
 					h5 
@@ -113,7 +113,7 @@ html
 					h5 #{currentUser.email}
 					form(action='/newemail' method='post' autocomplete='off')
 						label Change your email address
-						input(name='newemail' type='email' placeholder='yournew@emailadres.com' min-length = '3' required)
+						input(name='newemail' type='email' placeholder='yournew@emailaddress.com' min-length = '3' required)
 						input(type='submit' value='change e-mail' id='submitnewemail')
 					br
 
