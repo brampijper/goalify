@@ -81,7 +81,8 @@ html
 								td #{goal.lng}
 								td #{goal.createdAt}
 								td #{goal.updatedAt}
-								td EDIT
+								td 
+									a(href='admin-editgoal?id=' + goal.id) Edit
 								td 
 									form(action=('/deletegoal?id=' + goal.id) method='post' autocomplete='off')
 										input(type='submit' value='Delete' id='deletegoal')

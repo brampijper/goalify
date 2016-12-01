@@ -35,13 +35,47 @@ router.post('/admin-editgoal', (req, res) => {
 		where: {
 			id: req.query.id
 		}
-	})
-	.then( (goal) => {
+	}).then( (goal) => {
 		if ( req.body.newtitle.length !== 0 ) {
 			goal.updateAttributes({
 				title: req.body.newtitle
 			})
+		} else {
+			goal.updateAttributes({
+				title: goal.title
+			})
 		}
+	}).then ((goal) => {
+		console.log('---------------------------')
+		console.log(goal)//undefined??
+		if ( req.body.newdescription.length !== 0 ) {
+			goal.updateAttributes({
+				description: req.body.newdescription
+			})
+		} else {
+			goal.updateAttributes({
+				description: goal.description
+			})
+		}
+	}).then (() => {
+		res.redirect('/admin?message=' + encodeURIComponent('The goal has been changed.'));
+
+	})
+})
+
+
+
+
+		// .then (( goal ) => {
+		// 	if ( req.body.newdescription.length !== 0 ) {
+		// 		goal.updateAttributes({
+		// 			description: req.body.newdescription
+		// 		}).then (() => {
+		// 			res.redirect('/admin?message=' + encodeURIComponent('The goal has been changed.'));
+		// 		})
+		// 	}
+		// })
+
 		// werkt nog even niet: werken met .then .then .then etc, of misschien met promises?
 		// bijv: if newtitle.length !== 0 ==> update, en anders hou het op goal.title.
 		//en dan dat allemaal aanmaken aan variablen en daarmee een promise vullen
@@ -75,8 +109,8 @@ router.post('/admin-editgoal', (req, res) => {
 		// 		title: req.body.newlng
 		// 	})
 		// }
-		res.redirect('/admin?message=' + encodeURIComponent('The goal has been changed.'));
-	})
+		// res.redirect('/admin?message=' + encodeURIComponent('The goal has been changed.'));
+	// })
 
 
 	// db.Goal.create({
@@ -94,7 +128,7 @@ router.post('/admin-editgoal', (req, res) => {
 	// 	})
 
 	// }) 
-})
+// })
 // iets met if xxx.length !== 0 (dus dan heb je maar één knop nodig voor alles.)
 
 // router.post('/deletegoal', (req, res) => {
