@@ -1,5 +1,18 @@
 $(document).ready(function() {
 	  initialize()
+	  $(".button-collapse").sideNav();
+
+$('.dog').animate({
+    width: '25%'
+}, {
+    duration: 2000
+});
+
+$('.cat').animate({
+    width: '75%'
+}, {
+    duration: 2000
+});
 	// $('.container-mainbox').css({ height: $(window).innerHeight() });
 	// $(window).resize(function(){
 	// 	$('.container-mainbox').css({ height: $(window).innerHeight() });
@@ -7,7 +20,6 @@ $(document).ready(function() {
 })
 
 function initialize() {
-
 	// var styles = [
  //  	{
 	//     featureType: "road",
@@ -27,13 +39,16 @@ function initialize() {
 
 	// map.setStyle("map_style");
     
-    var map = new GMaps({
+   var map = new GMaps({
 		div: '#indexMap',
 		lat: 52.3702,
 		lng: 4.8952,
 		zoom: 13,
 		zoomControl: false,
-		panControl: false
+		panControl: false,
+		mapTypeControl: false, 
+		streetViewControl: false,
+		overviewMapControl: false
 	});
 
 	// map.addStyle({
