@@ -52,7 +52,7 @@ router.post('/login', (req, res) => {
 						req.session.user 		= user
 						// req.session.username 	= user.username
 						console.log('succesfully logged in')
-						res.redirect('/profile?message=' + encodeURIComponent('Tadaaa logged-in.'))
+						res.redirect('/profile?message=' + encodeURIComponent('You are now logged-in.'))
 					} else {
 						res.redirect('/login?message=' + encodeURIComponent('Invalid email or password.'))
 						return
