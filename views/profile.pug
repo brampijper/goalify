@@ -2,18 +2,24 @@ html
 	head
 		include includes/header.pug
 	body
-		div.container
+		div.container.center-align
 			div.row
-				div.col.s12
-					H2.headfont Welcome, #{currentUser.username}!
+				div.col.s12.m12.l12
+					h2.headfont Welcome, #{currentUser.username}!
+					if (currentUser.kindOfPerson == 'cat' && currentUser.profifo.length === 0)
+						img(src='images/catperson.jpg' class='circle profifo')
+
+					else if (currentUser.kindOfPerson == 'dog' && currentUser.profifo.length === 0)
+						img(src='images/dogperson.jpg' class='circle profifo')
+
+					else 
+						img(src=currentUser.profifo, class='circle profifo')
 					h5= message			
-			div.row.rowbackgr
-				div.col.s12
-					h6 
-						| Here you can view and edit your information. Only you can see this page. To see how other members view your profile, 
-						a(href='publicprofile?id=' + currentUser.id) click here
-						| .
-					
+			div.col.s12.m6.l6
+				h6.center-align 
+					| Here you can view and edit your information. Only you can see this page. To see how other members view your profile, 
+					a(href='publicprofile?id=' + currentUser.id) click here.
+			
 			div.row.rowbackgr
 				div.col.s12.m6.l6
 					p 
@@ -81,11 +87,11 @@ html
 						strong Bio
 					h5.profileIndent "#{currentUser.bio}"
 					form(action='/newbio' method='post' autocomplete='off')
-					div.input-field
-						input(name='newbio' type='text' placeholder='Your new bio' required)
-						label Change your bio
-						div.buttonholder
-							input(type='submit' value='Change bio' class="btn waves-effect" id='submitnewbio')
+						div.input-field
+							input(name='newbio' type='text' placeholder='Your new bio' required)
+							label Change your bio
+							div.buttonholder
+								input(type='submit' value='Change bio' class="btn waves-effect" id='submitnewbio')
 					br
 
 				div.col.s12.m6.l6

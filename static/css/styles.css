@@ -29,12 +29,10 @@ input[type=submit] {
   transform: translateY(35%); }
 
 .btn {
-  background-color: #028bca;
-  width: 80%; }
+  background-color: #028bca; }
 
 .btn:hover {
-  background-color: #FEC006;
-  width: 80%; }
+  background-color: #FEC006; }
 
 .main-title {
   margin-top: 2%;
@@ -119,9 +117,9 @@ div#sidenav-overlay {
 
 .profifo {
   display: block;
-  width: 80%;
+  width: 35%;
   margin: auto;
-  padding-top: 20px;
+  padding-top: 1%;
   padding-bottom: 20px; }
 
 .bulbright {
@@ -146,6 +144,9 @@ tr td #markRow {
   margin-top: 0rem; }
   .input-field label {
     color: #212121; }
+
+.rowbackgr {
+  margin-top: 5%; }
 
 /* label focus color */
 .input-field input[type=text]:focus + label {
