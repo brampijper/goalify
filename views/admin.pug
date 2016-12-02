@@ -4,7 +4,7 @@ html
 	body
 		if (currentUser.username === 'brammieboy' || currentUser.username === 'selma2202' || currentUser.username ==='admin')
 			h2.headfont Welcome, admin!
-			h4= message
+			h5= message
 			p How lovely that you have found inspiration, add new goals for your users here.
 			h3 New goal
 			form(action='/admin' method='post' autocomplete='off')
