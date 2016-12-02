@@ -2,12 +2,15 @@ html
 	head
 		include includes/header.pug
 	body
-		h2.headfont Goals Overview map
-		h5= message
+		div.container
+			h2.headfont Goals Overview map
+			h5= message
 		div#map
 		br
 		br
 		main
+		include includes/footer.pug
 		script(src='javascript/jquery-3.1.1.min.js' type='text/javascript')
-		script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC3T9CFl4_0Xl-JvP7liPb6AEUuscL1700' async defer)
+		script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyC3T9CFl4_0Xl-JvP7liPb6AEUuscL1700')
+		script(src='javascript/map-icons.js' type='text/javascript')
 		script(src='javascript/goal.js' type='text/javascript')

@@ -3,7 +3,12 @@ var distance;
 
 //initializing google maps with a custom design
 function initMap() {
-    console.log('google maps runs')
+    
+    var styledMapType = new google.maps.StyledMapType(
+
+   [{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"administrative.country","elementType":"all","stylers":[{"visibility":"on"},{"color":"#00858a"}]},{"featureType":"administrative.country","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"administrative.country","elementType":"labels.text.stroke","stylers":[{"saturation":"-45"},{"visibility":"off"}]},{"featureType":"administrative.province","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"administrative.locality","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"administrative.neighborhood","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"administrative.land_parcel","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"landscape.man_made","elementType":"geometry","stylers":[{"color":"#f6ebcb"}]},{"featureType":"landscape.natural","elementType":"geometry","stylers":[{"color":"#f7f1df"}]},{"featureType":"landscape.natural.landcover","elementType":"geometry.fill","stylers":[{"color":"#f7f1df"}]},{"featureType":"landscape.natural.terrain","elementType":"geometry","stylers":[{"visibility":"off"}]},{"featureType":"landscape.natural.terrain","elementType":"geometry.fill","stylers":[{"color":"#f7f1df"}]},{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"poi.attraction","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"poi.business","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi.government","elementType":"all","stylers":[{"visibility":"on"},{"color":"#f3dd9d"}]},{"featureType":"poi.medical","elementType":"geometry","stylers":[{"color":"#fbd3da"},{"visibility":"on"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#bde6ab"}]},{"featureType":"road","elementType":"geometry.stroke","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"road","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#f8a179"}]},{"featureType":"road.highway","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"transit.station.airport","elementType":"geometry.fill","stylers":[{"color":"#e6dcbd"}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#3dbbc2"}]}],
+    {name: 'Styled Map'});
+
 	//create new google maps with options
 	map = new google.maps.Map(document.getElementById('map'), {
 		disableDefaultUI: true,
@@ -23,7 +28,11 @@ function initMap() {
                 position: latLng,
                 map: map,
                 title: data.title,
-                animation: google.maps.Animation.DROP
+                animation: google.maps.Animation.DROP,
+                icon: {
+                    path: MAP_PIN
+                },
+                map_icon_label: '<span class="map-icon map-icon-point-of-interest></span>'
             })
 
             var circle = new google.maps.Circle({
@@ -100,6 +109,21 @@ function initMap() {
             })  
         })
     })
+     google.maps.event.addDomListener(window, 'resize', function() {
+        map.setCenter((document.body.offsetWidth<1104)
+                    //<1104
+                  ? mainPosition
+                    //>=1104
+                  : mainPosition
+              );
+    });
+
+    google.maps.event.trigger(window, 'resize')
+
+
+
+    map.mapTypes.set('styled_map', styledMapType);
+    map.setMapTypeId('styled_map'); 
 }
 
 
