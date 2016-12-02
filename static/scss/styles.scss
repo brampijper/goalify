@@ -1,9 +1,9 @@
-$main-color: #FAFAFA; 
-$secondary-color: #67D0E6;
+$main-color: #FEC006; 
+$secondary-color: #FFA000;
 $body-color: #FAFAFA;
 
 $index-font: "Canter-Bold";
-$secondary-font: "Canter-Light";
+$secondary-font: "Canter-Bold2";
 
 @font-face {
     font-family: "Canter-Bold";
@@ -11,31 +11,44 @@ $secondary-font: "Canter-Light";
 }
 
 @font-face {
-    font-family: "Canter-Light";
-    src: url(../fonts/Canter-Light.otf);
+    font-family: "Canter-Bold2";
+    src: url(../fonts/CanterBold.otf);
 }
 
 .nav-wrapper {
-	background-color: $secondary-color;
+	background-color: $main-color;
 }
 
 footer.page-footer {
-	background-color: $secondary-color;
+	background-color: #03A9F4;
 }
 
 nav ul li a {
-	color: $main-color;
+	color: $body-color;
 }
 
 body {
 	display: flex;
     min-height: 100vh;
     flex-direction: column;
-    background-color: $main-color; 
+    background-color: $body-color; 
 }
 
 main {
 	flex: 1 0 auto;
+}
+
+input[type=submit] {
+	position: relative;
+	transform: translateY(35%);
+}
+
+.btn {
+	background-color:#607D8B;
+}
+
+.btn:hover {
+	background-color:#BDBDBD;
 }
 
 .headfont {
@@ -43,10 +56,10 @@ main {
 }
 
 .container-mainbox {
-	background-color: #FAFAFA;
+	background-color: #03A9F4;
 	height: auto;
 	h2 {
-		color: $secondary-color;
+		color: $body-color;
 		padding: 1% 0% 5% 0%; 
 		font-family: 'Canter-Bold';
 		font-size: 120px;
@@ -54,7 +67,7 @@ main {
 }
 
 .container-secondbox {
-	background-color: #F48631;
+	background-color: #BDBDBD;
 	margin-top:8%;
 	padding-bottom:5%;
 	height: auto;
@@ -109,9 +122,9 @@ div#sidenav-overlay {
 	z-index: -1; 
 } 
 
-.rowbackgr {
-	background-color: $main-color;
-}
+// .rowbackgr {
+// 	background-color: $main-color;
+// }
 
 .highlighted {
 	background-color: yellow;

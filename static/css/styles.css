@@ -3,14 +3,14 @@
   src: url(../fonts/Canter-Bold-Shadow.otf); }
 
 @font-face {
-  font-family: "Canter-Light";
-  src: url(../fonts/Canter-Light.otf); }
+  font-family: "Canter-Bold2";
+  src: url(../fonts/CanterBold.otf); }
 
 .nav-wrapper {
-  background-color: #67D0E6; }
+  background-color: #FEC006; }
 
 footer.page-footer {
-  background-color: #67D0E6; }
+  background-color: #03A9F4; }
 
 nav ul li a {
   color: #FAFAFA; }
@@ -24,20 +24,30 @@ body {
 main {
   flex: 1 0 auto; }
 
+input[type=submit] {
+  position: relative;
+  transform: translateY(35%); }
+
+.btn {
+  background-color: #607D8B; }
+
+.btn:hover {
+  background-color: #BDBDBD; }
+
 .headfont {
-  font-family: "Canter-Light"; }
+  font-family: "Canter-Bold2"; }
 
 .container-mainbox {
-  background-color: #FAFAFA;
+  background-color: #03A9F4;
   height: auto; }
   .container-mainbox h2 {
-    color: #67D0E6;
+    color: #FAFAFA;
     padding: 1% 0% 5% 0%;
     font-family: 'Canter-Bold';
     font-size: 120px; }
 
 .container-secondbox {
-  background-color: #F48631;
+  background-color: #BDBDBD;
   margin-top: 8%;
   padding-bottom: 5%;
   height: auto; }
@@ -82,9 +92,6 @@ main {
 
 div#sidenav-overlay {
   z-index: -1; }
-
-.rowbackgr {
-  background-color: #FAFAFA; }
 
 .highlighted {
   background-color: yellow;
