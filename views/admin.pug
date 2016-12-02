@@ -3,56 +3,55 @@ html
 		include includes/header.pug
 	body
 		if (currentUser.username === 'brammieboy' || currentUser.username === 'selma2202' || currentUser.username ==='admin')
-			h2.headfont Welcome, admin!
-			h5= message
-			p How lovely that you have found inspiration, add new goals for your users here.
-			h3 New goal
-			form(action='/admin' method='post' autocomplete='off')
-				label Title 
-				br
-				input(name='title' type='text' placeholder='Title of task' max-length= '50' autofocus required)
-				br
-				br
-				label Description 
-				br
-				input(name='description' type='text' placeholder='Description of task' required)
-				br
-				br
-				label Duration 
-				br
-				input(name='duration' type='number' min="0" step="5" required)
-				br
-				br
-				label Difficulty
-				br
-				input(type='radio' name='difficulty' id='easy' value='easy' required)
-				label(for='easy') Easy
-				br
-				input(type='radio' name='difficulty' id='medium' value='medium' required) 
-				label(for='medium') Medium
-				br
-				input(type='radio' name='difficulty' id='hard' value='hard' required) 
-				label(for='hard') Hard
-				br
-				br
-				label Points 
-				br
-				input(name='points' type='number' min="0" step="5" required)
-				br
-				br
-				//- zou nog cool zijn als de admin de coordinaten op een kaartje kan aangeven
-				label Latitude
-				br
-				input(name='lat' type='text' placeholder='Latitude' max-length= '50'  required)
-				br
-				label Longitude 
-				br
-				input(name='lng' type='text' placeholder='Longitude' max-length= '50'  required)
-				br
-				input(type='submit' value='Create goal' id='submit')
-				br
-				br
-			h3 Goals
+			div.container
+				h2.headfont Welcome, admin!
+				h5= message
+				p How lovely that you have found inspiration, add new goals for your users here.
+				h5 New goal
+				form(action='/admin' method='post' autocomplete='off')
+					br
+					div.input-field
+						input(name='title' type='text' placeholder='Title of task' max-length= '50' class='validate' autofocus required)
+						label Title 
+					br
+					div.input-field
+						input(name='description' type='text' placeholder='Description of task' class='validate' required)
+						label Description 
+					br
+					div.input-field
+						input(name='duration' placeholder='Duration of task (in minutes)' type='number' min="0" step="5" class='validate' required)
+						label Duration 					
+					br
+					label.nonformLabel Difficulty
+					div.input-field
+						input(type='radio' name='difficulty' id='easy' value='easy' class='validate' required)
+						label(for='easy') Easy
+						br
+						input(type='radio' name='difficulty' id='medium' value='medium' class='validate' required) 
+						label(for='medium') Medium
+						br
+						input(type='radio' name='difficulty' id='hard' value='hard' class='validate' required) 
+						label(for='hard') Hard
+					br
+					br
+					div.input-field
+						input(name='points' type='number' min="0" step="5" placeholder='Points of task' class='validate' required)
+						label Points 
+					br
+					//- zou nog cool zijn als de admin de coordinaten op een kaartje kan aangeven
+					div.input-field
+							input(name='lat' type='text' placeholder='Latitude' max-length= '50' class='validate' required)
+							label Latitude
+					br
+					div.input-field
+						input(name='lng' type='text' placeholder='Longitude' max-length= '50' class='validate' required)
+						label Longitude 
+					br
+					input(type='submit' value='Create goal' id='submit')
+					br
+					br
+					br
+				h5 Existing goals
 			table.striped.highlight.responsive-table
 					thead
 						tr
@@ -107,24 +106,25 @@ html
 
 
 		else
-			h2.headfont Oops!
-			p 
-				| It seems you are not an admin. Do you perhaps wish to 
-				a(href='leaderboard') view the leaderboard
-				| , 
-				a(href='profile') edit your own profile 
-				| or 
-				a(href='goaloverview') view all goals
-				| ?
+			div.container
+				h2.headfont Oops!
+				p 
+					| It seems you are not an admin. Do you perhaps wish to 
+					a(href='leaderboard') view the leaderboard
+					| , 
+					a(href='profile') edit your own profile 
+					| or 
+					a(href='goaloverview') view all goals
+					| ?
 
-			h3 We're really sorry about this.
-			if (currentUser.kindOfPerson == 'cat')
-				p Since you like cats so much, here is a picture of a sad cat:
-				img(src='images/sadcat.png' style="width:400px" class='circle')
-			else
-				p Since you like dogs so much, here is a picture of a sad dog:
-				img(src='images/saddog.jpg' style="width:400px" class='circle')
-			//-nog laten redirecten, met vertraging, naar home
+				h3 We're really sorry about this.
+				if (currentUser.kindOfPerson == 'cat')
+					p Since you like cats so much, here is a picture of a sad cat:
+					img(src='images/sadcat.png' style="width:400px" class='circle')
+				else
+					p Since you like dogs so much, here is a picture of a sad dog:
+					img(src='images/saddog.jpg' style="width:400px" class='circle')
+				//-nog laten redirecten, met vertraging, naar home
 		main
 		include includes/footer.pug
 

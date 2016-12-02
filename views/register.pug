@@ -10,30 +10,30 @@ html
 			div.row.rowbackgr
 				div.col.s12
 					form(action='/register' method='post' autocomplete='off')
-						label Username 
-						input(name='username' placeholder='Brammieboy' max-length= '15' autofocus required)
+						div.input-field
+							input(name='username' type='text' placeholder='Brammieboy' max-length= '15' autofocus class='validate' required)
+							label Username 
 						br
+						div.input-field
+							input(name='email' type='email' placeholder='your@emailaddress.com' class='validate' required)
+							label Email address
 						br
-						label Email address
-						input(name='email' type='email' placeholder='your@emailaddress.com' required)
+						div.input-field
+							input(name='password' type='password' placeholder='Ultra secure password' min-length = '3' class='validate' required)
+							label Password
 						br
+						label.nonformLabel Birthday:
+						div.input-field
+							input(type="date" name="bday" required)
+							
 						br
-						label Password
-						input(name='password' type='password' placeholder='Ultra secure password' min-length = '3' required)
-						br
-						br
-						label Birthday:
-						input(type="date" name="bday" required)
-						br
-						br
-						label Are you a cat or dog person?
-						br
-						input(type='radio' name='catdog' id ='cat' value='cat' required)
-						label(for='cat') Cat
-						br
-						input(type='radio' name='catdog' id='dog' value='dog' required) 
-						label(for='dog') Dog
-						br
+						label.nonformLabel Are you a cat or dog person?
+						div.input-field
+							input(type='radio' name='catdog' id ='cat' value='cat' required)
+							label(for='cat') Cat
+							br
+							input(type='radio' name='catdog' id='dog' value='dog' required) 
+							label(for='dog') Dog
 						br
 						br
 						input(type='submit' value='Register' id='submit')
