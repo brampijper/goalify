@@ -56,7 +56,7 @@ input[type=submit] {
   height: 100vh; }
 
 .barBG {
-  background-color: #757575;
+  background-color: #03A9F4;
   height: 200px;
   width: 100%;
   margin-top: 7%;
@@ -66,9 +66,12 @@ input[type=submit] {
   display: inline-block;
   float: left;
   width: 1%;
-  background-color: #4CAF50;
   height: 150px;
-  margin-top: 2%; }
+  margin-top: 2%;
+  background-image: url("/images/cat-pattern.jpg"); }
+
+.cat:hover {
+  background-color: #8BC34A; }
 
 .dog {
   display: inline-block;
@@ -76,7 +79,11 @@ input[type=submit] {
   width: 1%;
   background-color: #F44336;
   height: 150px;
-  margin-top: 2%; }
+  margin-top: 2%;
+  background-image: url("/images/dog-pattern.jpg"); }
+
+.dog:hover {
+  background-color: #FF5252; }
 
 .dog p {
   position: relative;
@@ -125,3 +132,137 @@ tr td #markRow {
 
 .profileIndent {
   margin-left: 20px; }
+
+/* FORM SHIZZLE */
+/* label color */
+.input-field {
+  margin-top: 0rem; }
+  .input-field label {
+    color: #212121; }
+
+/* label focus color */
+.input-field input[type=text]:focus + label {
+  color: #FFA000; }
+
+/* label underline focus color */
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid #FFA000;
+  box-shadow: 0 1px 0 0 #FEC006; }
+
+/* valid color */
+.input-field input[type=text].valid {
+  border-bottom: 1px solid #028bca;
+  box-shadow: 0 1px 0 0 #03a9f4; }
+
+/* invalid color */
+.input-field input[type=text].invalid {
+  border-bottom: 1px solid #ca0202;
+  box-shadow: 0 1px 0 0 #f20202; }
+
+/* label focus color */
+.input-field input[type=password]:focus + label {
+  color: #FFA000; }
+
+/* label underline focus color */
+.input-field input[type=password]:focus {
+  border-bottom: 1px solid #FFA000;
+  box-shadow: 0 1px 0 0 #FEC006; }
+
+/* valid color */
+.input-field input[type=password].valid {
+  border-bottom: 1px solid #028bca;
+  box-shadow: 0 1px 0 0 #03a9f4; }
+
+/* invalid color */
+.input-field input[type=password].invalid {
+  border-bottom: 1px solid #ca0202;
+  box-shadow: 0 1px 0 0 #f20202; }
+
+/* label focus color */
+.input-field input[type=email]:focus + label {
+  color: #FFA000; }
+
+/* label underline focus color */
+.input-field input[type=email]:focus {
+  border-bottom: 1px solid #FFA000;
+  box-shadow: 0 1px 0 0 #FEC006; }
+
+/* valid color */
+.input-field input[type=email].valid {
+  border-bottom: 1px solid #028bca;
+  box-shadow: 0 1px 0 0 #03a9f4; }
+
+/* invalid color */
+.input-field input[type=email].invalid {
+  border-bottom: 1px solid #ca0202;
+  box-shadow: 0 1px 0 0 #f20202; }
+
+/* label focus color */
+.input-field input[type=radio]:focus + label {
+  color: #FFA000; }
+
+/* label underline focus color */
+.input-field input[type=radio]:focus {
+  border-bottom: 1px solid #FFA000;
+  box-shadow: 0 1px 0 0 #FEC006; }
+
+/* valid color */
+.input-field input[type=radio].valid {
+  border-bottom: 1px solid #028bca;
+  box-shadow: 0 1px 0 0 #03a9f4; }
+
+/* invalid color */
+.input-field input[type=radio].invalid {
+  border-bottom: 1px solid #ca0202;
+  box-shadow: 0 1px 0 0 #f20202; }
+
+[type="radio"]:checked + label:after, [type="radio"].with-gap:checked + label:after {
+  background-color: #03a9f4; }
+
+[type="radio"]:checked + label:after, [type="radio"].with-gap:checked + label:before, [type="radio"].with-gap:checked + label:after {
+  border: 2px solid #028bca; }
+
+/* label focus color */
+.input-field input[type=date]:focus + label {
+  color: #FFA000; }
+
+/* label underline focus color */
+.input-field input[type=date]:focus {
+  border-bottom: 1px solid #FFA000;
+  box-shadow: 0 1px 0 0 #FEC006; }
+
+/* valid color */
+.input-field input[type=date].valid {
+  border-bottom: 1px solid #028bca;
+  box-shadow: 0 1px 0 0 #03a9f4; }
+
+/* invalid color */
+.input-field input[type=date].invalid {
+  border-bottom: 1px solid #ca0202;
+  box-shadow: 0 1px 0 0 #f20202; }
+
+/* label focus color */
+.input-field input[type=number]:focus + label {
+  color: #FFA000; }
+
+/* label underline focus color */
+.input-field input[type=number]:focus {
+  border-bottom: 1px solid #FFA000;
+  box-shadow: 0 1px 0 0 #FEC006; }
+
+/* valid color */
+.input-field input[type=number].valid {
+  border-bottom: 1px solid #028bca;
+  box-shadow: 0 1px 0 0 #03a9f4; }
+
+/* invalid color */
+.input-field input[type=number].invalid {
+  border-bottom: 1px solid #ca0202;
+  box-shadow: 0 1px 0 0 #f20202; }
+
+/* icon prefix focus color */
+.input-field .prefix.active {
+  color: brown; }
+
+.nonformlabel {
+  color: #212121; }
