@@ -115,3 +115,6 @@ div#sidenav-overlay {
 
 tr td #markRow {
   background-color: pink; }
+
+.profileIndent {
+  margin-left: 20px; }
