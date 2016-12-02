@@ -6,55 +6,48 @@ html
 			div.row
 				div.col.s12
 					H2.headfont Welcome, #{currentUser.username}!
-					h4= message			
+					h5= message			
 			div.row.rowbackgr
 				div.col.s12
-					h5 
+					h6 
 						| Here you can view and edit your information. Only you can see this page. To see how other members view your profile, 
 						a(href='publicprofile?id=' + currentUser.id) click here
 						| .
-
-					br
-					
-			div.row
-				div.col.s12
-					h4 Profile details that can not be changed
 					
 			div.row.rowbackgr
 				div.col.s12.m6.l6
 					p 
 						strong Your username: 
-						| #{currentUser.username}
-						br 
+					h5.profileIndent #{currentUser.username}
+					p 
 						strong Your team: 
-						| you are a #{currentUser.kindOfPerson} person
-						br
+					h5.profileIndent you are a #{currentUser.kindOfPerson} person
+					p
 						strong Your current score: 
-						| #{currentUser.score}
-					div.highlighted
-						p 
-							i.medium.material-icons.bulbleft lightbulb_outline
-							|Get a higher score by 
-							a(href='goaloverview') completing more goals
-							br
-							| View how you rank on the 
-							a(href='leaderboard') leaderboard 
-							//- Nog een unordered list van maken, maar die is momenteel niet zichtbaar in materialize
+					h5.profileIndent #{currentUser.score}
+					p
+						strong View how you rank on the 
+					h5.profileIndent
+						a(href='leaderboard') leaderboard 
+						//- Nog een unordered list van maken, maar die is momenteel niet zichtbaar in materialize
 					
 		
 				div.col.s12.m6.l6
 					p
 						strong Your finished goals:
 					each thing in completedGoals
-						p 
+						p.profileIndent 
 							i.tiny.material-icons done 
 							| #{thing.goal.title}: #{thing.goal.points} points.
+					p 
+						strong Want to see more here? 
+					h5.profileIndent
+						a(href='goaloverview') Complete more goals
 					//- Nog een unordered list van maken, maar die is momenteel niet zichtbaar in materialize
 
 			div.row
 				div.col.s12
 					h4 Edit profile
-
 			div.row.rowbackgr
 				div.col.s12.m6.l6
 					if (currentUser.kindOfPerson == 'cat' && currentUser.profifo.length === 0)
@@ -76,49 +69,44 @@ html
 							input(type='file', name='newpic')
 							br
 							input(type='submit')
-						div.highlighted
-							p 
-								i.medium.material-icons.bulbright lightbulb_outline
-								| Wouldn't it be great for people to see your face when they check who beat them in the leaderboard?
+
 
 
 
 			div.row.rowbackgr
-				div.col.s12
+				div.col.s12.m6.l6
 					p 
 						strong Bio
-					h5 "#{currentUser.bio}"
+					h5.profileIndent "#{currentUser.bio}"
 					form(action='/newbio' method='post' autocomplete='off')
 						label Change your bio
 						input(name='newbio' type='text' placeholder='Your new bio' required)
-						input(type='submit' value='change bio' id='submitnewbio')
+						input(type='submit' value='Change bio' id='submitnewbio')
 					br
 
-			div.row.rowbackgr
-				div.col.s12
+				div.col.s12.m6.l6
 					p 
 						strong Date of birth 
-					h5 #{currentUser.dob}
+					h5.profileIndent #{currentUser.dob}
 
 					form(action='/newdob' method='post' autocomplete='off')
 						label Change your date of birth
 						input(name='newdob' type='date' required)
-						input(type='submit' value='change date of birth' id='submitnewdob')
+						input(type='submit' value='Change date of birth' id='submitnewdob')
 					br
 
 			div.row.rowbackgr
-				div.col.s12
+				div.col.s12.m6.l6
 					p
 						strong Email address 
-					h5 #{currentUser.email}
+					h5.profileIndent #{currentUser.email}
 					form(action='/newemail' method='post' autocomplete='off')
 						label Change your email address
 						input(name='newemail' type='email' placeholder='yournew@emailaddress.com' min-length = '3' required)
-						input(type='submit' value='change e-mail' id='submitnewemail')
+						input(type='submit' value='Change e-mail' id='submitnewemail')
 					br
 
-			div.row.rowbackgr
-				div.col.s12
+				div.col.s12.m6.l6
 					p
 						strong Password
 					p To change your password, first please add your old password.
@@ -127,24 +115,19 @@ html
 						input(name='oldpassword' type='password' placeholder='Your old password' required)
 						input(name='newpassword' type='password' placeholder='Your new password' min-length = '8' required)
 						input(name='newpassword2' type='password' placeholder='Confirm your new password' min-length = '8' required)
-						input(type='submit' value='change password' id='submitnewpassword')
-					br
-
-			div.row
-				div.col.s12
-					h4 I want to delete my profile
+						input(type='submit' value='Change password' id='submitnewpassword')
 
 			div.row.rowbackgr
-				div.col.s12
+				div.col.s12.m6.l6
+					p
+						strong Delete profile
 					p Are you sure? We'd hate to see you go!
 					p 
-						| This action is irreversible.
-						br
-						| We require your password before confirmation
+						| This action is irreversible. We require your password before confirmation
 					form(action='/deleteaccount' method='post' autocomplete='off')
 						label Password
 						input(name='oldpassword' type='password' placeholder='Your password' required)
-						input(type='submit' value='DELETE' id='submitnewpassword')
+						input(type='submit' value='Delete profile' id='submitnewpassword')
 					br
 
 		main

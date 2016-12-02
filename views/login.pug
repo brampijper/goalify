@@ -6,10 +6,9 @@ html
 			div.row
 				div.col.s12
 					h2.headfont Login
-					h4= message
+					h5= message
 			div.row.rowbackgr
 				div.col.s12
-					h4 Login to your Explorify account
 					form(action='/login' method='post')
 						label Your email address
 						input(name='email' placeholder='your@email.com' type='text' required)

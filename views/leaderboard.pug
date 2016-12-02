@@ -8,7 +8,6 @@ html
 		div.container
 			if (currentUser === undefined)
 				H2.headfont Leaderboard
-				h5 Individual ranking
 				p Our best three players currently are: 
 
 				table.striped.highlight.responsive-table
@@ -25,7 +24,7 @@ html
 								td #{thing.kindOfPerson}
 								td #{thing.score}		
 				p
-					| Think you can beat 'em? Please 
+					| Think you can beat 'em? Want to see the full leaderboard? Please 
 					a(href='login') login
 					|  or 
 					a(href='register') register
