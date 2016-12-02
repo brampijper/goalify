@@ -1,3 +1,8 @@
+$(document).ready(function() {
+    initLocationProcedure();
+    $(".button-collapse").sideNav();
+});
+
 var map, userLocation, mainPosition = {lat: 52.3702, lng: 4.8952}, map;
 var distance;
 
@@ -28,11 +33,11 @@ function initMap() {
                 position: latLng,
                 map: map,
                 title: data.title,
-                animation: google.maps.Animation.DROP,
-                icon: {
-                    path: MAP_PIN
-                },
-                map_icon_label: '<span class="map-icon map-icon-point-of-interest></span>'
+                animation: google.maps.Animation.DROP
+                // icon: {
+                //     path: MAP_PIN
+                // },
+                // map_icon_label: '<span class="map-icon map-icon-point-of-interest></span>'
             })
 
             var circle = new google.maps.Circle({
@@ -94,7 +99,8 @@ function initMap() {
                 position: latLng,
                 map: map,
                 title: data.title,
-                icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+                icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
+                animation: google.maps.Animation.DROP
             })
 
             var contentString = 'Finished Goalsss You received points for this yooo' 
@@ -132,7 +138,8 @@ function setCurrenPosition(pos) {
     userLocation = new google.maps.Marker({
        map : map,
        position : new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
-       icon : "images/location-marker.png"
+       icon : "images/location-marker.png",
+       animation: google.maps.Animation.DROP
     })
     var circle = new google.maps.Circle({
         map: map,
@@ -183,7 +190,3 @@ function initLocationProcedure() {
         alert('Sorry, your browser does not support the Geolocation')
     }
 }
-
-$(document).ready(function() {
-    initLocationProcedure();
-});
