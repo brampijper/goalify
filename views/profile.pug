@@ -68,7 +68,9 @@ html
 							| Select a file: 
 							input(type='file', name='newpic')
 							br
-							input(type='submit')
+							div.buttonholder
+								br
+								input(type='submit' class="btn waves-effect")
 
 
 
@@ -79,20 +81,23 @@ html
 						strong Bio
 					h5.profileIndent "#{currentUser.bio}"
 					form(action='/newbio' method='post' autocomplete='off')
-						label Change your bio
+					div.input-field
 						input(name='newbio' type='text' placeholder='Your new bio' required)
-						input(type='submit' value='Change bio' id='submitnewbio')
+						label Change your bio
+						div.buttonholder
+							input(type='submit' value='Change bio' class="btn waves-effect" id='submitnewbio')
 					br
 
 				div.col.s12.m6.l6
 					p 
 						strong Date of birth 
 					h5.profileIndent #{currentUser.dob}
-
+					label.nonformLabel Change your date of birth
 					form(action='/newdob' method='post' autocomplete='off')
-						label Change your date of birth
-						input(name='newdob' type='date' required)
-						input(type='submit' value='Change date of birth' id='submitnewdob')
+						div.input-field
+							input(name='newdob' type='date' required)
+							div.buttonholder
+								input(type='submit' value='Change date of birth' class="btn waves-effect" id='submitnewdob')
 					br
 
 			div.row.rowbackgr
@@ -101,9 +106,11 @@ html
 						strong Email address 
 					h5.profileIndent #{currentUser.email}
 					form(action='/newemail' method='post' autocomplete='off')
-						label Change your email address
-						input(name='newemail' type='email' placeholder='yournew@emailaddress.com' min-length = '3' required)
-						input(type='submit' value='Change e-mail' id='submitnewemail')
+						div.input-field
+							input(name='newemail' type='email' placeholder='yournew@emailaddress.com' min-length = '3' required)
+							label Change your email address
+							div.buttonholder
+								input(type='submit' value='Change e-mail' class="btn waves-effect" id='submitnewemail')
 					br
 
 				div.col.s12.m6.l6
@@ -111,11 +118,13 @@ html
 						strong Password
 					p To change your password, first please add your old password.
 					form(action='/newpassword' method='post' autocomplete='off')
-						label Change password
-						input(name='oldpassword' type='password' placeholder='Your old password' required)
-						input(name='newpassword' type='password' placeholder='Your new password' min-length = '8' required)
-						input(name='newpassword2' type='password' placeholder='Confirm your new password' min-length = '8' required)
-						input(type='submit' value='Change password' id='submitnewpassword')
+						div.input-field
+							input(name='oldpassword' type='password' placeholder='Your old password' required)
+							label Change password
+							input(name='newpassword' type='password' placeholder='Your new password' min-length = '8' required)
+							input(name='newpassword2' type='password' placeholder='Confirm your new password' min-length = '8' required)
+							div.buttonholder
+								input(type='submit' value='Change password' class="btn waves-effect" id='submitnewpassword')
 
 			div.row.rowbackgr
 				div.col.s12.m6.l6
@@ -125,9 +134,11 @@ html
 					p 
 						| This action is irreversible. We require your password before confirmation
 					form(action='/deleteaccount' method='post' autocomplete='off')
-						label Password
-						input(name='oldpassword' type='password' placeholder='Your password' required)
-						input(type='submit' value='Delete profile' id='submitnewpassword')
+						div.input-field
+							input(name='oldpassword' type='password' placeholder='Your password' required)
+							label Password
+							div.buttonholder
+								input(type='submit' value='Delete profile' class="btn waves-effect" id='submitnewpassword')
 					br
 
 		main

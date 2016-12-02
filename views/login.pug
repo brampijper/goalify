@@ -11,9 +11,8 @@ html
 				div.col.s12
 					form(action='/login' method='post')
 						div.input-field
-							input(name='email' placeholder='your@email.com' type='text' class="validate" required)
+							input(name='email' placeholder='your@email.com' type='email' class="validate" required)
 							label Your email address
-							//- niet vergeten aan te passen: type naar email
 						br
 						br
 						div.input-field
@@ -21,6 +20,7 @@ html
 							label Your password
 						br
 						br
-						input(type='submit' class="btn waves-effect" id='submit' value='Login')
+						div.buttonholder
+							input(type='submit' class="btn waves-effect" id='submit' value='Login')
 		main
 		include includes/footer.pug
