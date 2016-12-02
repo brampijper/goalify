@@ -32,23 +32,13 @@ html
 			else
 				div.row
 					div.col.s12
-						h2.headfont #{goalsByUser[0].user.username}'s profile
+						h2.headfont.center-align #{goalsByUser[0].user.username}'s profile
 						h5= message
 
 				div.row.rowbackgr
-					div.col.s12.m6.l6
-						h4 #{goalsByUser[0].user.username}
+					div.col.s12.m6.l6.right-align
+						h4 About #{goalsByUser[0].user.username}
 						h5 "#{goalsByUser[0].user.bio}"
-						p Age: (hier nog datumnotatie omzetten) #{goalsByUser[0].user.dob}
-						if goalsByUser[0].user.id === currentUser.id
-							div.highlighted
-								p
-									i.medium.material-icons.bulbleft lightbulb_outline
-									| Is this information incorrect? 
-									a(href='profile') Click here 
-									| to change your personal details.
-
-					div.col.s12.m6.l6
 						if (goalsByUser[0].user.kindOfPerson == 'cat' && goalsByUser[0].user.profifo.length === 0)
 							img(src='images/catperson.jpg' class='circle profifo')
 
@@ -57,35 +47,30 @@ html
 
 						else 
 							img(src=goalsByUser[0].user.profifo, class='circle profifo')
-				div.row
-					div.col.s12
-						h4 Game achievements:
-				div.row.rowbackgr
+						if goalsByUser[0].user.id === currentUser.id
+							
+							p
+								em Is this information incorrect? 
+								em
+									a(href='profile') Click here 
+								em to change your personal details.
+
 					div.col.s12.m6.l6
+						h4 Game achievements:
 						p 
 							strong Playing for team: 
 						h5 #{goalsByUser[0].user.kindOfPerson}
 						p 
 							strong Current score: 
 						h5 #{goalsByUser[0].user.score}
-					div.col.s12.m6.l6
 						p 
-							//- - for (var i = 0; i < 10; ++i) {
-							//- #{goalsByUser[i].goal.title} for #{goalsByUser[i].goal.points} points completed on #{goalsByUser[i].createdAt}
-							//- }
-							//- each goalbyuser in GoalsByUser
-							//- 	p #{goalbyuser.goal.title} for #{goalbyuser.goal.points} points completed on #{goalbyuser.createdAt}
-							//- | #{goalsByUser[0].goal.title} for #{goalsByUser[0].goal.points} points completed on #{goalsByUser[0].createdAt}
+							strong Completed goals:
 							each thing in goalsByUser
 								p 
 									i.tiny.material-icons done 
 									| #{thing.goal.title} for #{thing.goal.points} points completed on #{thing.createdAt}
-							//- | #{goalsByUser[0].goal.title} for #{goalsByUser[0].goal.points} points completed on #{goalsByUser[0].createdAt}
-							//- |  #{goalsByUser[1].goal.title} 
-							//- | #{goalsByUser[2].goal.title} 
-							//- | #{goalsByUser[3].goal.title} 
-							//- | #{goalsByUser[4].goal.title} 
-							//- | #{goalsByUser.goal.title} for #{goalsByUser[2].goal.points} points completed on #{goalsByUser[3].createdAt}
+						
+
 
 		main
 		include includes/footer.pug
