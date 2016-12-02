@@ -4,7 +4,7 @@ html
 	body
 		if (currentUser.username === 'brammieboy' || currentUser.username === 'selma2202' || currentUser.username ==='admin')
 			if (currentGoal === null)
-				h2 Bad admin!!
+				h2.headfont Bad admin!!
 				p 
 					| Admin, you are trying to edit a goal without providing an ID. Go back to 
 					a(href='admin') admin 
@@ -26,7 +26,7 @@ html
 					//- This part is only ever visible when the user is logged in AND s/he is an admin. Therefore we can address the user on their admin-ness.
 
 			else
-				h2 Edit goal
+				h2.headfont Edit goal
 
 				p 
 					strong Only edit the fields you want changed. 
@@ -86,7 +86,7 @@ html
 					br
 
 		else
-			h2 Oops!
+			h2.headfont Oops!
 			p 
 				| It seems you are not an admin. Do you perhaps wish to 
 				a(href='leaderboard') view the leaderboard
