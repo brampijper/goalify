@@ -1,15 +1,28 @@
 $(document).ready(function() {
-	  initialize()
-	  $(".button-collapse").sideNav();
-
-	$('.dog').animate({
-    	width: '25%'
-	}, {duration: 2000})
-
-	$('.cat').animate({
-    	width: '75%'
-	}, {duration: 2000})
+	initialize()
+	$(".button-collapse").sideNav();
 })
+
+$(".next").click(function() {
+       $('html,body').animate({ scrollTop:$('.container-secondbox').parent().next().offset().top}, 'slow');
+});
+
+$(window).scroll(function() {
+    var y_scroll_pos = window.pageYOffset;
+    var scroll_pos_test = 550;             
+
+    if(y_scroll_pos > scroll_pos_test) {
+    	 setTimeout(function() {
+       	$('.dog').animate({
+    		width: '25%'
+		}, {duration: 2500})
+
+		$('.cat').animate({
+    		width: '75%'
+		}, {duration: 2500})
+       }, 1000)
+    }
+});
 
 var map, userLocation, mainPosition = {lat: 52.3702, lng: 4.8952}, map;
 

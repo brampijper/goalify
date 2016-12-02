@@ -51,30 +51,30 @@ input[type=submit] {
 	background-color:#BDBDBD;
 }
 
-.headfont {
-	font-family: $secondary-font; 
+.main-title {
+	margin-top: 2%;
+	font-family: $index-font;
+	font-size: 105px;
+}
+
+.main-title2 {
+	margin-top: 8%;
+	font-family: $index-font;
+	font-size: 105px; 
 }
 
 .container-mainbox {
 	background-color: #03A9F4;
 	height:100vh;
-	h2 {
-		color: $body-color;
-		padding: 1% 0% 2% 0%; 
-		font-family: 'Canter-Bold';
-		font-size: 120px;
-	}
+}
+
+.headfont {
+	font-family: $secondary-font; 
 }
 
 .container-secondbox {
 	background-color: #BDBDBD;
-	margin-top:8%;
-	padding-bottom:5%;
 	height:100vh;
-	h2 {
-		color: #f5f5f5; 
-		padding-top:2% 0% 5% 0%; 
-	}
 }
 
 .barBG {
@@ -116,7 +116,7 @@ input[type=submit] {
 }
 
 #indexMap {
-    width: 75%;
+    width: 85%;
     height:400px;
     margin: 0 auto;
 }
@@ -129,10 +129,6 @@ input[type=submit] {
 div#sidenav-overlay {
 	z-index: -1; 
 } 
-
-// .rowbackgr {
-// 	background-color: $main-color;
-// }
 
 .highlighted {
 	background-color: yellow;
