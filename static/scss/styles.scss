@@ -44,11 +44,13 @@ input[type=submit] {
 }
 
 .btn {
-	background-color:#607D8B;
+	background-color:$formUnderlineWhenValid;
+	width: 80%;
 }
 
 .btn:hover {
-	background-color:#BDBDBD;
+	background-color:$formUnderlineWhenClickedShadow;
+	width: 80%;
 }
 
 .main-title {
@@ -175,6 +177,11 @@ tr{
 
 .profileIndent {
     margin-left: 20px;
+    margin-bottom: 25px;
+}
+
+.buttonholder {
+	text-align: center;
 }
 
 // Formcolours
@@ -347,3 +354,4 @@ $formUnderlineWhenInvalidShadow: #f20202;
 	background-color: red;
 	color: red;
 }
+
