@@ -2,108 +2,112 @@ html
 	head
 		include includes/header.pug
 	body
-		if (currentUser.username === 'brammieboy' || currentUser.username === 'selma2202' || currentUser.username ==='admin')
-			if (currentGoal === null)
-				h2.headfont Bad admin!!
-				p 
-					| Admin, you are trying to edit a goal without providing an ID. Go back to 
-					a(href='admin') admin 
-					| to select a specific goal.
+		div.container
+			if (currentUser.username === 'brammieboy' || currentUser.username === 'selma2202' || currentUser.username ==='admin')
+				if (currentGoal === null)
+					h2.headfont Bad admin!!
+					p 
+						| Admin, you are trying to edit a goal without providing an ID. Go back to 
+						a(href='admin') admin 
+						| to select a specific goal.
 
-				h5 We're not really sorry about this, because you're the admin, and you are supposed to know this kind of stuff! 
+					h5 We're not really sorry about this, because you're the admin, and you are supposed to know this kind of stuff! 
+					p 
+						| You could very well say we're 
+						em disappointed 
+						|in you.
+					if (currentUser.kindOfPerson == 'cat')
+						p So here's a sad cat:
+						img(src='images/sadcat.png' style="width:400px" class='circle')
+					else
+						p So here's a sad dog:
+						img(src='images/saddog.jpg' style="width:400px" class='circle')
+
+
+						//- This part is only ever visible when the user is logged in AND s/he is an admin. Therefore we can address the user on their admin-ness.
+
+				else
+					h2.headfont Edit goal
+					h5 Unfortunately, this page does not work just yet. Admins can add and delete goals (the most important actions), but unfortunately can not edit just yet. This is on the to do list however and will be possible shortly!
+					h5 Fortunately, this page is only visible for the users selma2202, brammieboy and admin, and therefore will not affect the user.
+					br
+					p
+						strong Only edit the fields you want changed. 
+						| Leave them empty if they do not need changing, otherwise the value gets overwritten.
+
+					form(action=('/admin-editgoal?id=' + currentGoal.id) method='post' autocomplete='off')
+						label New title 
+						p
+							em #{currentGoal.title}
+						input(name='newtitle' type='text' placeholder='New title of task' max-length= '50' autofocus)
+						br
+						br
+						label New description 
+						p 
+							em #{currentGoal.description}
+						input(name='newdescription' type='text' placeholder='New description of task')
+						br
+						br
+						label New duration 
+						p 
+							em #{currentGoal.duration}
+						input(name='newduration' type='number' min="0" step="5")
+						br
+						br
+						label New difficulty
+						p 
+							em #{currentGoal.difficulty}
+						input(type='radio' name='newdifficulty' id='easy' value='easy')
+						label(for='easy') Easy
+						br
+						input(type='radio' name='newdifficulty' id='medium' value='medium') 
+						label(for='medium') Medium
+						br
+						input(type='radio' name='newdifficulty' id='hard' value='hard') 
+						label(for='hard') Hard
+						br
+						br
+						label New points 
+						p 
+							em #{currentGoal.points}
+						input(name='newpoints' type='number' min="0" step="5")
+						br
+						br
+						//- zou nog cool zijn als de admin de coordinaten op een kaartje kan aangeven
+						label New latitude
+						p 
+							em #{currentGoal.lat}
+						input(name='newlat' type='text' placeholder='New latitude' max-length= '50' )
+						br
+						label New longitude 
+						p 
+							em #{currentGoal.lng}
+						input(name='newlng' type='text' placeholder='New longitude' max-length= '50' )
+						br
+						div.buttonholder
+							input(type='submit' class="btn waves-effect" value='Edit goal' id='submit')
+						br
+						br
+
+			else
+				h2.headfont Oops!
 				p 
-					| You could very well say we're 
-					em disappointed 
-					|in you.
+					| It seems you are not an admin. Do you perhaps wish to 
+					a(href='leaderboard') view the leaderboard
+					| , 
+					a(href='profile') edit your own profile 
+					| or 
+					a(href='goaloverview') view all goals
+					| ?
+
+				h4 We're really sorry about this.
 				if (currentUser.kindOfPerson == 'cat')
-					p So here's a sad cat:
+					p Since you like cats so much, here is a picture of a sad cat:
 					img(src='images/sadcat.png' style="width:400px" class='circle')
 				else
-					p So here's a sad dog:
+					p Since you like dogs so much, here is a picture of a sad dog:
 					img(src='images/saddog.jpg' style="width:400px" class='circle')
-
-
-					//- This part is only ever visible when the user is logged in AND s/he is an admin. Therefore we can address the user on their admin-ness.
-
-			else
-				h2.headfont Edit goal
-
-				p 
-					strong Only edit the fields you want changed. 
-					| Leave them empty if they do not need changing, otherwise the value gets overwritten.
-
-				form(action=('/admin-editgoal?id=' + currentGoal.id) method='post' autocomplete='off')
-					label New title 
-					p
-						em #{currentGoal.title}
-					input(name='newtitle' type='text' placeholder='New title of task' max-length= '50' autofocus)
-					br
-					br
-					label New description 
-					p 
-						em #{currentGoal.description}
-					input(name='newdescription' type='text' placeholder='New description of task')
-					br
-					br
-					label New duration 
-					p 
-						em #{currentGoal.duration}
-					input(name='newduration' type='number' min="0" step="5")
-					br
-					br
-					label New difficulty
-					p 
-						em #{currentGoal.difficulty}
-					input(type='radio' name='newdifficulty' id='easy' value='easy')
-					label(for='easy') Easy
-					br
-					input(type='radio' name='newdifficulty' id='medium' value='medium') 
-					label(for='medium') Medium
-					br
-					input(type='radio' name='newdifficulty' id='hard' value='hard') 
-					label(for='hard') Hard
-					br
-					br
-					label New points 
-					p 
-						em #{currentGoal.points}
-					input(name='newpoints' type='number' min="0" step="5")
-					br
-					br
-					//- zou nog cool zijn als de admin de coordinaten op een kaartje kan aangeven
-					label New latitude
-					p 
-						em #{currentGoal.lat}
-					input(name='newlat' type='text' placeholder='New latitude' max-length= '50' )
-					br
-					label New longitude 
-					p 
-						em #{currentGoal.lng}
-					input(name='newlng' type='text' placeholder='New longitude' max-length= '50' )
-					br
-					input(type='submit' value='Edit goal' id='submit')
-					br
-					br
-
-		else
-			h2.headfont Oops!
-			p 
-				| It seems you are not an admin. Do you perhaps wish to 
-				a(href='leaderboard') view the leaderboard
-				| , 
-				a(href='profile') edit your own profile 
-				| or 
-				a(href='goaloverview') view all goals
-				| ?
-
-			h4 We're really sorry about this.
-			if (currentUser.kindOfPerson == 'cat')
-				p Since you like cats so much, here is a picture of a sad cat:
-				img(src='images/sadcat.png' style="width:400px" class='circle')
-			else
-				p Since you like dogs so much, here is a picture of a sad dog:
-				img(src='images/saddog.jpg' style="width:400px" class='circle')
-			//-nog laten redirecten, met vertraging, naar home
+				//-nog laten redirecten, met vertraging, naar home
 		main
 		include includes/footer.pug
 

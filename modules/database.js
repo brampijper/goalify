@@ -48,7 +48,7 @@ db.Complete.belongsTo ( db.User )
 db.Goal.hasMany( db.Complete)
 db.Complete.belongsTo (db.Goal)
 
-db.conn.sync( {force: true}).then( () => {
+db.conn.sync( {force: false}).then( () => {
 
 	//Create sample user 1
 	bcrypt.hash('panda123', null, null, function(err, hash) {
@@ -58,7 +58,7 @@ db.conn.sync( {force: true}).then( () => {
 			username: 'selma2202',
 			email: 'selmadorrestein@gmail.com',
 			password: hash,
-			score: 20,
+			score: 10,
 			dob: '1991-02-22',
 			kindOfPerson: 'cat',
 			bio: 'I am generally nice',
@@ -94,9 +94,9 @@ db.conn.sync( {force: true}).then( () => {
 
 		var p3 = db.User.create( {
 			username: 'brammieboy',
-			email: 'a',
+			email: 'brampijper@gmail.com',
 			password: hash,
-			score: 30,
+			score: 80,
 			dob: '1992-05-23',
 			kindOfPerson: 'cat',
 			bio: 'Selma is my BFF in Amsterdam',
@@ -146,17 +146,17 @@ db.conn.sync( {force: true}).then( () => {
 	})
 
 	//Create sample user 3
-	bcrypt.hash('dogs4life', null, null, function(err, hash) {
+	bcrypt.hash('admin', null, null, function(err, hash) {
 		if (err) throw (err); 
 
 		var p5 = db.User.create( {
-			username: 'jimbo',
-			email: 'jimmy@msn.com',
+			username: 'admin',
+			email: 'admin@admin',
 			password: hash,
-			score: 30,
+			score: 10,
 			dob: '1993-11-23',
 			kindOfPerson: 'dog',
-			bio: 'I like marketing and f16',
+			bio: 'I am a mock account for the admin. Try out our admin pages (not visible for the normal user) at /admin, by logging in with email address "admin@admin" and password "admin".',
 			profifo: ''
 		})
 
