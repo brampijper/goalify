@@ -56,12 +56,10 @@ input[type=submit] {
 
 .btn {
 	background-color:$formUnderlineWhenValid;
-	width: 80%;
 }
  
 .btn:hover {
 	background-color:$formUnderlineWhenClickedShadow;
-	width: 80%;
 }
 
 .main-title {
@@ -164,9 +162,9 @@ div#sidenav-overlay {
 
 .profifo {
 	display: block;
-	width: 80%;
+	width: 35%;
 	margin: auto;
-	padding-top: 20px;
+	padding-top: 1%;
 	padding-bottom: 20px
 }
 
@@ -204,6 +202,10 @@ tr{
 	label {
 		color: $formInputText;
 	}
+}
+
+.rowbackgr {
+	margin-top:5%;
 }
 
 // For text forms
