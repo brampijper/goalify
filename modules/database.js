@@ -48,7 +48,7 @@ db.Complete.belongsTo ( db.User )
 db.Goal.hasMany( db.Complete)
 db.Complete.belongsTo (db.Goal)
 
-db.conn.sync( {force: false}).then( () => {
+db.conn.sync( {force: true}).then( () => {
 
 	//Create sample user 1
 	bcrypt.hash('panda123', null, null, function(err, hash) {

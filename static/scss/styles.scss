@@ -2,6 +2,17 @@ $main-color: #FEC006;
 $secondary-color: #FFA000;
 $body-color: #FAFAFA;
 
+// Formcolours
+$formInputText: #212121;
+$formInputTextWhenClicked: #FFA000;
+$formUnderlineWhenClicked: #FFA000;
+$formUnderlineWhenClickedShadow: #FEC006;
+$formUnderlineWhenValid: #028bca;
+$formUnderlineWhenValidShadow: #03a9f4;
+$formUnderlineWhenInvalid: #ca0202;
+$formUnderlineWhenInvalidShadow: #f20202;
+
+
 $index-font: "Canter-Bold";
 $secondary-font: "Canter-Bold2";
 
@@ -47,7 +58,7 @@ input[type=submit] {
 	background-color:$formUnderlineWhenValid;
 	width: 80%;
 }
-
+ 
 .btn:hover {
 	background-color:$formUnderlineWhenClickedShadow;
 	width: 80%;
@@ -184,15 +195,6 @@ tr{
 	text-align: center;
 }
 
-// Formcolours
-$formInputText: #212121;
-$formInputTextWhenClicked: #FFA000;
-$formUnderlineWhenClicked: #FFA000;
-$formUnderlineWhenClickedShadow: #FEC006;
-$formUnderlineWhenValid: #028bca;
-$formUnderlineWhenValidShadow: #03a9f4;
-$formUnderlineWhenInvalid: #ca0202;
-$formUnderlineWhenInvalidShadow: #f20202;
 
 /* FORM SHIZZLE */
 /* label color */

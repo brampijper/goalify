@@ -29,10 +29,12 @@ input[type=submit] {
   transform: translateY(35%); }
 
 .btn {
-  background-color: #607D8B; }
+  background-color: #028bca;
+  width: 80%; }
 
 .btn:hover {
-  background-color: #BDBDBD; }
+  background-color: #FEC006;
+  width: 80%; }
 
 .main-title {
   margin-top: 2%;
@@ -132,7 +134,11 @@ tr td #markRow {
   background-color: pink; }
 
 .profileIndent {
-  margin-left: 20px; }
+  margin-left: 20px;
+  margin-bottom: 25px; }
+
+.buttonholder {
+  text-align: center; }
 
 /* FORM SHIZZLE */
 /* label color */
