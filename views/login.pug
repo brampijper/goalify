@@ -10,13 +10,15 @@ html
 			div.row.rowbackgr
 				div.col.s12
 					form(action='/login' method='post')
-						label Your email address
-						input(name='email' placeholder='your@email.com' type='text' required)
+						div.input-field
+							input(name='email' placeholder='your@email.com' type='text' class="validate" required)
+							label Your email address
 							//- niet vergeten aan te passen: type naar email
 						br
 						br
-						label Your password
-						input(name='password' placeholder='Your password' type='password' required)
+						div.input-field
+							input(name='password' placeholder='Your password' type='password' class="validate" required)
+							label Your password
 						br
 						br
 						input(type='submit' class="btn waves-effect" id='submit' value='Login')
