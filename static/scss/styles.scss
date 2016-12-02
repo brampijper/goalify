@@ -44,11 +44,13 @@ input[type=submit] {
 }
 
 .btn {
-	background-color:#607D8B;
+	background-color:$formUnderlineWhenValid;
+	width: 80%;
 }
 
 .btn:hover {
-	background-color:#BDBDBD;
+	background-color:$formUnderlineWhenClickedShadow;
+	width: 80%;
 }
 
 .main-title {
@@ -132,7 +134,8 @@ input[type=submit] {
 
 #map {
 	width: 100%;
-	height: 750px;
+	height: 500px;
+	margin-top: 3%;
 }
 
 div#sidenav-overlay {
@@ -174,6 +177,11 @@ tr{
 
 .profileIndent {
     margin-left: 20px;
+    margin-bottom: 25px;
+}
+
+.buttonholder {
+	text-align: center;
 }
 
 // Formcolours
@@ -333,15 +341,17 @@ $formUnderlineWhenInvalidShadow: #f20202;
  	box-shadow: 0 1px 0 0 $formUnderlineWhenInvalidShadow;
  }
 
-
  /* icon prefix focus color */
  .input-field .prefix.active {
  	color: brown;
  }
 
-
-
  .nonformlabel {
  	color: $formInputText;
  }
+
+.map-icon {
+	background-color: red;
+	color: red;
+}
 
