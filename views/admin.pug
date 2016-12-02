@@ -3,7 +3,7 @@ html
 		include includes/header.pug
 	body
 		if (currentUser.username === 'brammieboy' || currentUser.username === 'selma2202' || currentUser.username ==='admin')
-			h2 Welcome, admin!
+			h2.headfont Welcome, admin!
 			h4= message
 			p How lovely that you have found inspiration, add new goals for your users here.
 			h3 New goal
@@ -107,7 +107,7 @@ html
 
 
 		else
-			h2 Oops!
+			h2.headfont Oops!
 			p 
 				| It seems you are not an admin. Do you perhaps wish to 
 				a(href='leaderboard') view the leaderboard
