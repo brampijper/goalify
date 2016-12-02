@@ -196,7 +196,7 @@ db.conn.sync( {force: true}).then( () => {
 	})
 
 	db.Goal.create( {
-		title: 'Play an arcade game!',
+		title: 'Play an arcade game',
 		description: 'The TonTon Club is as close as an arcade hall as Amsterdam has, full of goofy Japanese games, air hockey and mega tetris. Play a game (any game!) and collect your points!',
 		duration: 15,
 		difficulty: 'medium',
@@ -206,7 +206,7 @@ db.conn.sync( {force: true}).then( () => {
 	})
 
 	db.Goal.create( {
-		title: 'Go to the other B. building.',
+		title: 'Go to the other B. building',
 		description: 'Creativity can simply not be held in one place... so go check out the other B. building, while going for a nice walk!',
 		duration: 15,
 		difficulty: 'easy',
@@ -215,7 +215,35 @@ db.conn.sync( {force: true}).then( () => {
 		lng: '4.827949'
 	})
 
+	db.Goal.create( {
+		title: 'Do Parcours',
+		description: 'In this nice area, locked-off yards and parcs run between the streets. Jump the fence, run across the yard, and jump the fence again: you\'re now doing parcours!',
+		duration: 15,
+		difficulty: 'medium',
+		points: 20,
+		lat: '52.339351',
+		lng: '4.894810'
+	})
 
+	db.Goal.create( {
+		title: 'Go to the beach',
+		description: 'The beach? Yes, Amsterdam has multiple little city beaches! One of the lesser known ones is at the Sloterplas. Discover it yourself and go for a swim!',
+		duration: 10,
+		difficulty: 'medium',
+		points: 40,
+		lat: '52.371653',
+		lng: '4.822276'
+	})
+
+	db.Goal.create( {
+		title: 'Register',
+		description: 'Right here, right in the middle of Amsterdam, is where you collected your first 5 points and it\'s where your journey begins. Let\'s Explorify!',
+		duration: 1,
+		difficulty: 'easy',
+		points: 5,
+		lat: '52.367438',
+		lng: '4.895367'
+	})
 
 
 	console.log ('Synced, yay')
