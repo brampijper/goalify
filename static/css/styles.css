@@ -139,7 +139,7 @@ input[type=submit] {
   margin-top: 3%; }
 
 div#sidenav-overlay {
-  z-index: -1; }
+  z-index: -50; }
 
 .highlighted {
   background-color: yellow;
