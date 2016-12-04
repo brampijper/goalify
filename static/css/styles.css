@@ -201,6 +201,29 @@ tr td #markRow {
 .rowbackgr {
   margin-top: 4%; }
 
+.red-icon {
+  background-image: url(../images/red-dot.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 40px;
+  vertical-align: middle;
+  border: 1px solid #d4d4d4; }
+
+.green-icon {
+  background-image: url(../images/green-dot.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 20px;
+  vertical-align: middle;
+  border: 1px solid #d4d4d4; }
+
+.loc-icon {
+  background-image: url(../images/location-marker.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  vertical-align: middle;
+  border: 1px solid #d4d4d4; }
+
 /* label focus color */
 .input-field input[type=text]:focus + label {
   color: #FFA000; }
