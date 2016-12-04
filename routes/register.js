@@ -48,11 +48,25 @@ router.post('/register', (req, res) => {
 								username: req.body.username.toLowerCase(),
 								email: req.body.email.toLowerCase(),
 								password: hash,
-								score: 0,
+								score: 5,
 								dob: req.body.bday,
 								kindOfPerson: req.body.catdog,
 								bio: 'This person does not have a bio just yet.',
 								profifo: ''
+							}).then ( (user) => {
+								var userIdVar = user.id
+								db.Goal.findOne({
+									where: {
+										title: 'Register'
+									}
+								}).then((goal) => {
+									db.Complete.create({
+										lat: goal.lat,
+										lng: goal.lng,
+										userId: userIdVar,
+										goalId: goal.id	
+									})
+								})
 							}).then(function () {
 								db.conn.sync().then( () => {
 									console.log('User Added')
@@ -64,8 +78,7 @@ router.post('/register', (req, res) => {
 				})
 			}
 		})
-	}
-	else {
+	} else {
 		res.redirect('/register?message=' + encodeURIComponent("Please fill in the form"))
 		return
 	} 
