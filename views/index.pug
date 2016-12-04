@@ -1,7 +1,7 @@
 html
 	include includes/header-loggedout.pug
 	meta(name="viewport" content="width=device-width")
-	body
+	body(style="background-color:#03A9F4;")
 		div.container-mainbox
 			div.row
 				div.col.s12
@@ -25,6 +25,7 @@ html
 						div.cat
 						div.dog
 		main
+		include includes/footer.pug
 		script( src="javascript/jquery-3.1.1.min.js" type="text/javascript" rel="javascript" )
 		script( src="http://maps.google.com/maps/api/js")
 		script( src="javascript/map-icons.js" type='text/javascript')  
