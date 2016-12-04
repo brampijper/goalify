@@ -1,29 +1,36 @@
 $(document).ready(function() {
+	
+	//Running Google map functions when page is loaded
 	initialize()
 	drop()
+
+	//materialize sidebar nav (mobile)
 	$(".button-collapse").sideNav();
+
+	//Scrolling to second page on the index page
+	$(".img-container").click(function() {
+    $('html, body').animate({
+        scrollTop: $(".container-secondbox").offset().top}, 'slow');
+	});
+
+	//Check's if the user is looking at the progress bar 
+	$(window).scroll(function() {
+	    var y_scroll_pos = window.pageYOffset;
+	    var scroll_pos_test = 550;             
+
+	    if(y_scroll_pos > scroll_pos_test) {
+	    	 setTimeout(function() {
+	       	$('.dog').animate({
+	    		width: '25%'
+			}, {duration: 2500})
+
+			$('.cat').animate({
+	    		width: '75%'
+			}, {duration: 2500})
+	       }, 1000)
+	    }
+	})
 })
-
-$(".next").click(function() {
-       $('html,body').animate({ scrollTop:$('.container-secondbox').parent().next().offset().top}, 'slow');
-});
-
-$(window).scroll(function() {
-    var y_scroll_pos = window.pageYOffset;
-    var scroll_pos_test = 550;             
-
-    if(y_scroll_pos > scroll_pos_test) {
-    	 setTimeout(function() {
-       	$('.dog').animate({
-    		width: '25%'
-		}, {duration: 2500})
-
-		$('.cat').animate({
-    		width: '75%'
-		}, {duration: 2500})
-       }, 1000)
-    }
-});
 
 //global var for Google Maps
 let map;

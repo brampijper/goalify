@@ -1,21 +1,29 @@
 html
 	include includes/header-loggedout.pug
+	meta(name="viewport" content="width=device-width")
 	body
 		div.container-mainbox
 			div.row
 				div.col.s12
 					h2.center-align.main-title.white-text Explorify Your City
 			div#indexMap
-			a(href="#" class="next")
-				h2.center-align.headfont.white-text Click me!
-			div.container-secondbox
-				div.row
-					div.col.s12
-						h2.center-align.main-title2 Which team will you pick? 
-						div.barBG
-							a(href='register')
-								div.cat
-								div.dog
+			div.img-container.center-align
+				a(href="#" class="next")
+					img#arrow(src='images/arrow-down.png')
+		div.container-secondbox
+			div.row
+				h2.center-align.main-title2 Which team will you pick?
+				br
+				br
+				ul
+					li.center-align.flow-text.sub-header Complete goals and collect points for your team!
+					br
+					li.center-align.flow-text.sub-header Currently the cat team is winning
+					br
+				div.barBG
+					a(href='register')
+						div.cat
+						div.dog
 		main
 		script( src="javascript/jquery-3.1.1.min.js" type="text/javascript" rel="javascript" )
 		script( src="http://maps.google.com/maps/api/js")
