@@ -30,6 +30,7 @@ app.set ('views', __dirname + '/views')
 // let db = require ( __dirname + '/modules/database')
 
 // require routes
+// let indexRouter			= require (__dirname + '/routes/index')
 let loginRouter			= require (__dirname + '/routes/login')
 let logoutRouter		= require (__dirname + '/routes/logout')
 let registerRouter		= require (__dirname + '/routes/register')
@@ -41,6 +42,7 @@ let publicprofile		= require (__dirname + '/routes/publicprofile')
 let adminEditgoal		= require (__dirname + '/routes/admin-editgoal')
 
 // use
+// app.use ('/', indexRouter)
 app.use ('/', loginRouter)
 app.use ('/', logoutRouter)
 app.use ('/', registerRouter)
