@@ -5,7 +5,7 @@ html
 		div.container.center-align
 			div.row
 				div.col.s12.m12.l12
-					h2.headfont Welcome, #{currentUser.username}!
+					h2.headfont Welcome #{currentUser.username}!
 					if (currentUser.kindOfPerson == 'cat' && currentUser.profifo.length === 0)
 						img(src='images/catperson.jpg' class='circle profifo')
 
@@ -19,43 +19,45 @@ html
 				h6.center-align 
 					| Here you can view and edit your information. Only you can see this page. To see how other members view your profile, 
 					a(href='publicprofile?id=' + currentUser.id) click here.
+					br
+					br
 			
-			div.row.rowbackgr
+			div.row
 				div.col.s12.m6.l6
-					p 
-						strong Your username: 
-					h5.profileIndent #{currentUser.username}
-					p 
-						strong Your team: 
-					h5.profileIndent you are a #{currentUser.kindOfPerson} person
-					p
-						strong Your current score: 
-					h5.profileIndent #{currentUser.score}
-					p
-						strong View how you rank on the 
-					h5.profileIndent
-						a(href='leaderboard') leaderboard 
+					div.card
+						div.card-content
+							span.card-title
+								h5.title Profile information
+								ul.profinfo
+									li Username: #{currentUser.username}
+									li Team: The #{currentUser.kindOfPerson} team!
+									li Score: #{currentUser.score}
+									br
+									li View how you rank on the global 
+										a(href='leaderboard') leaderboard 
 						//- Nog een unordered list van maken, maar die is momenteel niet zichtbaar in materialize
 					
-		
 				div.col.s12.m6.l6
-					p
-						strong Your finished goals:
-					each thing in completedGoals
-						p.profileIndent 
-							i.tiny.material-icons done 
-							| #{thing.goal.title}: #{thing.goal.points} points.
-					p 
-						strong Want to see more here? 
-					h5.profileIndent
-						a(href='goaloverview') Complete more goals
-					//- Nog een unordered list van maken, maar die is momenteel niet zichtbaar in materialize
+					div.card
+						div.card-content
+							span.card-title 
+								h5.title Achievements
+								ol.profinfo
+									each thing in completedGoals
+										li #{thing.goal.title}: #{thing.goal.points} points.
+								br
+								p 
+									strong See the map to 
+								h5.profileIndent
+									a(href='goaloverview') Complete more goals
+								//- Nog een unordered list van maken, maar die is momenteel niet zichtbaar in materialize
 
 			div.row
-				div.col.s12
+				div.col.s12.editbg
 					h4 Edit profile
-			div.row.rowbackgr
+			div.row.first-row
 				div.col.s12.m6.l6
+					h5 Change your picture
 					if (currentUser.kindOfPerson == 'cat' && currentUser.profifo.length === 0)
 						img(src='images/catperson.jpg' class='circle profifo')
 
@@ -64,41 +66,37 @@ html
 
 					else 
 						img(src=currentUser.profifo, class='circle profifo')
-
-				div.col.s12.m6.l6
-					p
-						strong Profile picture
+					form(action='/newpic' method='post' id='uploadForm' enctype="multipart/form-data")
+						| Select a file: 
+						input(type='file', name='newpic')
 						br
-						em Change your profile picture
-						form(action='/newpic' method='post' id='uploadForm' enctype="multipart/form-data")
-							| Select a file: 
-							input(type='file', name='newpic')
+						div.buttonholder
 							br
-							div.buttonholder
-								br
-								input(type='submit' class="btn waves-effect")
+							input(type='submit' class="btn waves-effect")
 
-
-
-
-			div.row.rowbackgr
 				div.col.s12.m6.l6
-					p 
-						strong Bio
+					h5 Change your bio
+					br
 					h5.profileIndent "#{currentUser.bio}"
+					br
+					br
 					form(action='/newbio' method='post' autocomplete='off')
 						div.input-field
-							input(name='newbio' type='text' placeholder='Your new bio' required)
-							label Change your bio
+							input(name='newbio' type='text' placeholder='I hate dogs' required)
+							br
+							br
+							label New Bio
 							div.buttonholder
 								input(type='submit' value='Change bio' class="btn waves-effect" id='submitnewbio')
 					br
-
+			div.row.second-row
 				div.col.s12.m6.l6
 					p 
 						strong Date of birth 
 					h5.profileIndent #{currentUser.dob}
 					label.nonformLabel Change your date of birth
+					br
+					br
 					form(action='/newdob' method='post' autocomplete='off')
 						div.input-field
 							input(name='newdob' type='date' required)
@@ -106,11 +104,12 @@ html
 								input(type='submit' value='Change date of birth' class="btn waves-effect" id='submitnewdob')
 					br
 
-			div.row.rowbackgr
 				div.col.s12.m6.l6
 					p
 						strong Email address 
 					h5.profileIndent #{currentUser.email}
+					br
+					br
 					form(action='/newemail' method='post' autocomplete='off')
 						div.input-field
 							input(name='newemail' type='email' placeholder='yournew@emailaddress.com' min-length = '3' required)
@@ -118,11 +117,10 @@ html
 							div.buttonholder
 								input(type='submit' value='Change e-mail' class="btn waves-effect" id='submitnewemail')
 					br
-
+			div.row.third-row
 				div.col.s12.m6.l6
 					p
 						strong Password
-					p To change your password, first please add your old password.
 					form(action='/newpassword' method='post' autocomplete='off')
 						div.input-field
 							input(name='oldpassword' type='password' placeholder='Your old password' required)
@@ -132,17 +130,19 @@ html
 							div.buttonholder
 								input(type='submit' value='Change password' class="btn waves-effect" id='submitnewpassword')
 
-			div.row.rowbackgr
 				div.col.s12.m6.l6
 					p
 						strong Delete profile
 					p Are you sure? We'd hate to see you go!
 					p 
 						| This action is irreversible. We require your password before confirmation
+					br
 					form(action='/deleteaccount' method='post' autocomplete='off')
 						div.input-field
 							input(name='oldpassword' type='password' placeholder='Your password' required)
 							label Password
+							br
+							br
 							div.buttonholder
 								input(type='submit' value='Delete profile' class="btn waves-effect" id='submitnewpassword')
 					br
