@@ -144,7 +144,7 @@ tr td #markRow {
     color: #212121; }
 
 .rowbackgr {
-  margin-top: 5%; }
+  margin-top: 4%; }
 
 /* label focus color */
 .input-field input[type=text]:focus + label {

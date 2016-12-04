@@ -115,7 +115,7 @@ function initMap() {
             })  
         })
     })
-     google.maps.event.addDomListener(window, 'resize', function() {
+    google.maps.event.addDomListener(window, 'resize', function() {
         map.setCenter((document.body.offsetWidth<1104)
                     //<1104
                   ? mainPosition
@@ -125,8 +125,6 @@ function initMap() {
     });
 
     google.maps.event.trigger(window, 'resize')
-
-
 
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map'); 
@@ -156,7 +154,6 @@ function setCurrenPosition(pos) {
 }
 
     function displayAndWatch(position) {
-        console.log('Yaay i run')
         //set current pos
         setCurrenPosition(position)
         // console.log(position)
@@ -165,7 +162,6 @@ function setCurrenPosition(pos) {
     }
 
     function watchCurrentPosition() {
-        console.log('Yaaay i run  as well')
         var positionTimer = navigator.geolocation.watchPosition(function(position) {
                 setMarkerPosition(userLocation,position)
                 map.panTo(new google.maps.LatLng(position.coords.latitude, position.coords.longitude))
@@ -173,7 +169,6 @@ function setCurrenPosition(pos) {
     }
 
     function setMarkerPosition(marker, position) {
-        console.log('yaaay i run tooo')
         marker.setPosition( new google.maps.LatLng(position.coords.latitude,position.coords.longitude))
     }
 
