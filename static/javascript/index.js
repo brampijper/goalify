@@ -15,8 +15,8 @@ $(document).ready(function() {
 
 	//Check's if the user is looking at the progress bar 
 	$(window).scroll(function() {
-	    var y_scroll_pos = window.pageYOffset;
-	    var scroll_pos_test = 550;             
+	    let y_scroll_pos = window.pageYOffset;
+	    let scroll_pos_test = 550;             
 
 	    if(y_scroll_pos > scroll_pos_test) {
 	    	 setTimeout(function() {
